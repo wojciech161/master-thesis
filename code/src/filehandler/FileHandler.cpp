@@ -27,7 +27,7 @@ boost::optional<cv::Mat> FileHandler::loadImage( const std::string& fileName ) c
         return result;
     }
 
-    std::cout << "Image loaded successfully.\n";
+    std::cout << "Loaded " << fileName << "\n";
     result = image;
     return result;
 }

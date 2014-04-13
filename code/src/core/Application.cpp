@@ -4,7 +4,7 @@
 #include "filehandler/PathManager.hpp"
 #include "filehandler/FileHandler.hpp"
 #include "debug/ImagePrinter.hpp"
-#include "filtration/ConvertToBlackAndWhite.hpp"
+#include "algorithm/Algorithm.hpp"
 
 namespace core
 {
@@ -72,12 +72,7 @@ void Application::start() const
 boost::shared_ptr<cv::Mat> Application::runFiltrationAndSegmentationAlgorithm(
     const cv::Mat& inputImage) const
 {
-    boost::shared_ptr<cv::Mat> resultImage;
-
-    // Convert image to Black - and - white
-    resultImage = filtration::ConvertToBlackAndWhite().apply( inputImage );
-
-    return resultImage;
+    return algorithm::Algorithm( inputImage ).run();
 }
 
 } // namespace core

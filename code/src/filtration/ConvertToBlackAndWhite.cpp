@@ -12,14 +12,18 @@ ConvertToBlackAndWhite::ConvertToBlackAndWhite()
 
 ConvertToBlackAndWhite::~ConvertToBlackAndWhite()
 {
-    std::cout << "FILTRATION: ConvertToBlackAndWhite - destructed\n";
+    std::cout << "FILTRATION: ConvertToBlackAndWhite - applied\n";
 }
 
-boost::shared_ptr<cv::Mat> ConvertToBlackAndWhite::apply( const cv::Mat& inputImage ) const
+boost::shared_ptr<cv::Mat> ConvertToBlackAndWhite::apply( 
+    boost::shared_ptr<cv::Mat> inputImage ) const
 {
     boost::shared_ptr<cv::Mat> result( new cv::Mat() );
-    cv::cvtColor( inputImage, *result, CV_RGB2GRAY );
-    std::cout << "FILTRATION: ConvertToBlackAndWhite - applied\n";
+    if( inputImage )
+    {
+        cv::cvtColor( *inputImage, *result, CV_RGB2GRAY );
+    }
+
     return result;
 }
 

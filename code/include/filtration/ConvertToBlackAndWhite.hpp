@@ -12,7 +12,7 @@ public:
     ConvertToBlackAndWhite();
     ~ConvertToBlackAndWhite();
 
-    boost::shared_ptr<cv::Mat> apply( const cv::Mat& ) const;
+    boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const;
 };
 
 }

@@ -11,7 +11,7 @@ class IFiltrationAlgorithm
 {
 public:
     virtual ~IFiltrationAlgorithm() {}
-    virtual boost::shared_ptr<cv::Mat> apply( const cv::Mat& ) const = 0;
+    virtual boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const = 0;
 };
 
 } // namespace filtration
