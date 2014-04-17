@@ -1,6 +1,7 @@
 #include "algorithm/Algorithm.hpp"
 #include "filtration/ApplyBilateralFilter.hpp"
 #include "filtration/ApplyGaussianFilter.hpp"
+#include "segmentation/ColorSegmentation.hpp"
 
 namespace algorithm
 {
@@ -24,7 +25,8 @@ boost::shared_ptr<cv::Mat> Algorithm::run()
     filteredImage = filtration::ApplyBilateralFilter().apply( image_ );
     filteredImage = filtration::ApplyGaussianFilter().apply( filteredImage );
 
-    result = filteredImage;
+    result = segmentation::ColorSegmentation().apply( filteredImage );
+
     return result;
 }
 

@@ -24,7 +24,17 @@ boost::shared_ptr<cv::Mat> ApplyBilateralFilter::apply( boost::shared_ptr<cv::Ma
     int sigmaColor = computeSigmaColor( input->rows, input->cols );
     int sigmaSpace = computeSigmaSpace( input->rows, input->cols );
 
-    cv::bilateralFilter( *input, *result, diameter, sigmaColor, sigmaSpace );
+    try
+    {
+        cv::bilateralFilter( *input, *result, diameter, sigmaColor, sigmaSpace );    
+    }
+    catch( cv::Exception& e )
+    {
+        std::cout << "FILTRATION: ApplyBilateralFilter - ERROR:\n";
+        std::cout << e.err << std::endl;
+        std::cout << e.msg << std::endl;
+    }
+    
 
     return result;
 }

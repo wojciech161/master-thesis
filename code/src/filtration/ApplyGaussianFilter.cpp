@@ -24,7 +24,21 @@ boost::shared_ptr<cv::Mat> ApplyGaussianFilter::apply( boost::shared_ptr<cv::Mat
     int blurWidth = getBlurWidth( input->rows, input->cols );
     int blurHeight = getBlurHeight( input->rows, input->cols );
 
-    cv::GaussianBlur( *input, *result, cv::Size( blurWidth, blurHeight ), STANDARD_DEVIATION, STANDARD_DEVIATION );
+    try
+    {
+        cv::GaussianBlur(
+            *input,
+            *result,
+            cv::Size( blurWidth, blurHeight ),
+            STANDARD_DEVIATION,
+            STANDARD_DEVIATION );
+    }
+    catch( cv::Exception& e )
+    {
+        std::cout << "FILTRATION: ApplyGaussianFilter - ERROR:\n";
+        std::cout << e.err << std::endl;
+        std::cout << e.msg << std::endl;
+    }
 
     return result;
 }
