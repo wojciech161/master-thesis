@@ -4,12 +4,14 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "segmentation/helpers/ColorGroup.hpp"
 #include "segmentation/helpers/ImageGenerator.hpp"
+#include "filtration/ApplyBilateralFilter.hpp"
+#include "filtration/ApplyGaussianFilter.hpp"
 
 namespace segmentation
 {
 
 ColorSegmentation::ColorSegmentation()
-    : threshold_( 15 )
+    : threshold_( 30 )
     , MIN_NUMBER_OF_COLORS( 5 )
     , MAX_NUMBER_OF_COLORS( 200 )
 {
@@ -25,6 +27,11 @@ boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> 
 {
     boost::shared_ptr<cv::Mat> result;
 
+    // First, we apply a bilateral and gaussian filters to remove noises from maps
+    boost::shared_ptr<cv::Mat> filteredImage;
+    filteredImage = filtration::ApplyBilateralFilter().apply( input );
+    filteredImage = filtration::ApplyGaussianFilter().apply( filteredImage );
+
     helpers::ColorGroup colorGroup( threshold_ );
 
     double numberOfPixels = static_cast<double>(input->rows * input->cols);
@@ -38,7 +45,7 @@ boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> 
             helpers::Color pxColor( px );
             colorGroup.addToGroup( pxColor );
             done += 1.0;
-            std::cout << "Done: " << ((done / numberOfPixels) * 100) << " percent\n";
+            std::cout << "Done: " << ((done / numberOfPixels) * 100) << " percent               \r";
         }
     }
 

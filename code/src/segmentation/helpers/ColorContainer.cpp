@@ -1,4 +1,5 @@
 #include "segmentation/helpers/ColorContainer.hpp"
+#include <cmath>
 
 namespace segmentation
 {
@@ -36,16 +37,24 @@ ColorContainer::~ColorContainer()
 
 bool ColorContainer::isInRange( const Color& color, int threshold ) const
 {
-    bool redOk = checkColor( color.getRed(), threshold, currentRedAverage_ );
-    bool greenOk = checkColor( color.getGreen(), threshold, currentGreenAverage_ );
-    bool blueOk = checkColor( color.getBlue(), threshold, currentBlueAverage_ );
+    // bool redOk = checkColor( color.getRed(), threshold, currentRedAverage_ );
+    // bool greenOk = checkColor( color.getGreen(), threshold, currentGreenAverage_ );
+    // bool blueOk = checkColor( color.getBlue(), threshold, currentBlueAverage_ );
 
-    if( redOk && greenOk && blueOk )
-    {
-        return true;
-    }
+    // if( redOk && greenOk && blueOk )
+    // {
+    //     return true;
+    // }
 
-    return false;
+    // return false;
+
+    double redDistance = pow( (color.getRed() - currentRedAverage_), 2 );
+    double greenDistance = pow( (color.getGreen() - currentGreenAverage_), 2 );
+    double blueDistance = pow( (color.getBlue() - currentBlueAverage_), 2 );
+
+    double distance = sqrt( redDistance + greenDistance + blueDistance );
+
+    return ( distance <= threshold );
 }
 
 void ColorContainer::add( const Color& color )
