@@ -15,6 +15,7 @@ class Color
 public:
     Color( int, int, int );
     Color( const cv::Vec3b& );
+    Color( const Color& );
     ~Color();
 
     int getRed() const;
@@ -22,6 +23,8 @@ public:
     int getBlue() const;
 
     cv::Vec3b toVec3b() const;
+
+    bool operator==( const Color& ) const;
 
 private:
     int red_;

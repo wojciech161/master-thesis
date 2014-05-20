@@ -6,7 +6,7 @@
 namespace filtration
 {
 
-ApplyGaussianFilter::ApplyGaussianFilter()
+ApplyGaussianFilter::ApplyGaussianFilter( int blurRadius ) : blurRadius_( blurRadius )
 {
     std::cout << "FILTRATION: ApplyGaussianFilter - created\n";
 }
@@ -21,15 +21,12 @@ boost::shared_ptr<cv::Mat> ApplyGaussianFilter::apply( boost::shared_ptr<cv::Mat
     const int STANDARD_DEVIATION = 0;
     boost::shared_ptr<cv::Mat> result( new cv::Mat( input->clone() ) );
 
-    int blurWidth = getBlurWidth( input->rows, input->cols );
-    int blurHeight = getBlurHeight( input->rows, input->cols );
-
     try
     {
         cv::GaussianBlur(
             *input,
             *result,
-            cv::Size( blurWidth, blurHeight ),
+            cv::Size( blurRadius_, blurRadius_ ),
             STANDARD_DEVIATION,
             STANDARD_DEVIATION );
     }
@@ -41,16 +38,6 @@ boost::shared_ptr<cv::Mat> ApplyGaussianFilter::apply( boost::shared_ptr<cv::Mat
     }
 
     return result;
-}
-
-int ApplyGaussianFilter::getBlurWidth( int rows, int cols ) const
-{
-    return 3;
-}
-
-int ApplyGaussianFilter::getBlurHeight( int rows, int cols ) const
-{
-    return 3;
 }
 
 } // namespace filtration

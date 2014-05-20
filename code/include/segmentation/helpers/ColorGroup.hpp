@@ -21,6 +21,7 @@ public:
     int getNumberOfGroups() const;
     Color getGroupColor( const Color& ) const;
     void mergeGroupsToThreshold( int );
+    void removeSmallAreaColors( int );
 
     void printAllContainers() const;
 

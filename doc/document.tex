@@ -1,0 +1,363 @@
+\pdfoutput=1
+\pdfcompresslevel=9
+\pdfinfo
+{
+    /Author ()
+    /Title ()
+    /Subject ()
+    /Keywords ()
+}
+
+%\newcommand*{\memfontfamily}{pnc}
+%\newcommand*{\memfontpack}{newcent}
+\documentclass[a4paper,onecolumn,oneside,12pt]{memoir}
+% Wydruk do archiwum
+%\documentclass[a4paper,onecolumn,twoside,10pt]{memoir} 
+%\renewcommand{\normalsize}{\fontsize{8pt}{10pt}\selectfont}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[polish]{babel}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{color,calc}
+%\usepackage{soul} % pakiet z komendami do podkreślania tekstu
+%\usepackage{fourier} % pakiet zmieniający czcionki na utopia
+\usepackage{times} % pakiet zmieniający czcionki na times 
+
+%\usepackage{longtable}
+%\usepackage{ltxtable}
+%\usepackage{tabulary}
+
+\usepackage{indentfirst}
+\usepackage{multicol}
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+%%%%%% Ustawienia odpowiedzialne za sposób łamania dokumentu
+%\hyphenpenalty=10000		% nie dziel wyrazów zbyt często
+\clubpenalty=10000      %kara za sierotki
+\widowpenalty=10000  % nie pozostawiaj wdów
+\brokenpenalty=10000		% nie dziel wyrazów między stronami
+\exhyphenpenalty=999999		% nie dziel słów z myślnikiem
+\righthyphenmin=3			% dziel minimum 3 litery
+
+%\tolerance=4500
+%\pretolerance=250
+%\hfuzz=1.5pt
+%\hbadness=1450
+
+%ustawienia rozmiarów: tekstu, stopki, marginesów 
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-5cm}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-5cm}
+\setlength{\oddsidemargin}{-0.04cm} % domyślnie jest 1 cal = 2.54 cm, stąd -0.04 da margines 2.5cm
+\setlength{\evensidemargin}{-0.04cm} % domyślnie jest 1 cal = 2.54 cm, stąd -0.04 da margines 2.5cm
+\topmargin -1.25cm 
+\footskip 1.4cm 
+
+\linespread{1}
+%\linespread{1.3}
+
+\usepackage{ifpdf}
+%\newif\ifpdf \ifx\pdfoutput\undefined
+%\pdffalse % we are not running PDFLaTeX
+%\else
+%\pdfoutput=1 % we are running PDFLaTeX
+%\pdftrue \fi
+\ifpdf
+\usepackage[pdftex]{graphicx,hyperref}
+\DeclareGraphicsExtensions{.pdf,.jpg,.mps,.png}
+\pdfcompresslevel=9
+\else
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.eps,.ps,.jpg,.mps,.png}
+\fi
+\sloppy
+
+%\graphicspath{{rys01/}{rys02/}}
+%\usepackage{rotating}
+
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{0.35}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Definicja strony tytułowej 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+%Uczelnia
+\newcommand\uczelnia[1]{\renewcommand\@uczelnia{#1}}
+\newcommand\@uczelnia{}
+%Wydział
+\newcommand\wydzial[1]{\renewcommand\@wydzial{#1}}
+\newcommand\@wydzial{}
+%Kierunek
+\newcommand\kierunek[1]{\renewcommand\@kierunek{#1}}
+\newcommand\@kierunek{}
+%Specjalność
+\newcommand\specjalnosc[1]{\renewcommand\@specjalnosc{#1}}
+\newcommand\@specjalnosc{}
+%Tytuł po angielsku
+\newcommand\titleEN[1]{\renewcommand\@titleEN{#1}}
+\newcommand\@titleEN{}
+%Tytuł krótki
+\newcommand\titleShort[1]{\renewcommand\@titleShort{#1}}
+\newcommand\@titleShort{}
+%Promotor
+\newcommand\promotor[1]{\renewcommand\@promotor{#1}}
+\newcommand\@promotor{}
+
+\def\maketitle{%
+  \null
+  \pagestyle{empty}%
+	{\centering\vspace{-1cm}
+		{\fontsize{22pt}{24pt}\selectfont \@uczelnia}\\[0.4cm]
+		{\fontsize{22pt}{24pt}\selectfont \@wydzial }\\[0.5cm]
+		\hrule \vspace*{0.7cm}
+	}
+{\flushleft\fontsize{14pt}{16pt}\selectfont%
+\begin{tabular}{ll}
+KIERUNEK: & \@kierunek\\
+SPECJALNOŚĆ: & \@specjalnosc\\
+\end{tabular}\\[1.3cm]
+}
+{\centering
+\vskip 1cm
+%{\fontsize{24pt}{26pt}\selectfont PRACA DYPLOMOWA}\\[0.5cm]
+{\fontsize{24pt}{26pt}\selectfont PRACA MAGISTERSKA}\\[2cm]
+%{\fontsize{24pt}{26pt}\selectfont PROJEKT INżYNIERSKI}\\[1.5cm]
+\vskip 0.8cm
+}
+%
+\begin{tabularx}{\linewidth}{p{6cm}>{\centering\arraybackslash}X}
+		&{\fontsize{16pt}{18pt}\selectfont \@title}\\[5mm] 	%UWAGA: tutaj jest miejsce na tytył w języku polskim
+		&{\fontsize{16pt}{18pt}\selectfont \@titleEN}\\[10mm] %UWAGA: tutaj jest miejsce na tytył w języku angielskim
+\end{tabularx}
+\vfill
+\begin{tabularx}{\linewidth}{p{6cm}l}
+		%UWAGA: tutaj jest miejsce na autora pracy
+		&{\fontsize{16pt}{18pt}\selectfont AUTOR:}\\[5mm]
+		&{\fontsize{14pt}{16pt}\selectfont \@author}\\[10mm]
+		%UWAGA: tutaj jest miejsce na promotora pracy 
+		&{\fontsize{16pt}{18pt}\selectfont PROWADZĄCY PRACĘ:}\\[5mm]
+		&{\fontsize{14pt}{16pt}\selectfont \@promotor}\\[10mm]
+		&{\fontsize{16pt}{18pt}\selectfont OCENA PRACY:}\\[20mm]
+	\end{tabularx}
+\hrule\vspace*{0.3cm}
+{\centering
+%{\fontsize{24pt}{26pt}\selectfont PRACA DYPLOMOWA}\\[0.5cm]
+%{\fontsize{24pt}{26pt}\selectfont MAGISTERSKA}\\[2cm]
+{\fontsize{16pt}{18pt}\selectfont \@date}\\[0cm]
+}
+\normalfont
+ \cleardoublepage
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Styl rozdziałów 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+%\definecolor{niceblue}{rgb}{.168,.234,.671}
+
+%\AtBeginDocument{% 
+        \addto\captionspolish{% 
+        \renewcommand{\tablename}{Table}% 
+}%} 
+
+%\AtBeginDocument{% 
+%        \addto\captionspolish{% 
+%        \renewcommand{\chaptername}{Rozdział}% 
+%}} 
+
+%\AtBeginDocument{% 
+        \addto\captionspolish{% 
+        \renewcommand{\figurename}{Image}% 
+}%}
+        \addto\captionspolish{% 
+        \renewcommand{\bibname}{Literature}% 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% nowe itemize
+\makeatletter
+\renewenvironment{itemize}{
+  \begin{list}{  
+  \csname labelitem\romannumeral\the\@listdepth\endcsname}{
+  \setlength{\leftmargin}{1em}
+	\setlength{\topsep}{6pt}%
+	\setlength{\partopsep}{0pt}%
+	\setlength{\parskip}{0pt}%
+	\setlength{\parsep}{0pt}%
+	\setlength{\itemsep}{0pt}}
+}{
+  \end{list}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                  Styl wyliczenia (opis skrótów) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{Ventry}[1]%
+ {\begin{list}{}{\renewcommand{\makelabel}[1]{\textbf{##1}\hfill}%
+   \settowidth{\labelwidth}{\textbf{#1}}%
+   \setlength{\leftmargin}{3cm}}}%
+ {\end{list}}
+
+\addtopsmarks{headings}{%
+\nouppercaseheads % added at the beginning
+}{%
+\createmark{chapter}{both}{shownumber}{}{. \space}
+%\createmark{chapter}{left}{shownumber}{}{. \space}
+\createmark{section}{right}{shownumber}{}{. \space}
+}%use the new settings
+\pagestyle{headings}
+
+\newlength\mytemplengtha
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setsecnumdepth{subsection} % activating subsubsec numbering in doc
+
+\makeatletter
+\copypagestyle{outer}{headings}
+\makeoddhead{outer}{}{}{\slshape\rightmark}
+\makeevenhead{outer}{\slshape\leftmark}{}{}
+\makeoddfoot{outer}{\@author:~\@titleShort}{}{\thepage}
+\makeevenfoot{outer}{\thepage}{}{\@author:~\@title}
+\makeheadrule{outer}{\linewidth}{\normalrulethickness}
+\makefootrule{outer}{\linewidth}{\normalrulethickness}{6pt}
+\makeatother
+
+% fix plain
+%\copypagestyle{plain}{outer} % overwrite plain with outer
+\makeoddhead{plain}{}{}{} % remove right header
+\makeevenhead{plain}{}{}{} % remove left header
+\makeevenfoot{plain}{}{}{}
+\makeoddfoot{plain}{}{}{}
+
+%\copypagestyle{plain}{outer} % overwrite plain with outer
+\makeoddhead{empty}{}{}{} % remove right header
+\makeevenhead{empty}{}{}{} % remove left header
+\makeevenfoot{empty}{}{}{}
+\makeoddfoot{empty}{}{}{}
+
+\pagestyle{outer}
+
+%definicja nagłówków
+%\renewcommand{\chaptermark}[1]{\markboth{\ifnum \c@secnumdepth >\z@ \thechapter \ \fi #1}{}} 
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter \ #1}{\thesection \ #1}} 
+%\renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}{}} 
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter \MakeUppercase{#1}}{}}
+
+%kropki po numerach sekcji
+\makeatletter
+\def\@seccntformat#1{\csname the#1\endcsname.\quad}
+\def\numberline#1{\hb@xt@\@tempdima{#1\if&#1&\else.\fi\hfil}}
+\makeatother
+
+\renewcommand{\chapternumberline}[1]{#1.\quad}
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+
+%\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}}
+
+%\includeonly{wstep,rozdzial01} % jeśli chcemy kompilować tylko fragmenty, to można tu je wpisać
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Początek dokumentu 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{Filtracja i segmentacja drukowanych w kolorze obrazów}
+\titleShort{Filtracja i segmentacja drukowanych w kolorze obrazów}
+\titleEN{Preprocessing and segmentation of color-printed images}
+\author{Marcin Wojciechowski}
+\uczelnia{POLITECHNIKA WROCŁAWSKA}
+\wydzial{WYDZIAŁ ELEKTRONIKI}
+\kierunek{INFORMATYKA}
+\specjalnosc{Internet Engineering}
+\promotor{dr inż. Tomasz Babczyński}
+\date{WROCŁAW, 2014}
+\maketitle
+
+\pagestyle{outer}
+\mbox{}\pdfbookmark[0]{Table of Contents}{spisTresci.1}
+\tableofcontents* 
+\newpage
+
+\chapter{Introduction}
+
+\section{Abstract}
+
+\section{Background}
+
+\section{Problem statement}
+
+\section{Objectives}
+
+\section{Document structure}
+
+
+\chapter{State of Art}
+
+\section{Color image processing}
+
+\section{Algorithms processing color scanned maps}
+
+\section{Conclusion}
+
+
+\chapter{Theoretical introduction}
+
+\section{Findings}
+
+\section{Problems and restrictions}
+
+\section{Conclusion}
+
+
+\chapter{Research design}
+
+\section{Introduction}
+
+\section{Main parts of the algorithm}
+
+\section{Detection of areas}
+
+\section{Detection of smaller elements}
+
+\section{Merge of layers}
+
+\section{Conclusion}
+
+
+\chapter{Implementation of the algorithm}
+
+\section{Introduction}
+
+\section{Used tools}
+
+\section{Application outline}
+
+\section{Conclusion}
+
+
+\chapter{Tests and Results}
+
+\section{Testing data}
+
+\section{Result analysis}
+
+\section{Conclusion}
+
+
+\chapter{Conclusion}
+
+\newpage
+
+\begin{thebibliography}{   }
+
+	\bibitem{rdfprimer}{RDF Primer, \url{http://www.w3.org/TR/rdf-primer/}}
+    \url{http://wifo5-03.informatik.uni-mannheim.de/bizer/berlinsparqlbenchmark/}}
+
+\end{thebibliography}
+
+\end{document}

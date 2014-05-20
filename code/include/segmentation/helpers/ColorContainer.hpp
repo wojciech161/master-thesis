@@ -26,6 +26,7 @@ public:
     double getCurrentGreen() const;
     double getCurrentBlue() const;
     void merge( const ColorContainer& );
+    double getDistance( const Color& ) const;
 
 private:
     void correctAverage( double&, int );

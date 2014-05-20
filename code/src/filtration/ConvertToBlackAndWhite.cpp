@@ -19,9 +19,14 @@ boost::shared_ptr<cv::Mat> ConvertToBlackAndWhite::apply(
     boost::shared_ptr<cv::Mat> inputImage ) const
 {
     boost::shared_ptr<cv::Mat> result( new cv::Mat() );
+    boost::shared_ptr<cv::Mat> blackAndWhiteMode( new cv::Mat() );
     if( inputImage )
     {
-        cv::cvtColor( *inputImage, *result, CV_RGB2GRAY );
+        // Convert to black and white
+        cv::cvtColor( *inputImage, *blackAndWhiteMode, CV_RGB2GRAY );
+
+        // Convert black and white image to RGB mode
+        cv::cvtColor( *blackAndWhiteMode, *result, cv::COLOR_GRAY2RGB );
     }
 
     return result;

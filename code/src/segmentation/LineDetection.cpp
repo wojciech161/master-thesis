@@ -2,7 +2,11 @@
 #include <iostream>
 #include "filtration/Threshold.hpp"
 #include "filtration/UnsharpMask.hpp"
-#include "opencv2/photo/photo.hpp"
+#include "filtration/ElliminateWhiteNoise.hpp"
+#include "filtration/RemoveLonePixels.hpp"
+#include "segmentation/helpers/ContourColorRestoration.hpp"
+#include "segmentation/helpers/ColorAlignment.hpp"
+#include "segmentation/helpers/HolesRemoval.hpp"
 
 namespace segmentation
 {
@@ -19,22 +23,25 @@ LineDetection::~LineDetection()
 
 boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> input ) const
 {
-    const int THRESHOLD_VALUE = 75;
-    boost::shared_ptr<cv::Mat> result( new cv::Mat() );
-    boost::shared_ptr<cv::Mat> unsharpedImage;
-    boost::shared_ptr<cv::Mat> thresholdedImage;
+    const int THRESHOLD_VALUE = 100;
+    boost::shared_ptr<cv::Mat> result = input;
 
     // Apply unsharp mask to image
-    unsharpedImage = filtration::UnsharpMask().apply( input );
+    result = filtration::UnsharpMask().apply( result );
     // Threshold image
-    thresholdedImage = filtration::Threshold( THRESHOLD_VALUE ).apply( unsharpedImage );
+    result = filtration::Threshold( THRESHOLD_VALUE ).apply( result );
 
-    // Elliminate single dots
-    cv::fastNlMeansDenoising( *thresholdedImage, *result, 50 );
+    // Elliminate white noise
+    result = filtration::ElliminateWhiteNoise().apply( result );
 
     // Substitute black pixels with color ones from input
+    result = helpers::ContourColorRestoration( input, result ).apply();
+
+    // Elliminate single dots
+    result = filtration::RemoveLonePixels().apply( result );
 
     // Find common colors of lines
+    result = helpers::ColorAlignment().apply( result );
 
     return result;
 }

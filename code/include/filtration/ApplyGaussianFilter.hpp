@@ -9,13 +9,12 @@ namespace filtration
 class ApplyGaussianFilter : public IFiltrationAlgorithm
 {
 public:
-    ApplyGaussianFilter();
+    ApplyGaussianFilter( int );
     ~ApplyGaussianFilter();
 
     boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const;
 private:
-    int getBlurWidth( int, int ) const;
-    int getBlurHeight( int, int ) const;
+    int blurRadius_;
 };
 
 } // namespace filtration

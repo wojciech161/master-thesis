@@ -25,12 +25,13 @@ ColorSegmentation::~ColorSegmentation()
 
 boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> input ) const
 {
+    const int GAUSSIAN_BLUR_RADIUS = 3;
     boost::shared_ptr<cv::Mat> result;
 
     // First, we apply a bilateral and gaussian filters to remove noises from maps
     boost::shared_ptr<cv::Mat> filteredImage;
     filteredImage = filtration::ApplyBilateralFilter().apply( input );
-    filteredImage = filtration::ApplyGaussianFilter().apply( filteredImage );
+    filteredImage = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( filteredImage );
 
     helpers::ColorGroup colorGroup( threshold_ );
 

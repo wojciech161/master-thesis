@@ -21,6 +21,13 @@ Color::Color( const cv::Vec3b& pixel )
 
 }
 
+Color::Color( const Color& c )
+{
+    red_ = c.getRed();
+    green_ = c.getGreen();
+    blue_ = c.getBlue();
+}
+
 Color::~Color()
 {
 
@@ -50,6 +57,16 @@ cv::Vec3b Color::toVec3b() const
     pixel[2] = red_;
 
     return pixel;
+}
+
+bool Color::operator==( const Color& second ) const
+{
+    if( red_ == second.getRed() && green_ == second.getGreen() && blue_ == second.getBlue() )
+    {
+        return true;
+    }
+
+    return false;
 }
 
 } // namespace helpers

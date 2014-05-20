@@ -37,22 +37,7 @@ ColorContainer::~ColorContainer()
 
 bool ColorContainer::isInRange( const Color& color, int threshold ) const
 {
-    // bool redOk = checkColor( color.getRed(), threshold, currentRedAverage_ );
-    // bool greenOk = checkColor( color.getGreen(), threshold, currentGreenAverage_ );
-    // bool blueOk = checkColor( color.getBlue(), threshold, currentBlueAverage_ );
-
-    // if( redOk && greenOk && blueOk )
-    // {
-    //     return true;
-    // }
-
-    // return false;
-
-    double redDistance = pow( (color.getRed() - currentRedAverage_), 2 );
-    double greenDistance = pow( (color.getGreen() - currentGreenAverage_), 2 );
-    double blueDistance = pow( (color.getBlue() - currentBlueAverage_), 2 );
-
-    double distance = sqrt( redDistance + greenDistance + blueDistance );
+    double distance = getDistance( color );
 
     return ( distance <= threshold );
 }
@@ -142,6 +127,17 @@ void ColorContainer::merge( const ColorContainer& anotherContainer )
     currentGreenAverage_ = ( myGreenSum + anotherGreenSum ) / newNumberOfColors_;
     currentBlueAverage_ = ( myBlueSum + anotherBlueSum ) / newNumberOfColors_;
     numberOfColors_ = newNumberOfColors_;
+}
+
+double ColorContainer::getDistance( const Color& color ) const
+{
+    double redDistance = pow( (color.getRed() - currentRedAverage_), 2 );
+    double greenDistance = pow( (color.getGreen() - currentGreenAverage_), 2 );
+    double blueDistance = pow( (color.getBlue() - currentBlueAverage_), 2 );
+
+    double distance = sqrt( redDistance + greenDistance + blueDistance );
+
+    return distance;
 }
 
 } // namespace helpers

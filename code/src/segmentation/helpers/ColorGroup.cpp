@@ -55,15 +55,21 @@ int ColorGroup::getNumberOfGroups() const
 
 Color ColorGroup::getGroupColor( const Color& color ) const
 {
+    Color bestFitColor( 0, 0, 0 );
+    double currentFactor = 1000;
+
     foreach( const ColorContainer& c, colorContainers_ )
     {
-        if( c.isInRange( color, threshold_ ) )
+        Color avg = c.getAverage();
+        double distance = c.getDistance( color );
+        if( distance < currentFactor )
         {
-            return c.getAverage();
+            bestFitColor = avg;
+            currentFactor = distance;
         }
     }
 
-    return Color( 166, 0, 220 );
+    return bestFitColor;
 }
 
 void ColorGroup::mergeGroupsToThreshold( int treshold )
@@ -115,6 +121,23 @@ void ColorGroup::printAllContainers() const
         std::cout << "( " << avg.getRed() << " , " << avg.getGreen()
                   << " , " << avg.getBlue() << " ) " 
                   << "COLORS: " << c.getNumberOfColors() << std::endl;
+    }
+}
+
+void ColorGroup::removeSmallAreaColors( int threshold )
+{
+    std::list<ColorContainer>::iterator colorContainer = colorContainers_.begin();
+
+    while( colorContainer != colorContainers_.end() )
+    {
+        if( colorContainer->getNumberOfColors() < threshold )
+        {
+            colorContainer = colorContainers_.erase( colorContainer );
+        }
+        else
+        {
+            ++colorContainer;
+        }
     }
 }
 
