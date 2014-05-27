@@ -9,14 +9,15 @@ namespace filtration
 class ApplyBilateralFilter : public IFiltrationAlgorithm
 {
 public:
-    ApplyBilateralFilter();
+    ApplyBilateralFilter( int, int, int );
     ~ApplyBilateralFilter();
 
     boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const;
+    
 private:
-    int computeDiameter( int, int ) const;
-    int computeSigmaColor( int, int ) const;
-    int computeSigmaSpace( int, int ) const;
+    int diameter_;
+    int sigmaColor_;
+    int sigmaSpace_;
 };
 
 } // namespace filtration

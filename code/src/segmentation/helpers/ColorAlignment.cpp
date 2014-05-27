@@ -26,13 +26,17 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
     const int INITIAL_THRESHOLD = 10;
     const int MINIMAL_COLOR_AREA = 500;
     const int MAX_NUMBER_OF_COLORS = 30;
+    const int DIAMETER = 20;
+    const int SIGMA_COLOR = 75;
+    const int SIGMA_SPACE = 50;
     
     boost::shared_ptr<cv::Mat> result( new cv::Mat( image->clone() ) );
 
     // First apply bilateral filter multiple times
     for( int i = 0 ; i < BILATERAL_FILTER_COUNTER ; ++i )
     {
-        result = filtration::ApplyBilateralFilter().apply( result );
+        result = 
+            filtration::ApplyBilateralFilter( DIAMETER, SIGMA_COLOR, SIGMA_SPACE ).apply( result );
     }
 
     // Next, apply Gaussian Filter and unsharp mask to remove some holes

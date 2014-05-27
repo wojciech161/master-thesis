@@ -24,12 +24,10 @@ struct PairCompare
 
 HolesRemoval::HolesRemoval()
 {
-    std::cout << "HR begin\n";
 }
 
 HolesRemoval::~HolesRemoval()
 {
-    std::cout << "HR end\n";
 }
 
 boost::shared_ptr<cv::Mat> HolesRemoval::apply( const boost::shared_ptr<cv::Mat> input ) const
@@ -50,7 +48,7 @@ boost::shared_ptr<cv::Mat> HolesRemoval::apply( const boost::shared_ptr<cv::Mat>
 
 void HolesRemoval::removeHole( int row, int col, cv::Vec3b& changedPixel, const boost::shared_ptr<cv::Mat> image ) const
 {
-    const int WINDOW_WIDTH = 5;
+    const int WINDOW_WIDTH = 15;
 
     Color pxColor( changedPixel );
 

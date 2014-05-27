@@ -3,3 +3,11 @@ code/bin/*
 
 # Ignore resources
 code/resources/*
+
+# Ignore output from Latex
+doc/document.aux
+doc/document.log
+doc/document.out
+doc/document.pdf
+doc/document.toc
+

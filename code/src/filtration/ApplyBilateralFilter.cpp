@@ -6,7 +6,10 @@
 namespace filtration
 {
 
-ApplyBilateralFilter::ApplyBilateralFilter()
+ApplyBilateralFilter::ApplyBilateralFilter( int diameter, int sigmaColor, int sigmaSpace )
+ : diameter_( diameter )
+ , sigmaColor_( sigmaColor )
+ , sigmaSpace_( sigmaSpace )
 {
     std::cout << "FILTRATION: ApplyBilateralFilter - created\n";
 }
@@ -20,13 +23,9 @@ boost::shared_ptr<cv::Mat> ApplyBilateralFilter::apply( boost::shared_ptr<cv::Ma
 {
     boost::shared_ptr<cv::Mat> result( new cv::Mat( input->clone() ) );
 
-    int diameter = computeDiameter( input->rows, input->cols );
-    int sigmaColor = computeSigmaColor( input->rows, input->cols );
-    int sigmaSpace = computeSigmaSpace( input->rows, input->cols );
-
     try
     {
-        cv::bilateralFilter( *input, *result, diameter, sigmaColor, sigmaSpace );    
+        cv::bilateralFilter( *input, *result, diameter_, sigmaColor_, sigmaSpace_ );    
     }
     catch( cv::Exception& e )
     {
@@ -38,21 +37,5 @@ boost::shared_ptr<cv::Mat> ApplyBilateralFilter::apply( boost::shared_ptr<cv::Ma
 
     return result;
 }
-
-int ApplyBilateralFilter::computeDiameter( int rows, int cols ) const
-{
-    return 20;
-}
-
-int ApplyBilateralFilter::computeSigmaColor( int rows, int cols ) const
-{
-    return 75;
-}
-
-int ApplyBilateralFilter::computeSigmaSpace( int rows, int cols ) const
-{
-    return 50;
-}
-
     
 } // namespace filtration

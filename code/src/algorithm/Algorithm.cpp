@@ -19,9 +19,9 @@ boost::shared_ptr<cv::Mat> Algorithm::run()
 {
     boost::shared_ptr<cv::Mat> result;
 
-    result = segmentation::LineDetection().apply( image_ );
+    // result = segmentation::LineDetection().apply( image_ );
 
-    // result = segmentation::ColorSegmentation().apply( image_ );
+    result = segmentation::ColorSegmentation().apply( image_ );
 
     return result;
 }
