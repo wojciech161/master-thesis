@@ -15,7 +15,7 @@ namespace helpers
 class HolesRemoval
 {
 public:
-    HolesRemoval();
+    HolesRemoval( int );
     ~HolesRemoval();
 
     boost::shared_ptr<cv::Mat> apply( const boost::shared_ptr<cv::Mat> ) const;
@@ -24,6 +24,9 @@ private:
     void removeHole( int, int, cv::Vec3b&, const boost::shared_ptr<cv::Mat> ) const;
     std::list<Color> getWindow( int, int, int, const boost::shared_ptr<cv::Mat> ) const;
     Color getPixelColor( const std::list<Color>&, const Color& ) const;
+
+private:
+    int windowWidth_;
 };
 
 } // namespace helpers

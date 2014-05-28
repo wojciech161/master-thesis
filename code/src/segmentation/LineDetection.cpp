@@ -23,7 +23,8 @@ LineDetection::~LineDetection()
 
 boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> input ) const
 {
-    const int THRESHOLD_VALUE = 100;
+    const int THRESHOLD_VALUE = 140;
+    // const int HOLES_REMOVAL_WINDOW_SIZE = 3;
     boost::shared_ptr<cv::Mat> result = input;
 
     // Apply unsharp mask to image
@@ -42,6 +43,9 @@ boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> inpu
 
     // Find common colors of lines
     result = helpers::ColorAlignment().apply( result );
+
+    // remove single holes
+    // result = helpers::HolesRemoval( HOLES_REMOVAL_WINDOW_SIZE ).apply( result );
 
     return result;
 }

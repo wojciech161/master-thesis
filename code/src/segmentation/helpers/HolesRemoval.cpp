@@ -22,7 +22,8 @@ struct PairCompare
     const Color& c_;
 };
 
-HolesRemoval::HolesRemoval()
+HolesRemoval::HolesRemoval( int windowWidth )
+ : windowWidth_( windowWidth )
 {
 }
 
@@ -48,11 +49,9 @@ boost::shared_ptr<cv::Mat> HolesRemoval::apply( const boost::shared_ptr<cv::Mat>
 
 void HolesRemoval::removeHole( int row, int col, cv::Vec3b& changedPixel, const boost::shared_ptr<cv::Mat> image ) const
 {
-    const int WINDOW_WIDTH = 15;
-
     Color pxColor( changedPixel );
 
-    std::list<Color> window = getWindow( row, col, WINDOW_WIDTH, image );
+    std::list<Color> window = getWindow( row, col, windowWidth_, image );
     if( !window.empty() )
     {
         pxColor = getPixelColor( window, pxColor );

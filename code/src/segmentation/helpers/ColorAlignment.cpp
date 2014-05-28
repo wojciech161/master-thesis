@@ -22,10 +22,10 @@ ColorAlignment::~ColorAlignment()
 boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Mat> image ) const
 {
     const int BILATERAL_FILTER_COUNTER = 5;
-    const int GAUSSIAN_BLUR_RADIUS = 3;
+    const int GAUSSIAN_BLUR_RADIUS = 5;
     const int INITIAL_THRESHOLD = 10;
     const int MINIMAL_COLOR_AREA = 500;
-    const int MAX_NUMBER_OF_COLORS = 30;
+    const int MAX_NUMBER_OF_COLORS = 10;
     const int DIAMETER = 20;
     const int SIGMA_COLOR = 75;
     const int SIGMA_SPACE = 50;
@@ -41,7 +41,7 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
 
     // Next, apply Gaussian Filter and unsharp mask to remove some holes
     result = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( result );
-    result = filtration::UnsharpMask().apply( result );
+    result = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( result );
 
     // Create groups of colors
     helpers::ColorGroup colorGroup( INITIAL_THRESHOLD );
@@ -77,7 +77,7 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
     {
         for( int col = 0; col < result->cols; ++col )
         {
-            cv::Vec3b inPx = result->at<cv::Vec3b>( row, col );
+            cv::Vec3b inPx = image->at<cv::Vec3b>( row, col );
             helpers::Color inColor( inPx );
             if( !isWhite( inColor ) )
             {

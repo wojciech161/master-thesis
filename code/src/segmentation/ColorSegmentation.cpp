@@ -34,6 +34,7 @@ boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> 
     const int SIGMA_SPACE = 150;
     const int DILATION_AND_EROSION_SIZE = 3;
     const int DILATION_AND_EROSION_COUNTER = 4;
+    const int WINDOW_WIDTH = 15;
     boost::shared_ptr<cv::Mat> result = input;
 
     // First, we apply a bilateral and gaussian filters to remove noises from maps
@@ -81,7 +82,7 @@ boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> 
 
     result = helpers::ImageGenerator( result, colorGroup ).getImage();
 
-    result = helpers::HolesRemoval().apply( result );
+    result = helpers::HolesRemoval( WINDOW_WIDTH ).apply( result );
 
     return result;
 }
