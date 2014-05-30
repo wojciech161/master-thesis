@@ -194,7 +194,7 @@ SPECJALNOŚĆ: & \@specjalnosc\\
   \end{list}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                  Styl wyliczenia (opis skrótów) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Styl wyliczenia (opis skrótów) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{Ventry}[1]%
  {\begin{list}{}{\renewcommand{\makelabel}[1]{\textbf{##1}\hfill}%
@@ -293,37 +293,37 @@ Nowadays image digitization is a very important topic. It has a lot of practical
 For example, it is a very good way to prevent destruction of old photos,
 to archive them(to keep them in one place in a digital version) and make it easier to 
 send it from one place to another. Unfortunately, basic method of digitization of
-images - scanning - has many disadvantages. Due to errors of a person, who does the
-scanning, input image distortions or quality of a scanning device, resulting digitized images 
+images - scanning - has some disadvantages. Due to errors made during a scanning procedure,
+input image distortions or quality of a scanning device, resulting digitized images 
 have a poor quality. To improve digitization process there are many filtration algorithms,
-which task is to solve this problem and to produce an image with better quality. There
-is another big advantage of image digitization - there is a possibility
-to retrieve information from the picture(for example: pattern recognition, feature extraction).
-This feature is handled by segmentation algorithms. Although this group is one of the most 
-difficult in image processing, there is a big emphasis on a research, due to many advantages
-of this type of algorithms in practical use.
+which task is to solve this problem and to produce an image with better quality.Image digitization 
+has another big advantage - there is a possibility to retrieve information from the picture(for 
+example: pattern recognition, feature extraction). This feature is handled by segmentation 
+algorithms. Although this group is one of the most difficult in image processing, there is a big 
+emphasis on a research, due to many advantages of this type of algorithms in practical use.
 
 \section{Problem statement and main objectives}
 
 The main aim of this thesis is to create a filtration and segmentation algorithm, which should
-apply to scanned color-printed images. In my work I will focus on scanned maps. 
+apply to scanned color-printed images. This work is focused on scanned maps. 
 Resulting algorithm should be optimized to used it with this type of scanned images. 
 Output image should have following properties:
 
 \begin{itemize}
   \item most of distortions should be eliminated;
-  \item image should be divided into consistent areas, like forests, lakes, rivers, etc. These areas should
-        be marked on the map in a consistent way(it should have the same color);
+  \item image should be divided into consistent areas, like forests, lakes, rivers, etc. These areas
+        should be marked on the map in a consistent way(it should have the same color);
   \item detected areas should have the same size like in an input image;
   \item small details, like text should be kept and marked in a resulting image.
 \end{itemize}
 
-Used fltering algorithms should remove main distortions and all disadvantages of image scanning(like for example
-rasters, moro effect). Next, proper segmentation algorithm should be used to detect all areas in an input map
-and to divide the map into different, homogenous regions. \\
+Used fltering algorithms should remove main distortions and all disadvantages of image scanning(like
+for example rasters, moro effect). Next, proper segmentation algorithm should be used to detect all
+areas in an input map and to divide the map into different, homogenous regions. \\
 
-The final solution - set of algorithms - should be impemented in a chosen programming language. Created application
-should be tested on many different scanned maps. Test results should be then analysed.
+The final solution - set of algorithms - should be impemented in a chosen programming language.
+Created application should be tested on many different scanned maps. Test results should be then
+analysed.
 
 \section{Document structure}
 
@@ -350,12 +350,33 @@ Below there is a short description of a content for each chapter:
 
 \chapter{Theoretical introduction}
 
-
+This section contains all needed definitions and concepts needed for a good understanding of the
+work. It also covers history and basic usage of digital image processing.
 
 \section{Digital image processing}
 
+\subsection{History and usage}
+
 According to \cite{digitalImageProcessing},
-a digital image can be defined as a two dimentional function f(x, y), where x and y denote spatial 
+digital image processing has a lot of practical applications. It was used first at the beginning of
+XX century to send pictures over long distances. Research and development of digital image
+processing algorithms  was strongly associated with growth of the computer industry. It was caused
+by high computational complexity of this type of algorithms. Further growth began in 1960s. Many 
+techniques were developed in organisations like Jet Propulsion Laboratory, Massachusetts Institute
+of Technology or Bell Laboratories. It was used in satellite imagery, medical imaging(in 1970s 
+computerized tomography was developed), image enhancement, science(for example in geography - 
+in research about pollution, archeology - in restoring blured pictures), defence or industry.
+Another area of digital image processing focuses on extracting an information from the picture in
+a for suitable for computer processing. It is used in a character recognition(OCR), industry(
+automatic inspection of production process), military, forensics(recognition of fingerprints) and
+weather prediction. \\
+
+Nowadays, with fast computers and signal processors, digital image processing is used widely.
+It is mainly caused by its low price and versatility.
+
+\subsection{Basic definitions}
+
+A digital image can be defined as a two dimentional function f(x, y), where x and y denote spatial 
 coordinates and f(x, y) is the intensity or gray level of the image at this point. Values of x, y
 and f(x, y) should be finite, descrete quantities. Digital image processing refers to processing 
 digital images by means of a digital computer. It includes many primitive operations like noise
@@ -363,20 +384,105 @@ reduction, contrast enhancement or image sharpening. It also involves more advan
 image segmentation(partitioning an image into regions or objects), description of objects,
 classification(recognition) of objects and even advanced analysis of an image. Digital image 
 processing algorithms take an image as an input. Output depends on a type of the algorithm.
-It can be new, processed image or group of attributes taken from an image. Digital image processing
-algorithms are already used in many areas, for example to categorize images, modelling, visualization,
-medical diagnostics, industry and many others.
+It can be new, processed image or group of attributes taken from an image. Main tasks of digital
+image processing are:
+
+\begin{itemize}
+  \item Image aquisition;
+  \item Image enhancement;
+  \item Image restoration;
+  \item Wavelets;
+  \item Compression;
+  \item Feature extraction;
+  \item Segmentation;
+  \item Recognition.
+\end{itemize}
+
+This work focuses mainly on image enhancement and image segmentation. All algorithms used in this 
+work are described in next sections.
 
 \section{Image enhancement}
 
+Image enhancement algorithms are one of the simplest and most commonly used group of digital image
+processing. Main idea of these algorithms is to improve image quality, bring out obscured details 
+or highlight certain features of an image.  The main aim of image enhancement is to process image 
+and return an image more suitable, than input for a specific application. Proper image enhancement
+algorithms should be chosen for different cases(algorithm solving one problem may be inadequate for
+other problems). Image enhancement algorithms can be divided into two groups:
 
+\begin{itemize}
+  \item Spatial domain - manipulation of pixels of an image directly;
+  \item Frequency domain - modification of Fourier transform of an image.
+\end{itemize}
+
+\subsection{Smoothing algorithms}
+
+According to \cite{learningOpenCv}, smoothing is a very simple and frequently used operation. It is
+used to reduce noise or camera artifacts. It is also used in an image resolution reduction. In this
+work, there are two smoothing algorithms used.
+
+\subsubsection{Gaussian blur}
+
+Gaussian filter is one of the most frequently used filters. According to \cite{learningOpenCv}, 
+gaussian blur is done by convolving each point in the input array with a Gaussian kernel and then
+summing to produce the output array. Resulting image is a smooth blur. It is used to reduce noise
+or image details and as a part of edge detection algorithms. Example result of a Gaussian Blur
+filter is shown in a Fig.~\ref{gaussianBlurExample}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/GaussianBlurExample.jpg}
+\caption{Gaussian Blur example. \\
+Source: http://en.wikipedia.org/wiki/File:Halftone,\_Gaussian\_Blur.jpg}
+\label{gaussianBlurExample}
+\end{center}
+\end{figure}
+
+\subsubsection{Bilateral filter}
+
+According to \cite{bilateralFilterWiki}, bilateral filter is a non-linear, edge-preserving and
+noise reducing filter for images. The intensity value at each pixel in an image is replaced by a
+weighted average of an intensity values from nearby pixels. In contrast to the Gaussian Blur, 
+weights are based on the difference of intensity from the center pixel. This algorithm is commonly
+used to prepare an input for segmenting algorithms. Example of a bilateral filter usage is presented
+in a fig.~\ref{bilateralFilterExample}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{images/BilateralFilterExample.jpg}
+\caption{Bilateral Filter example. \\
+Source: http://www.planet-source-code.com/Upload\_PSC/ScreenShots/PIC20103161922506817.jpg}
+\label{bilateralFilterExample}
+\end{center}
+\end{figure}
+
+\subsection{Morphological transformations}
+
+Opis...
+
+\subsubsection{Dilation}
+
+Opis...
+
+\subsubsection{Erosion}
+
+Opis...
 
 \section{Image segmentation}
 
+Segmentation algorithms partitions images into constituent parts or objects. I dalsza część opisu...
+
+\subsection{Tresholding}
+
+Opis...
+
+
+
 \chapter{State of Art}
 
-This chapter focuses on actual research in topic of filtration and segmentation of scanned color images.
-There is also a description of basic filtration and segmentation algorithms used in this work.
+This chapter focuses on actual research in topic of filtration and segmentation of scanned color
+images. There is also a description of basic filtration and segmentation algorithms used in this
+work.
 
 \section{Digital image processing}
 
@@ -415,7 +521,7 @@ There is also a description of basic filtration and segmentation algorithms used
 
 \chapter{Tests and Results}
 
-\section{Testing data}
+\section{Test description}
 
 \section{Result analysis}
 
@@ -428,7 +534,14 @@ There is also a description of basic filtration and segmentation algorithms used
 
 \begin{thebibliography}{   }
 
-	\bibitem{digitalImageProcessing}{Rafael C. Gonzalez, E. Woods, Digital Image Processing, Prentice Hall, 3rd Edition(2007)}
+	\bibitem{digitalImageProcessing}
+          {Rafael C. Gonzalez, E. Woods, Digital Image Processing, Prentice Hall, 3rd Edition, 2007}
+  \bibitem{learningOpenCv}
+          {Gary Bradski, Adrian Kaehler, Learning OpenCV. Computer Vision with the OpenCV Library,
+          O`Reilly Media Inc., 2008}
+  \bibitem{bilateralFilterWiki}
+          {http://en.wikipedia.org/wiki/Bilateral\_filter, Version from 29.05.2014}
+
 
 \end{thebibliography}
 

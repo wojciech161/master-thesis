@@ -10,12 +10,12 @@ LayerMerge::LayerMerge( boost::shared_ptr<cv::Mat> background, boost::shared_ptr
  : backgroundImage_( background )
  , contourImage_( contour )
 {
-
+    std::cout << "UTILITY: LayerMerge - created\n";
 }
 
 LayerMerge::~LayerMerge()
-{
-
+{   
+    std::cout << "UTILITY: LayerMerge - applied\n";
 }
 
 boost::shared_ptr<cv::Mat> LayerMerge::apply() const

@@ -11,12 +11,12 @@ namespace helpers
     
 ColorAlignment::ColorAlignment()
 {
-
+    std::cout << "SEGMENTATION: ColorAlignment - created\n";
 }
 
 ColorAlignment::~ColorAlignment()
 {
-
+    std::cout << "SEGMENTATION: ColorAlignment - applied\n";
 }
 
 boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Mat> image ) const

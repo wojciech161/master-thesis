@@ -1,4 +1,5 @@
 #include "segmentation/helpers/ImageGenerator.hpp"
+#include <iostream>
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
@@ -10,6 +11,7 @@ namespace helpers
 ImageGenerator::ImageGenerator( boost::shared_ptr<cv::Mat> input, const ColorGroup& colorGroup )
  : result_( new cv::Mat( input->clone() ) )
 {
+    std::cout << "UTILITY: ImageGenerator - created\n";
     for( int row = 0; row < input->rows; ++row )
     {
         for( int col = 0; col < input->cols; ++col )
@@ -24,7 +26,7 @@ ImageGenerator::ImageGenerator( boost::shared_ptr<cv::Mat> input, const ColorGro
 
 ImageGenerator::~ImageGenerator()
 {
-
+    std::cout << "UTILITY: ImageGenerator - applied\n";
 }
 
 boost::shared_ptr<cv::Mat> ImageGenerator::getImage() const

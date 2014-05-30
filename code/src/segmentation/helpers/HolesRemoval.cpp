@@ -25,10 +25,12 @@ struct PairCompare
 HolesRemoval::HolesRemoval( int windowWidth )
  : windowWidth_( windowWidth )
 {
+    std::cout << "SEGMENTATION: HolesRemoval - created\n";
 }
 
 HolesRemoval::~HolesRemoval()
 {
+    std::cout << "SEGMENTATION: HolesRemoval - applied\n";
 }
 
 boost::shared_ptr<cv::Mat> HolesRemoval::apply( const boost::shared_ptr<cv::Mat> input ) const

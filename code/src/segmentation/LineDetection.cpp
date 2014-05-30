@@ -6,7 +6,6 @@
 #include "filtration/RemoveLonePixels.hpp"
 #include "segmentation/helpers/ContourColorRestoration.hpp"
 #include "segmentation/helpers/ColorAlignment.hpp"
-#include "segmentation/helpers/HolesRemoval.hpp"
 
 namespace segmentation
 {
@@ -43,9 +42,6 @@ boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> inpu
 
     // Find common colors of lines
     result = helpers::ColorAlignment().apply( result );
-
-    // remove single holes
-    // result = helpers::HolesRemoval( HOLES_REMOVAL_WINDOW_SIZE ).apply( result );
 
     return result;
 }

@@ -12,10 +12,12 @@ ContourColorRestoration::ContourColorRestoration(
  : colorImage_( colorImage )
  , blackAndWhiteImage_( blackAndWhiteImage )
 {
+    std::cout << "SEGMENTATION: ContourColorRestoration - created\n";
 }
 
 ContourColorRestoration::~ContourColorRestoration()
 {
+    std::cout << "SEGMENTATION: ContourColorRestoration - applied\n";
 }
 
 boost::shared_ptr<cv::Mat> ContourColorRestoration::apply()
