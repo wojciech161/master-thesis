@@ -50,13 +50,14 @@ SET (CMAKE_VERBOSE_MAKEFILE 0) # Use 1 for debugging, 0 for release
 #
 # g++ flags
 #
-set(CMAKE_CXX_FLAGS "-O2 -Wall -pedantic -Werror")
+set(CMAKE_CXX_FLAGS "-O2 -Wall -pedantic -Werror -g")
 
 #
 # Project Search Paths
 #
 LIST (APPEND CMAKE_PREFIX_PATH "${MAINFOLDER}")
 INCLUDE_DIRECTORIES("${MAINFOLDER}/include")
+INCLUDE_DIRECTORIES("${MAINFOLDER}/lib")
 LINK_DIRECTORIES(${MAINFOLDER}/lib)
 
 #

@@ -7,7 +7,8 @@
 namespace filtration
 {
 
-ElliminateWhiteNoise::ElliminateWhiteNoise()
+ElliminateWhiteNoise::ElliminateWhiteNoise( int denoisingFactor )
+ : denoisingFactor_( denoisingFactor )
 {
     std::cout << "FILTRATION: ElliminateWhiteNoise - created\n";
 }
@@ -19,10 +20,8 @@ ElliminateWhiteNoise::~ElliminateWhiteNoise()
 
 boost::shared_ptr<cv::Mat> ElliminateWhiteNoise::apply( boost::shared_ptr<cv::Mat> input ) const
 {
-    const int DENOISING_FACTOR = 50;
-
     boost::shared_ptr<cv::Mat> result( new cv::Mat() );
-    cv::fastNlMeansDenoising( *input, *result, DENOISING_FACTOR );
+    cv::fastNlMeansDenoising( *input, *result, denoisingFactor_ );
     return result;
 }
 

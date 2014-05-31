@@ -9,10 +9,13 @@ namespace filtration
 class ElliminateWhiteNoise : public IFiltrationAlgorithm
     {
     public:
-        ElliminateWhiteNoise();
+        ElliminateWhiteNoise( int );
         ~ElliminateWhiteNoise();
     
         boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const;
+
+    private:
+        int denoisingFactor_;
     };    
 
 }

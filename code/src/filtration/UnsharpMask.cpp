@@ -6,7 +6,8 @@
 namespace filtration
 {
     
-UnsharpMask::UnsharpMask()
+UnsharpMask::UnsharpMask( int standardDeviation )
+ : standardDeviation_( standardDeviation )
 {
     std::cout << "FILTRATION: UnsharpMask - created\n";
 }
@@ -18,8 +19,6 @@ UnsharpMask::~UnsharpMask()
 
 boost::shared_ptr<cv::Mat> UnsharpMask::apply( boost::shared_ptr<cv::Mat> input ) const
 {
-    const double STANDARD_DEVIATION = 5;
-
     boost::shared_ptr<cv::Mat> result( new cv::Mat() );
     cv::Mat tmpImage;
 
@@ -30,7 +29,7 @@ boost::shared_ptr<cv::Mat> UnsharpMask::apply( boost::shared_ptr<cv::Mat> input 
         *input,
         tmpImage,
         cv::Size( blurWidth, blurHeight ),
-        STANDARD_DEVIATION );
+        standardDeviation_ );
 
     cv::addWeighted( *input, 2.5, tmpImage, -1.5, 0, *result );
 

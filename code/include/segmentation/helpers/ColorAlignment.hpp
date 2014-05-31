@@ -5,6 +5,7 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "Color.hpp"
+#include "core/Parameters.hpp"
 
 namespace segmentation
 {
@@ -14,13 +15,16 @@ namespace helpers
 class ColorAlignment
 {
 public:
-    ColorAlignment();
+    ColorAlignment( const LineDetectionParams& );
     ~ColorAlignment();
 
     boost::shared_ptr<cv::Mat> apply( const boost::shared_ptr<cv::Mat> ) const;
 
 private:
     bool isWhite( const Color& ) const;
+
+private:
+    const LineDetectionParams& parameters_;
 };
 
 } // namespace helpers

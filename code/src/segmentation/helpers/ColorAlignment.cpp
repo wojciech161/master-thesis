@@ -9,7 +9,8 @@ namespace segmentation
 namespace helpers
 {
     
-ColorAlignment::ColorAlignment()
+ColorAlignment::ColorAlignment( const LineDetectionParams& parameters )
+ : parameters_( parameters )
 {
     std::cout << "SEGMENTATION: ColorAlignment - created\n";
 }
@@ -21,14 +22,16 @@ ColorAlignment::~ColorAlignment()
 
 boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Mat> image ) const
 {
-    const int BILATERAL_FILTER_COUNTER = 5;
-    const int GAUSSIAN_BLUR_RADIUS = 5;
-    const int INITIAL_THRESHOLD = 10;
-    const int MINIMAL_COLOR_AREA = 500;
-    const int MAX_NUMBER_OF_COLORS = 10;
-    const int DIAMETER = 20;
-    const int SIGMA_COLOR = 75;
-    const int SIGMA_SPACE = 50;
+    const int BILATERAL_FILTER_COUNTER = parameters_.bilateralFilterCounter;
+    const int GAUSSIAN_BLUR_RADIUS = parameters_.gaussianBlurRadius;
+    const int GAUSSIAN_BLUR_STANDARD_DEVIATION = parameters_.gaussianBlurStandardDeviation;
+    const int GAUSSIAN_BLUR_COUNTER = parameters_.gaussianBlurCounter;
+    const int INITIAL_THRESHOLD = parameters_.initialThreshold;
+    const int MINIMAL_COLOR_AREA = parameters_.mimimalColorArea;
+    const int MAX_NUMBER_OF_COLORS = parameters_.maxNumberOfColors;
+    const int DIAMETER = parameters_.diameter;
+    const int SIGMA_COLOR = parameters_.sigmaColor;
+    const int SIGMA_SPACE = parameters_.sigmaSpace;
     
     boost::shared_ptr<cv::Mat> result( new cv::Mat( image->clone() ) );
 
@@ -40,8 +43,11 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
     }
 
     // Next, apply Gaussian Filter and unsharp mask to remove some holes
-    result = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( result );
-    result = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( result );
+    for( int i = 0 ; i < GAUSSIAN_BLUR_COUNTER ; ++i )
+    {
+        result = filtration::ApplyGaussianFilter( 
+            GAUSSIAN_BLUR_RADIUS, GAUSSIAN_BLUR_STANDARD_DEVIATION ).apply( result );
+    }
 
     // Create groups of colors
     helpers::ColorGroup colorGroup( INITIAL_THRESHOLD );

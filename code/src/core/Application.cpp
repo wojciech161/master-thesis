@@ -5,6 +5,7 @@
 #include "filehandler/FileHandler.hpp"
 #include "debug/ImagePrinter.hpp"
 #include "algorithm/Algorithm.hpp"
+#include "filehandler/ConfigurationFileReader.hpp"
 
 namespace core
 {
@@ -12,6 +13,7 @@ namespace core
 Application::Application()
 {
     displayIntroMessage();
+    readParameters();
     start();
 }
 
@@ -31,7 +33,7 @@ void Application::displayIntroMessage() const
     std::cout << "Academic Year:\t2013/2014\n";
 }
 
-void Application::start() const
+void Application::start()
 {
     // Constants definitions
     const std::string INPUT_WINDOW_TITLE = "Input Image";
@@ -70,9 +72,15 @@ void Application::start() const
 }
 
 boost::shared_ptr<cv::Mat> Application::runFiltrationAndSegmentationAlgorithm(
-    const cv::Mat& inputImage) const
+    const cv::Mat& inputImage)
 {
-    return algorithm::Algorithm( inputImage ).run();
+    return algorithm::Algorithm( inputImage, parameters_ ).run();
+}
+
+void Application::readParameters()
+{
+    // Get algorithm parameters from configuration file
+    filehandler::ConfigurationFileReader reader( parameters_ );
 }
 
 } // namespace core

@@ -13,10 +13,9 @@
 namespace segmentation
 {
 
-ColorSegmentation::ColorSegmentation()
+ColorSegmentation::ColorSegmentation( const ColorSegmentationParams& parameters )
     : threshold_( 30 )
-    , MIN_NUMBER_OF_COLORS( 5 )
-    , MAX_NUMBER_OF_COLORS( 30 )
+    , parameters_( parameters )
 {
     std::cout << "SEGMENTATION: ColorSegmentation - created\n";
 }
@@ -28,17 +27,21 @@ ColorSegmentation::~ColorSegmentation()
 
 boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> input ) const
 {
-    const int GAUSSIAN_BLUR_RADIUS = 7;
-    const int DIAMETER = 20;
-    const int SIGMA_COLOR = 150;
-    const int SIGMA_SPACE = 150;
-    const int DILATION_AND_EROSION_SIZE = 3;
-    const int DILATION_AND_EROSION_COUNTER = 4;
-    const int WINDOW_WIDTH = 15;
+    const int GAUSSIAN_BLUR_RADIUS = parameters_.gaussianBlurRadius;
+    const int GAUSSIAN_BLUR_STANDARD_DEVIATION = parameters_.gaussianBlurStandardDeviation;
+    const int DIAMETER = parameters_.diameter;
+    const int SIGMA_COLOR = parameters_.sigmaColor;
+    const int SIGMA_SPACE = parameters_.sigmaSpace;
+    const int DILATION_AND_EROSION_SIZE = parameters_.dilationAndErosionSize;
+    const int DILATION_AND_EROSION_COUNTER = parameters_.dilationAndErosionCounter;
+    const int WINDOW_WIDTH = parameters_.windowWidth;
+    const int MAX_NUMBER_OF_COLORS = parameters_.maxNumberOfColors;
+
     boost::shared_ptr<cv::Mat> result = input;
 
     // First, we apply a bilateral and gaussian filters to remove noises from maps
-    result = filtration::ApplyGaussianFilter( GAUSSIAN_BLUR_RADIUS ).apply( result );
+    result = filtration::ApplyGaussianFilter(
+        GAUSSIAN_BLUR_RADIUS, GAUSSIAN_BLUR_STANDARD_DEVIATION ).apply( result );
 
     for( int i = 0 ; i < DILATION_AND_EROSION_COUNTER ; ++i )
     {
