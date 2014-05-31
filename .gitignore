@@ -2,7 +2,8 @@
 code/bin/*
 
 # Ignore resources
-code/resources/*
+code/resources/input_images*
+code/resources/output_images*
 
 # Ignore output from Latex
 doc/document.aux
