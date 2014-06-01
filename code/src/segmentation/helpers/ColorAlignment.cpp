@@ -3,6 +3,7 @@
 #include "filtration/ApplyGaussianFilter.hpp"
 #include "filtration/UnsharpMask.hpp"
 #include "segmentation/helpers/ColorGroup.hpp"
+#include "filtration/ElliminateWhiteNoise.hpp"
 
 namespace segmentation
 {
@@ -32,6 +33,7 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
     const int DIAMETER = parameters_.diameter;
     const int SIGMA_COLOR = parameters_.sigmaColor;
     const int SIGMA_SPACE = parameters_.sigmaSpace;
+    const int DENOISING_FACTOR = parameters_.denoisingFactor;
     
     boost::shared_ptr<cv::Mat> result( new cv::Mat( image->clone() ) );
 
@@ -92,6 +94,9 @@ boost::shared_ptr<cv::Mat> ColorAlignment::apply( const boost::shared_ptr<cv::Ma
             }
         }
     }
+
+    // Elliminate white noise
+    result = filtration::ElliminateWhiteNoise( DENOISING_FACTOR ).apply( result );
 
     return result;
 }

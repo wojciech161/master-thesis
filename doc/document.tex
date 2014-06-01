@@ -8,6 +8,9 @@
     /Keywords ()
 }
 
+\batchmode
+\nonstopmode
+
 %\newcommand*{\memfontfamily}{pnc}
 %\newcommand*{\memfontpack}{newcent}
 \documentclass[a4paper,onecolumn,oneside,12pt]{memoir}
@@ -464,11 +467,44 @@ morphological operations are called Dilation and Erosion.
 
 \subsubsection{Dilation}
 
-Opis...
+Dilation is a convolution of an image with a kernel. The kernel can have any shape or size and has
+to have defined an anchor point. When kernel is scanned over the image, there is computed maximum
+pixel value covered by the kernel. Then, the anchor point value is set to maximum value. Dilation
+causes growth of all bright elements in an image. Example of dilation is presented in 
+Fig.~\ref{dilationExample}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{images/dilationExample.jpg}
+\caption{Dilation example. \\
+Source: http://www.mathworks.com/help/images/ref/referenceipart130.gif}
+\label{dilationExample}
+\end{center}
+\end{figure}
 
 \subsubsection{Erosion}
 
+Erosion is a converse operation to dilation. Main difference is that it computes local minimum over
+the area of the kernel. Erosion causes growth of all dark elements in an image. Example of erosion
+is presented in Fig.~\ref{erosionExample}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{images/erosionExample.jpg}
+\caption{Erosion example. \\
+Source: http://www.mathworks.com/help/images/ref/referenceipart128.gif}
+\label{erosionExample}
+\end{center}
+\end{figure}
+
+\subsection{Noise elimination}
+
 Opis...
+
+\subsection{Unsharp mask}
+
+Unsharp mask is applied to highlight or enhance some details in an image. There are many 
+implementations of unsharp algorithms. Depending on the application, other algorithm is used.
 
 \section{Image segmentation}
 

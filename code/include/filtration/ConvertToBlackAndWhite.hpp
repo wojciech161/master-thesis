@@ -6,13 +6,37 @@
 namespace filtration
 {
 
+enum EConversionType
+{
+    EConversionType_All,
+    EConversionType_Red,
+    EConversionType_Green,
+    EConversionType_Blue
+};
+
+enum EColor
+{
+    EColor_Red,
+    EColor_Green,
+    EColor_Blue
+};
+
 class ConvertToBlackAndWhite : public IFiltrationAlgorithm
 {
 public:
-    ConvertToBlackAndWhite();
+    ConvertToBlackAndWhite( EConversionType );
     ~ConvertToBlackAndWhite();
 
     boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const;
+
+private:
+    boost::shared_ptr<cv::Mat> convertAll( boost::shared_ptr<cv::Mat> ) const;
+    boost::shared_ptr<cv::Mat> convertRed( boost::shared_ptr<cv::Mat> ) const;
+    boost::shared_ptr<cv::Mat> convertGreen( boost::shared_ptr<cv::Mat> ) const;
+    boost::shared_ptr<cv::Mat> convertBlue( boost::shared_ptr<cv::Mat> ) const;
+
+private:
+    EConversionType conversion_;
 };
 
 }

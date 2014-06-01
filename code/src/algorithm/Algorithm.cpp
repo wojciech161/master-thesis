@@ -20,18 +20,20 @@ Algorithm::~Algorithm()
 
 boost::shared_ptr<cv::Mat> Algorithm::run()
 {
-    boost::shared_ptr<cv::Mat> result;
-    boost::shared_ptr<cv::Mat> backgroundImage;
+    // boost::shared_ptr<cv::Mat> result;
+    // boost::shared_ptr<cv::Mat> backgroundImage;
     boost::shared_ptr<cv::Mat> contourImage;
 
     contourImage = segmentation::LineDetection( parameters_.getLineDetectionParams() )
         .apply( image_ );
-    backgroundImage = segmentation::ColorSegmentation( parameters_.getColorSegmentationParams() )
-        .apply( image_ );
+    // backgroundImage = segmentation::ColorSegmentation( parameters_.getColorSegmentationParams() )
+    //     .apply( image_ );
 
-    result = segmentation::helpers::LayerMerge( backgroundImage, contourImage ).apply();
+    // result = segmentation::helpers::LayerMerge( backgroundImage, contourImage ).apply();
 
-    return result;
+    // return result;
+
+    return contourImage;
 }
 
 } // namespace algorithm
