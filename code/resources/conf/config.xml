@@ -3,13 +3,13 @@
 <configuration>
 
     <background_detection>
-        <gaussian_blur_radius>7</gaussian_blur_radius>
+        <gaussian_blur_radius>9</gaussian_blur_radius>
         <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
         <diameter>20</diameter>
         <sigma_color>150</sigma_color>
         <sigma_space>150</sigma_space>
-        <dilation_and_erosion_size>3</dilation_and_erosion_size>
-        <dilation_and_erosion_counter>4</dilation_and_erosion_counter>
+        <dilation_and_erosion_size>2</dilation_and_erosion_size>
+        <dilation_and_erosion_counter>3</dilation_and_erosion_counter>
         <window_width>15</window_width>
         <max_number_of_colors>30</max_number_of_colors>
     </background_detection>

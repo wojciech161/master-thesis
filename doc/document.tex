@@ -497,24 +497,53 @@ Source: http://www.mathworks.com/help/images/ref/referenceipart128.gif}
 \end{center}
 \end{figure}
 
-\subsection{Noise elimination}
+\subsection{Denoising}
 
-Opis...
+Main goal of this type of algorithms is to eliminate noise from the image. In this work algorithm
+called Non-local Means Denoising \cite{nonLocalMeansDenoising}. Example of its usage is presented in
+a Fig.~\ref{denoisingExample}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.3]{images/denoisingExample.jpg}
+\caption{Denoising example. \\
+Source: Image generator in \cite{nonLocalMeansDenoising}}
+\label{denoisingExample}
+\end{center}
+\end{figure}
 
 \subsection{Unsharp mask}
 
-Unsharp mask is applied to highlight or enhance some details in an image. There are many 
-implementations of unsharp algorithms. Depending on the application, other algorithm is used.
+Unsharp mask is applied to highlight or enhance some details in an image. According to 
+\cite{unsharpMaskWiki}, this technique uses a blured or unsharp image to create mask of the original
+image. The unsharped mask is then combined with the negative image. As a result there is an image
+less blurry than the original. In algorithm used in this work, Gaussian blur is used and then its
+result is compared to the original image. If the difference is greater than specified threshold
+value, images are subtracted. Example of unsharp mask usage is presented in a 
+Fig.~\ref{unsharpMaskExample}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=1.2]{images/unsharpMaskExample.jpg}
+\caption{Unsharp mask example. \\
+Source: http://upload.wikimedia.org/wikipedia/commons/4/43/Unsharped\_eye.jpg}
+\label{unsharpMaskExample}
+\end{center}
+\end{figure}
 
 \section{Image segmentation}
 
-Segmentation algorithms partitions images into constituent parts or objects. I dalsza część opisu...
+According to \cite{digitalImageProcessing}, segmentation algorithms partitions images into 
+constituent parts or objects. They are generally based on two basic properties of intensity values:
+discontinuity and similarity. In first case, the approach is to partition an image based on abrupt
+changes in intensity(like for example edges in an image). In second case, the approach is based on
+partitioning an image into regions, that are similar(for example they have similar color). There
+are many segmentation algorithms available. Solution presented in this work is based on thresholding
+approach.
 
 \subsection{Tresholding}
 
 Opis...
-
-
 
 \chapter{State of Art}
 
@@ -579,6 +608,10 @@ work.
           O`Reilly Media Inc., 2008}
   \bibitem{bilateralFilterWiki}
           {http://en.wikipedia.org/wiki/Bilateral\_filter, Version from 29.05.2014}
+  \bibitem{unsharpMaskWiki}
+          {http://en.wikipedia.org/wiki/Unsharp\_masking, Version from 1.06.2014}
+  \bibitem{nonLocalMeansDenoising}
+          {http://www.ipol.im/pub/art/2011/bcm_nlm/, Version from 1.06.2014}
 
 
 \end{thebibliography}
