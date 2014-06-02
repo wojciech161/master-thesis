@@ -543,13 +543,41 @@ approach.
 
 \subsection{Tresholding}
 
-Opis...
+Thresholding, thanks to its properties and simple implementation, is one of the most commonly used
+segmentation algorithms. In the most basic form, having gray level of each pixel in an image we can
+find a value of threshold, which will separate groups with different gray-level values. Then we 
+set appropriate, different color value for pixels, which are above and below threshold value.
+
+Let's assume, that:
+\begin{itemize}
+  \item T is a threshold value
+  \item f(x, y) is a gray-level value in a point x, y
+  \item g(x, y) is a thresholded pixel value
+\end{itemize}
+
+$$
+g(x, y) = \left\{ \begin{array}{ll}
+1 & \textrm{if $f(x, y) \geq T$}\\
+0 & \textrm{if $f(x, y) < T$}\\
+\end{array} \right.
+$$
+
+Example image with applied thresholding( with T = 130 ) is presented in a 
+Fig.~\ref{thresholdingExample}.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.15]{images/thresholdingExample.jpg}
+\caption{Thresholding example. \\
+Source: own}
+\label{thresholdingExample}
+\end{center}
+\end{figure}
 
 \chapter{State of Art}
 
 This chapter focuses on actual research in topic of filtration and segmentation of scanned color
-images. There is also a description of basic filtration and segmentation algorithms used in this
-work.
+images.
 
 \section{Digital image processing}
 
@@ -598,6 +626,8 @@ work.
 \chapter{Conclusion}
 
 \newpage
+
+\renewcommand\bibname{References}
 
 \begin{thebibliography}{   }
 
