@@ -34,27 +34,30 @@ boost::shared_ptr<cv::Mat> ColorSegmentation::apply( boost::shared_ptr<cv::Mat> 
     const int SIGMA_SPACE = parameters_.sigmaSpace;
     const int DILATION_AND_EROSION_SIZE = parameters_.dilationAndErosionSize;
     const int EROSION_COUNTER = parameters_.dilationAndErosionCounter;
-    const int DILATION_COUNTER = static_cast<int>( 2.5 * EROSION_COUNTER );
+    const int DILATION_COUNTER = EROSION_COUNTER;
     const int WINDOW_WIDTH = parameters_.windowWidth;
     const int MAX_NUMBER_OF_COLORS = parameters_.maxNumberOfColors;
 
     boost::shared_ptr<cv::Mat> result = input;
 
-    for( int i = 0 ; i < EROSION_COUNTER ; ++i )
-    {
-        result = 
-            filtration::Erosion( DILATION_AND_EROSION_SIZE ).apply( result );
-    }
-
-    for( int i = 0 ; i < DILATION_COUNTER; ++i )
-    {
-        result = 
-            filtration::Dilation( DILATION_AND_EROSION_SIZE ).apply( result );  
-    }
-
     // First, we apply a bilateral and gaussian filters to remove noises from maps
     result = filtration::ApplyGaussianFilter(
         GAUSSIAN_BLUR_RADIUS, GAUSSIAN_BLUR_STANDARD_DEVIATION ).apply( result );
+
+    result = 
+            filtration::Erosion( DILATION_AND_EROSION_SIZE ).apply( result ); 
+
+    for( int i = 0 ; i < DILATION_COUNTER ; ++i )
+    {
+        result = 
+            filtration::Dilation( DILATION_AND_EROSION_SIZE ).apply( result );
+    }
+
+    for( int i = 0 ; i < EROSION_COUNTER - 1; ++i )
+    {
+        result = 
+            filtration::Erosion( DILATION_AND_EROSION_SIZE ).apply( result );  
+    }
 
     for(int i = 0; i < 2 ; ++i)
     {

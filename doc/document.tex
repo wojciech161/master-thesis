@@ -354,7 +354,8 @@ Below there is a short description of a content for each chapter:
 \chapter{Theoretical introduction}
 
 This section contains all needed definitions and concepts needed for a good understanding of the
-work. It also covers history and basic usage of digital image processing.
+work. It also covers history and basic usage of digital image processing. The last section is 
+focused on actual state of art in the filtration and segmentation of color printed digital images.
 
 \section{Digital image processing}
 
@@ -574,23 +575,248 @@ Source: own}
 \end{center}
 \end{figure}
 
-\chapter{State of Art}
+\section{Color scanned maps processing}
 
-This chapter focuses on actual research in topic of filtration and segmentation of scanned color
-images.
+Processing of color scanned maps is a very intersting topic. There are some research works focusing
+on it. In this section there are short descriptions of found six algorithms, which focus on this
+problem.
 
-\section{Digital image processing}
+In \cite{semanticAnalysisAndRecognition}, authors treat alphanumerical signs, letters, points, lines
+and areas separately. Image is vectorized and segmented in separate processes. To separate 
+alphanumerical characters, there is used a \textit{False Color Technique}. Next, the 
+\textit{Composite Image Technique} is used to decompose image and link objects by their associated
+names. Finally, set of separate modules grouped as \textit{A2R2V} detect alphanumeric, punctual and
+linear characters in the map. In this algorithm there are used such techniques like thresholding,
+color segmentation and neural networks.
 
-\section{Processing color scanned maps}
+Another approach is presented in \cite{comparativeAnalysisOfScannedMaps}. This work focused on 
+decomposition of scanned topographic maps. Algorithm finds different areas(like lakes, rivers,
+contours, text, grid and other) using map analysis and thresholding in a black and white mode.
+Next, there are used filtering algorithms to remove elements smaller than expected and noise.
+Then map texture is analysed. This step is helpful in detection of areas like for example lakes.
+Algorithm uses thresholding, median filter and many color segmentation techniques.
 
-\section{Conclusion}
+Next algorithm is shown in \cite{colorsOfThePast}.
 
+Another solution is presented in \cite{automaticVectorization}.
+
+Next algorithm can be found in \cite{topographicMapsAutomaticVectorization}.
+
+Last presented approach is shown in \cite{colorMapSegmentation}.
 
 \chapter{Research design}
 
+In this chapter there is a full description of an algorithm processing scanned maps. Additionaly,
+there is a description of an input data and found problems related to it.
+
 \section{Input data description}
 
+Algorithm has two inputs. One is a file containing an image with a map. Second input is a
+configuration file, which contains parameters of an algorithm.
+
+\subsection{Map image file}
+
+Input of the algorithm is an digital image, stored in a disk in one of many available formats, like
+png, tif, jpg or bmp. Image should be a color-scanned map at any resolution. Exampke image is 
+presented in a Fig.~\ref{inputExample}. It is a scanned color map of a Polish city - Brzeg.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.78]{images/brzeg.jpg}
+\caption{Example input.}
+\label{inputExample}
+\end{center}
+\end{figure}
+
+To confirm proper working of the algorithm, there were nine maps prepared. All input map files
+with its description are listed in a table~\ref{tableInputFiles}. 
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Input files.}
+\label{tableInputFiles}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  Filename & Format & Resolution & Description \\
+  \hline
+  brzeg & tif & 3391x4671 & Map of Brzeg. It has text and multiple areas like \\
+        &     &           & forests, lakes, roads and cities \\
+  \hline
+  bydgoszcz & bmp & 1747x1272 & Map of Bydgoszcz. Small number of areas, \\
+            &     &           & high density of roads and small details \\
+  \hline
+  dolny\_slask & png & 5936x8669 & Old map of a Lower Silesia. No backround. \\
+              &     &           & Many thin lines and rivers. \\
+  \hline
+  lubsza & tif & 3391x4671 & Map of surroundings of Lubsza. It has many areas \\
+         &     &           & like forests and lakes. Image has a big damage. \\
+         &     &           & Map was bent during scanning process. \\
+  \hline
+  masyw\_slezy & tif & 3883x4606 & Topographic map of Ślęża Mountain. It contains \\
+              &     &           & many areas in different colors, roads, text and \\
+              &     &           & topographic lines. \\
+  \hline
+  namyslow & jpg & 4814x5628 & Topographic map of Namysłów. It contains many \\
+           &     &           & small details, topographic lines, small text  \\
+           &     &           & and bright background of areas\\
+  \hline
+  pokoj & tif & 2921x2989 & Map of Pokój. It has text, multiple areas \\
+        &     &           & (forests, lakes) and roads. \\
+  \hline
+  sleza & jpg & 1812x2756 & Map of Ślęża. It contains areas like forests, \\
+        &     &           & lakes and roads. \\
+  \hline
+  sobotka & png & 2798x1824 & Map of Sobótka. It has many different areas, like \\
+          &     &           & small details, text and roads. \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Configuration file}
+
+Created algorithm has number of parameters, which have to be determined. Application loads them
+using special XML file. Parameters in a configuration file are divided to two layers. Meaning
+and usage of each parameter is explained in next sections. Example XML configuration file is
+listed in~\ref{listingConfig}
+
+\begin{lstlisting}[caption=Example configuration XML file,label=listingConfig,language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <background_detection>
+        <enabled>true</enabled>
+        <gaussian_blur_radius>9</gaussian_blur_radius>
+        <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
+        <diameter>20</diameter>
+        <sigma_color>150</sigma_color>
+        <sigma_space>150</sigma_space>
+        <dilation_and_erosion_size>2</dilation_and_erosion_size>
+        <dilation_and_erosion_counter>4</dilation_and_erosion_counter>
+        <window_width>15</window_width>
+        <max_number_of_colors>30</max_number_of_colors>
+    </background_detection>
+    <line_detection>
+        <enabled>true</enabled>
+        <threshold_value>100</threshold_value>
+        <unsharp_mask_standard_deviation>5</unsharp_mask_standard_deviation>
+        <denoising_factor>35</denoising_factor>
+        <bilateral_filter_counter>5</bilateral_filter_counter>
+        <gaussian_blur_radius>5</gaussian_blur_radius>
+        <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
+        <gaussian_blur_counter>2</gaussian_blur_counter>
+        <initial_threshold>10</initial_threshold>
+        <mimimal_color_area>500</mimimal_color_area>
+        <max_number_of_colors>15</max_number_of_colors>
+        <diameter>20</diameter>
+        <sigma_color>75</sigma_color>
+        <sigma_space>50</sigma_space>
+    </line_detection>
+</configuration>
+\end{lstlisting}
+
 \section{Problems and restrictions}
+
+There are a lot of problems associated with segmentation of scanned maps. Due to imperfection of
+a scanning process, resulting color scanned digital images have many distortions.
+There are also problems connected with input image(it can be damaged before scanning).
+Moreover, raster derived from printed document should be removed.
+Additionaly maps have many small elements and text. These details, as well as shape of background
+areas (like for example lakes and forests) should be kept in resulting image.
+All found problems are described more precisely in next sections.
+
+\subsection{Input image and scanning process quality}
+
+Scanned digital images have many distortions. They are related with damage of an input image, like
+places, where maps are creased(example in Fig.~\ref{creaseExample}) or dirty(shown in a 
+Fig.~\ref{dirtyExample}). It results in the existence of darker elements in the output image.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.1]{images/creaseExample.jpg}
+\caption{Example of distortion caused by creased maps.}
+\label{creaseExample}
+\end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=3.0]{images/dirtyExample.jpg}
+\caption{Example of distortion caused by dirty map.}
+\label{dirtyExample}
+\end{center}
+\end{figure}
+
+Another problems are related to scanning process. Resulting images are noisy. Additionaly a
+scanning device or scanned map can be dusty. These problems results in small distortions, which
+should not be placed in an output image. Example of this situation is presented in a 
+Fig.~\ref{dustExample}. It is marked in red rectangle.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=3.0]{images/dustExample.jpg}
+\caption{Example of distortion caused by dust.}
+\label{dustExample}
+\end{center}
+\end{figure}
+
+Finally, resulting image can have undesirable areas with wrong(usually darker) color. Their
+existence is caused by mistakes made during scanning process, for example when image is not properly
+put in a scanner surface. This situation is visualized in a Fig.~\ref{badScanExample}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.3]{images/badScanExample.jpg}
+\caption{Example of distortion caused by improper scanning.}
+\label{badScanExample}
+\end{center}
+\end{figure}
+
+\subsection{Small details}
+
+Input image contains many small details. They exist especially in city and topographic maps.
+City maps contain a lot of small elements, like churches, parking places or gas stations.
+Additionaly, in cities there are many roads and areas, which are marked in different colors. 
+Furthermore they contain many small letters, which, for example, indicate names of streets, parks
+or major buildings and places. Finally, in the city map, lines, roads and test are 
+often crossing each other. Example fragment of a city map fragment is shown in a 
+Fig.~\ref{cityExample}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.65]{images/cityExample.jpg}
+\caption{Fragment of a map with a city.}
+\label{cityExample}
+\end{center}
+\end{figure}
+
+Another problems are in topographic maps. They have small letters and elements in different
+colors. Additionaly they contain very thin topographic maps. Many of them are not continuous
+(some lines are even marked as dots in the same color). These problems are shown in a fragment of a
+topographic map in a Fig.~\ref{topographicMapExample}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=2.0]{images/topographicMapExample.jpg}
+\caption{Fragment of a topographic map.}
+\label{topographicMapExample}
+\end{center}
+\end{figure}
+
+\subsection{Raster elimination}
+
+Digital image coming from a scanner is a raster image. Every pixel is defined itself. This
+representation has some disadvantages. One of them is called moro effect. It interferes with
+segmentation algorithm. Example of a moro effect is shown in a Fig.~\ref{moroEffectExample}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=11.0]{images/moroEffectExample.jpg}
+\caption{Example of a moro effect.}
+\label{moroEffectExample}
+\end{center}
+\end{figure}
 
 \section{Main parts of the algorithm}
 
@@ -600,28 +826,17 @@ images.
 
 \section{Merge of layers}
 
-\section{Conclusion}
-
-
 \chapter{Implementation of the algorithm}
-
-\section{Introduction}
 
 \section{Used tools}
 
 \section{Application outline}
-
-\section{Conclusion}
-
 
 \chapter{Tests and Results}
 
 \section{Test description}
 
 \section{Result analysis}
-
-\section{Conclusion}
-
 
 \chapter{Conclusion}
 
@@ -632,7 +847,7 @@ images.
 \begin{thebibliography}{   }
 
 	\bibitem{digitalImageProcessing}
-          {Rafael C. Gonzalez, E. Woods, Digital Image Processing, Prentice Hall, 3rd Edition, 2007}
+          {Rafael C. Gonzalez, Richard E. Woods, Digital Image Processing, Prentice Hall, 3rd Edition, 2007}
   \bibitem{learningOpenCv}
           {Gary Bradski, Adrian Kaehler, Learning OpenCV. Computer Vision with the OpenCV Library,
           O`Reilly Media Inc., 2008}
@@ -641,8 +856,33 @@ images.
   \bibitem{unsharpMaskWiki}
           {http://en.wikipedia.org/wiki/Unsharp\_masking, Version from 1.06.2014}
   \bibitem{nonLocalMeansDenoising}
-          {http://www.ipol.im/pub/art/2011/bcm_nlm/, Version from 1.06.2014}
-
+          {http://www.ipol.im/pub/art/2011/bcm\_nlm/, Version from 1.06.2014}
+  \bibitem{semanticAnalysisAndRecognition}
+          {Serguei Levachkine, Aurelio Velázquez, Victor Alexandrov, Mikhail Kharinov, 
+          Semantic Analysis and Recognition of Raster-Scanned Color Cartographic Images,
+          4th International Workshop, GREC 2001 Kingston, Ontario, Canada, September 7–8, 
+          2001 Selected Papers, 2002}
+  \bibitem{comparativeAnalysisOfScannedMaps}
+          {C. Armenakis, F. Leduca, I. Cyra, F. Savopola, F. Cavayasb,
+          A comparative analysis of scanned maps and imagery for mapping applications,
+          ISPRS Journal of Photogrammetry and Remote Sensing Volume 57, Issues 5–6, April 2003,
+          Pages 304–314}
+  \bibitem{colorsOfThePast}
+          {Stefan Leyk, Ruedi Boesch, Colors of the past: color image segmentation in historical 
+          topographic maps based on homogeneity, GeoInformatica, January 2010, Volume 14, Issue 1, pp 1-21 }
+  \bibitem{automaticVectorization}
+          {Huali Zheng, Xianzhong Zhou, Hongbo Wang, Automatic Vectorization of Contour Lines Based
+          on Deformable Model with Adaptive Flow Orientation, Proceedings of the 2003 IEEE
+          International Conference on Robotics,Intelligent Systems and Signal Processing
+          Changsha, China - October 2003}
+  \bibitem{topographicMapsAutomaticVectorization}
+          {Marc Pierrot Deseilligny, Robert Mariani, Jacque Labiche, Remy Mullot,
+          Topographic Maps Automatic Interpretation: Some Proposed Strategies, Second International
+          Workshop, GREC' 97 Nancy, France, August 22–23, 1997}
+  \bibitem{colorMapSegmentation}
+          {Alireza Khotanzad, Edd Zink, Color paper map segmentation using eigenvector line-fitting,
+          Image Analysis and Interpretation, 1996., Proceedings of the IEEE Southwest Symposium on
+          8-9 April 1996}
 
 \end{thebibliography}
 

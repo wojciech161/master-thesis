@@ -23,13 +23,36 @@ boost::shared_ptr<cv::Mat> Algorithm::run()
     boost::shared_ptr<cv::Mat> result;
     boost::shared_ptr<cv::Mat> backgroundImage;
     boost::shared_ptr<cv::Mat> contourImage;
+    bool lineDetectionEnabled = parameters_.getLineDetectionParams().enabled;
+    bool colorSegmentationEnabled = parameters_.getColorSegmentationParams().enabled;
 
-    contourImage = segmentation::LineDetection( parameters_.getLineDetectionParams() )
-        .apply( image_ );
-    backgroundImage = segmentation::ColorSegmentation( parameters_.getColorSegmentationParams() )
-        .apply( image_ );
+    if( lineDetectionEnabled )
+    {
+        contourImage = segmentation::LineDetection( parameters_.getLineDetectionParams() )
+            .apply( image_ );
+    }
+    if( colorSegmentationEnabled )
+    {
+        backgroundImage = segmentation::ColorSegmentation( parameters_.getColorSegmentationParams() )
+            .apply( image_ );
+    }
 
-    result = segmentation::helpers::LayerMerge( backgroundImage, contourImage ).apply();
+    if( lineDetectionEnabled && colorSegmentationEnabled )
+    {
+        result = segmentation::helpers::LayerMerge( backgroundImage, contourImage ).apply();
+    }
+    else if ( lineDetectionEnabled ) // Only line detection enabled
+    {
+        result = contourImage;
+    }
+    else if ( colorSegmentationEnabled ) // Only color segmentation enabled
+    {
+        result = backgroundImage;
+    }
+    else // Nothing enabled
+    {
+        result = image_;
+    }
 
     return result;
 }

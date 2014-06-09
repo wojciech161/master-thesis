@@ -25,6 +25,7 @@ void ConfigurationFileReader::read()
 
     // Background detection names
     const std::string BACKGROUND_DETECTION_NODE = "background_detection";
+    const std::string BD_ENABLED = "enabled";
     const std::string BD_GAUSSIAN_BLUR_RADIUS = "gaussian_blur_radius";
     const std::string BD_GAUSSIAN_BLUR_STANDARD_DEVIATION = "gaussian_blur_standard_deviation";
     const std::string BD_DIAMETER = "diameter";
@@ -37,6 +38,7 @@ void ConfigurationFileReader::read()
 
     // Line detection names
     const std::string LINE_DETECTION_NODE = "line_detection";
+    const std::string LD_ENABLED = "enabled";
     const std::string LD_THRESHOLD_VALUE = "threshold_value";
     const std::string LD_UNSHARP_MASK_STANDARD_DEV = "unsharp_mask_standard_deviation";
     const std::string LD_DENOISING_FACTOR = "denoising_factor";
@@ -69,6 +71,8 @@ void ConfigurationFileReader::read()
 
     // Get background detection attributes
     rapidxml::xml_node<> *backgroundDetectionNode = root->first_node( BACKGROUND_DETECTION_NODE.c_str() );
+    rapidxml::xml_node<> *bdEnabled
+        = backgroundDetectionNode->first_node( BD_ENABLED.c_str() );
     rapidxml::xml_node<> *bdGaussianBlurRadius
         = backgroundDetectionNode->first_node( BD_GAUSSIAN_BLUR_RADIUS.c_str() );
     rapidxml::xml_node<> *bdGaussianBlurStandardDev
@@ -90,6 +94,14 @@ void ConfigurationFileReader::read()
 
     // Fill parameters
     ColorSegmentationParams& colorSegmentation = parameters_.getColorSegmentationParams();
+    if( "false" == std::string( bdEnabled->value() ) )
+    {
+        colorSegmentation.enabled = false;
+    }
+    else
+    {
+        colorSegmentation.enabled = true;
+    }
     colorSegmentation.gaussianBlurRadius = atoi( bdGaussianBlurRadius->value() );
     colorSegmentation.gaussianBlurStandardDeviation = atoi( bdGaussianBlurStandardDev->value() );
     colorSegmentation.diameter = atoi( bdDiameter->value() );
@@ -102,6 +114,8 @@ void ConfigurationFileReader::read()
 
     // Get Line detection attributes
     rapidxml::xml_node<> *lineDetectionNode = root->first_node( LINE_DETECTION_NODE.c_str() );
+    rapidxml::xml_node<> *ldEnabled
+        = backgroundDetectionNode->first_node( LD_ENABLED.c_str() );
     rapidxml::xml_node<> *ldthresholdValue =
         lineDetectionNode->first_node( LD_THRESHOLD_VALUE.c_str() );
     rapidxml::xml_node<> *ldInsharpMaskStandardDev =
@@ -131,6 +145,14 @@ void ConfigurationFileReader::read()
 
     // Fill parameters
     LineDetectionParams& lineDetectionParams = parameters_.getLineDetectionParams();
+    if( "false" == std::string( ldEnabled->value() ) )
+    {
+        lineDetectionParams.enabled = false;
+    }
+    else
+    {
+        lineDetectionParams.enabled = true;
+    }
     lineDetectionParams.thresholdValue = atoi( ldthresholdValue->value() );
     lineDetectionParams.unsharpMaskStandardDeviation = atoi( ldInsharpMaskStandardDev->value() );
     lineDetectionParams.denoisingFactor = atoi( ldDenoisingFactor->value() );

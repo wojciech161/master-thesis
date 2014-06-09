@@ -3,6 +3,7 @@
 
 struct LineDetectionParams
 {
+    bool enabled;
     int thresholdValue;
     int unsharpMaskStandardDeviation;
     int denoisingFactor;
@@ -20,6 +21,7 @@ struct LineDetectionParams
 
 struct ColorSegmentationParams
 {
+    bool enabled;
     int gaussianBlurRadius;
     int gaussianBlurStandardDeviation;
     int diameter;
