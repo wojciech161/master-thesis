@@ -22,6 +22,7 @@
 \usepackage{setspace}
 \usepackage{tabularx}
 \usepackage{color,calc}
+\usepackage[]{algorithm2e}
 %\usepackage{soul} % pakiet z komendami do podkreślania tekstu
 \usepackage{times} % pakiet zmieniający czcionki na times 
 
@@ -112,7 +113,7 @@
 
 \def\maketitle{%
   \null
-  \pagestyle{empty}%
+  \pagestyle{empty}%i
 	{\centering\vspace{-1cm}
 		{\fontsize{22pt}{24pt}\selectfont \@uczelnia}\\[0.4cm]
 		{\fontsize{22pt}{24pt}\selectfont \@wydzial }\\[0.5cm]
@@ -333,22 +334,22 @@ analysed.
 This document has been divided into seven chapters and the bibliography at the end.
 Below there is a short description of a content for each chapter:
 
-% TODO do przepisania po napisaniu całości pracy. Na razie mocno nieaktualne
-
 \begin{itemize}
-  \item In a first chapter there is a description and the background of the topic, 
+  \item In the first chapter there is a description and the background of the topic, 
         next there are listed main objectives of the work and a problem statement;
-  \item In a second chapter there is an analysis of existing research work and solutions
-        of the problem;
-  \item In a third chapter there is a theoretical introduction to the problem. There are 
-        findings after analysis of input images, problems which should be taken into consideration
-        and algorithm properties, which should be applied;
-  \item Fourth chapter focuses on research part of this thesis. There is a full description of
-        filtration and segmentation algorithms used in this work;
-  \item Fifth chapter focuses on engineering part of the thesis. There is a description of 
-        all implementation details of the algorithm;
-  \item In a sixth chapter there are presented results of all taken tests;
-  \item In a seventh chapter there are conclusions of the thesis.
+  \item In the second chapter there is a theoretical introduction of the problem. There are
+        explained all already known filtration and segmentation algorithms used in this work.
+        The description consists of the definition, properties and parameters of each method. In the
+        second part, there is an analysis of existing research work and solutions of the color
+        scanned maps preprocessing problem;
+  \item Third chapter focuses on research part of this thesis. There are listed all found problems,
+        which should be taken into considerationin the analysis of color scanned maps. In the second
+        part of the chapter, there is a full description of filtration and segmentation algorithms
+        designed in this work;
+  \item Fourth chapter focuses on engineering part of the thesis. There is a description of all
+        implementation details of the algorithm;
+  \item In the fifth chapter there are presented description of all made tests and their results;
+  \item In the last chapter there are conclusions of the thesis.
 \end{itemize}
 
 \chapter{Theoretical introduction}
@@ -430,8 +431,14 @@ work, there are two smoothing algorithms used.
 Gaussian filter is one of the most frequently used filters. According to \cite{learningOpenCv}, 
 gaussian blur is done by convolving each point in the input array with a Gaussian kernel and then
 summing to produce the output array. Resulting image is a smooth blur. It is used to reduce noise
-or image details and as a part of edge detection algorithms. Example result of a Gaussian Blur
-filter is shown in a Fig.~\ref{gaussianBlurExample}.
+or image details and as a part of edge detection algorithms. Algorithm has two parameters:
+
+\begin{itemize}
+  \item \textit{Radius} - it is a kernel size. The bigger value set, the image is smoother;
+  \item \textit{Standard Deviation} in X and Y direction.
+\end{itemize}
+
+Example result of a Gaussian Blur filter is shown in a Fig.~\ref{gaussianBlurExample}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -448,8 +455,19 @@ According to \cite{bilateralFilterWiki}, bilateral filter is a non-linear, edge-
 noise reducing filter for images. The intensity value at each pixel in an image is replaced by a
 weighted average of an intensity values from nearby pixels. In contrast to the Gaussian Blur, 
 weights are based on the difference of intensity from the center pixel. This algorithm is commonly
-used to prepare an input for segmenting algorithms. Example of a bilateral filter usage is presented
-in a fig.~\ref{bilateralFilterExample}.
+used to prepare an input for segmenting algorithms. Algorithm takes three parameters:
+
+\begin{itemize}
+  \item \textit{Diameter} of each pixel that is used during filtering. The larger value is set, the
+        algorithm is slower and takes into consideration larger pixel surrounding;
+  \item \textit{Filter Sigma in a color space}. A larger value of this parameter means, that farther
+        colors within the pixel neighborhood will be mixed together. Resulting image will have
+        larger areas with semi-equal color;
+  \item \textit{Filter Sigma in the coordinate space}. A larger value of the parameter means that
+        farther pixels will influence each other as long as their colors are close enough.
+\end{itemize}
+
+Example of a bilateral filter usage is presented in a fig.~\ref{bilateralFilterExample}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -498,11 +516,22 @@ Source: http://www.mathworks.com/help/images/ref/referenceipart128.gif}
 \end{center}
 \end{figure}
 
+Dilation and erosion take two parameters:
+
+\begin{itemize}
+  \item \textit{Size of rectangular structuring element used for erosion/dilation}. If it is set to
+        3, the structuring element is a matrix with size 3x3. The bigger value is set, the algorithm
+        has stronger impact on the image;
+  \item \textit{Number of iterations} of the algorithm.
+\end{itemize}
+
 \subsection{Denoising}
 
 Main goal of this type of algorithms is to eliminate noise from the image. In this work algorithm
-called Non-local Means Denoising \cite{nonLocalMeansDenoising}. Example of its usage is presented in
-a Fig.~\ref{denoisingExample}
+called Non-local Means Denoising \cite{nonLocalMeansDenoising}. Filter takes one argument. It
+regulates the filter strength. Big value of the parameter perfectly removes noise but also removes
+image details. Smaller parameter values preserve details but also preserve some noise.
+Example of its usage is presented in a Fig.~\ref{denoisingExample}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -520,8 +549,8 @@ Unsharp mask is applied to highlight or enhance some details in an image. Accord
 image. The unsharped mask is then combined with the negative image. As a result there is an image
 less blurry than the original. In algorithm used in this work, Gaussian blur is used and then its
 result is compared to the original image. If the difference is greater than specified threshold
-value, images are subtracted. Example of unsharp mask usage is presented in a 
-Fig.~\ref{unsharpMaskExample}
+value, images are subtracted. Algorithm takes the same arguments, as Gaussian filter. Example of
+unsharp mask usage is presented in a Fig.~\ref{unsharpMaskExample}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -563,6 +592,8 @@ g(x, y) = \left\{ \begin{array}{ll}
 \end{array} \right.
 $$
 
+Algorithm takes one parameter - T, which is a thresholding value.
+
 Example image with applied thresholding( with T = 130 ) is presented in a 
 Fig.~\ref{thresholdingExample}.
 
@@ -577,7 +608,7 @@ Source: own}
 
 \section{Color scanned maps processing}
 
-Processing of color scanned maps is a very intersting topic. There are some research works focusing
+Processing of color scanned maps is a very interesting topic. There are some research works focusing
 on it. In this section there are short descriptions of found six algorithms, which focus on this
 problem.
 
@@ -596,13 +627,43 @@ Next, there are used filtering algorithms to remove elements smaller than expect
 Then map texture is analysed. This step is helpful in detection of areas like for example lakes.
 Algorithm uses thresholding, median filter and many color segmentation techniques.
 
-Next algorithm is shown in \cite{colorsOfThePast}.
+Next method is shown in \cite{colorsOfThePast}. Authors of this research worked with maps from 
+19th century. The algorithm is divided into four stages. First, the clustering algorithm allows 
+automatic determination of the pixels, which represent color layer prototypes uin three domains:
+local image domain, histogram analysis and color space. In second phase, pixels are defined as
+layer specific seeds based on distances in color space to the color points of the computed layer 
+prototypes and local homogenity. Third phase takes the result of previous part and it identifies 
+connected regions of pixels belonging to one of the color layers. Finally, unallocated pixels are
+joined to proper groups.
 
-Another solution is presented in \cite{automaticVectorization}.
+Another solution is presented in \cite{automaticVectorization}. This work is focused on segmentation
+of contour maps. There are used \textit{Deformable Model Tracking} and \textit{Adaptive Flow 
+Orientation}. It uses a seed segment searching and variable force control. Contour lines are 
+detected automatically. This method is good at detection of crossed, broken and touching lines.
 
-Next algorithm can be found in \cite{topographicMapsAutomaticVectorization}.
+Next algorithm can be found in \cite{topographicMapsAutomaticVectorization}. In this work image is
+segmented with a "Peeling Onion Strategy". Layers are recognized separately. Each recognized layer
+is subtracted of the map to facilitate the interpreation of remaining, more complex ones. Sequence
+of processes is as follows:
 
-Last presented approach is shown in \cite{colorMapSegmentation}.
+\begin{itemize}
+  \item Recognition of objects for which there is external data available;
+  \item Recognition and vectorization of textured areas;
+  \item Recognition of strings and symbols;
+  \item Recognition of objects with variable shape;
+  \item Recognition of networks.
+\end{itemize}
+
+In these processes there are used pattern matching, contour following, polygonal approximation and
+skeletonization algorithms, 
+
+Last presented approach is shown in \cite{colorMapSegmentation}. There is presented a segmentation
+method dedicated for United States Geological Survey(U.S.G.S.) topographic maps. Algorithm first 
+segments out white background. Next, image is segmented using Eigenvector line fitting technique.
+Algorithm knows typical values of colors used in U.S.G.S. In the final part of the algorithm, proper
+color value is set for every pixel(it is based on distance of pixel Eigenvector and Eigenvalue and
+a known value of known U.S.G.S. colors). Summarizing, the segmentation algorithm uses knowledge
+about colors used in maps from U.S.G.S.
 
 \chapter{Research design}
 
@@ -617,7 +678,7 @@ configuration file, which contains parameters of an algorithm.
 \subsection{Map image file}
 
 Input of the algorithm is an digital image, stored in a disk in one of many available formats, like
-png, tif, jpg or bmp. Image should be a color-scanned map at any resolution. Exampke image is 
+png, tif, jpg or bmp. Image should be a color-scanned map at any resolution. Example image is 
 presented in a Fig.~\ref{inputExample}. It is a scanned color map of a Polish city - Brzeg.
 
 \begin{figure}[!ht]
@@ -820,9 +881,433 @@ segmentation algorithm. Example of a moro effect is shown in a Fig.~\ref{moroEff
 
 \section{Main parts of the algorithm}
 
+Map segmentation is a complicated process. In the one hand, all background with as small number of
+mistakes as possible should be segmented. To reduce scanning errors and unifize background, many 
+smoothing algorithms can be applied, like for example Gaussian Filter. On the other hand there are a
+lot of details, lines and text like for example streets, toponyms, symbols and topographic lines.
+In this case using smoothing algorithms with bigger parameters is not a good idea - these algorithms
+cause, that for example text is deformed and not as sharp as in the input image. To solve these
+problems, algorithm has been divided into two parts. First one is responsible for detection of all
+details(roads, text, lines, rivers). Second one detects background of the map. Both algorithms work
+independently and take as an input the same, input image. They can work simultaneously. Results of
+segmentation of both layers are merged to one output image. Flow of the algorithm is presented on a
+statechart in a Fig.~\ref{algorithmParts}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{images/allAlgorithmParts.png}
+\caption{Parts of the algorithm.}
+\label{algorithmParts}
+\end{center}
+\end{figure}
+
 \section{Detection of areas}
 
-\section{Detection of smaller elements}
+The main aim of this part is to detect all background elements, like for example lakes, forests and
+thicker lines(rivers, main roads). The algorithm focuses on elimination of all distortions and
+on detection and unification of color of areas. This method should remove all thiner lines and small
+details from an image. In an output image there should appear background elements. Every separate
+area should have a different color. Main distortions should be eliminated.
+
+\subsection{Algorithm parts}
+
+The algorithm firstly applies a group of algorithms to remove some distortions and prepare image for
+a final segmentation. In this case there are used some smoothing algorithms, like Gaussian Filter
+and Bilateral Filter. Then, smaller details are eliminated. To do that, there are used Dilation and
+Erosion algorithms. In the next step image is segmented. Main aim of this part is to unify color for
+each area. Finally, areas with too small area are eliminated from an output image. They are
+substituted with colors of areas, which are around them. Flow of the background detection algorithm
+is presented in a Fig.~\ref{backgroundDetectionImage}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.3]{images/backgroundDetection.png}
+\caption{Background detection process.}
+\label{backgroundDetectionImage}
+\end{center}
+\end{figure}
+
+\subsubsection{Input preprocessing}
+
+In an input preprocessing part there were used two algorithms: \textit{Gaussian Filter} and \textit{
+Bilateral Filter}. Usage of first one is a very good method in elimination of raster and small
+distortions(like for example dust). The algorithm is called with a big value of \textit{Radius}
+parameter - it helps to remove more distortions, loss of image sharpness is irrelevant in this
+case. In a Fig.~\ref{gaussianBlurResult} there is an example usage of a Gaussian Filter with 
+\textit{Radius} = 5. All major distortions and moro effect do not exist in a resulting image.
+Sharpness of the text(in this case name of the river) is lost.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=3.0]{images/GaussianBlurResult.jpg}
+\caption{Fragment of a map of Brzeg with Gaussian Blur with Radius = 5 applied. \\ 
+Original image is on the left. On the right side there is a resulting image.}
+\label{gaussianBlurResult}
+\end{center}
+\end{figure}
+
+Second algorithm - bilateral filter reduces noise, which was visible in an input map. It has also
+another advantage - all edges are kept. In case of a background detection, similarly to Gaussian
+Filter, large values of parameters are used. It causes, that a bilateral filter has a big influence
+on resulting image. Colors of all areas are aligned. In a Fig.~\ref{bilateralFilterResult}, there is
+an example result of applying bilateral filter. Colors of green area, border line, roads and a town
+are aligned. Some small details dissapeared.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.5]{images/BilateralFilterResult.jpg}
+\caption{Fragment of a map of Brzeg with Bilateral Filter with Diameter = 30 and Delta values = 150
+applied. Original image is on the left. On the right side there is a resulting image.}
+\label{bilateralFilterResult}
+\end{center}
+\end{figure}
+
+\subsubsection{Removal of details}
+
+Erosion and Dilation algorithms are useful in removing noise, joining or isolation of individual
+elements and finding intensity holes or bumps in an image. Thanks to these properties, it is easy
+to eliminate unwanted, small elements from an image, like roads, rivers, small details(in cities) or
+topographic lines. These algorithms are helpful in removal of some distortions of a map, like for
+example darker areas caused by unproper scanning process or map creases - image after applying these
+algorithms have these unwanted areas eliminated. Usage of dilation cause, that all thin areas
+dissapear. Furthermore, distance of every separate element grows.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/dilationResult.png}
+\caption{Fragment of a map of Sobótka with dilation applied(5 times). \\
+Original image is on the left. On the right side there is a resulting image.}
+\label{dilationResult}
+\end{center}
+\end{figure}
+
+Example of dilation usage is in a Fig.~\ref{dilationResult}. All thin lines are eliminated from the
+resulting image. In the output there are visible only yellow and green backgrounds(with some
+distortions eliminated). Moreover there is a background of roads and areas of three smaller
+elements.
+
+Erosion does the opposite - it causes, that all lines become thicker. It also merges broken
+elements. Example of its use is in a Fig.~\ref{erosionResult}. Every line is thicker than in the
+original. Borders of every area is easy to determine. Colors of areas are darker and unified.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/erosionResult.png}
+\caption{Fragment of a map of Sobótka with erosion applied(5 times). Original image is on the left.
+On the right side there is a resulting image.}
+\label{erosionResult}
+\end{center}
+\end{figure}
+
+In case of background detection in scanned color maps, these algorithms give the best results when
+they are combined together. After applying these operations, noise and all smaller elements(listed
+above) are removed. Major distortions are also eliminated. Moreover colors of every area is almost
+the same. As a result, these algorithms are an excellent base for segmentation methods. Example
+usage of combined dilation and erosion is presented in a Fig.~\ref{dilationErosionResult}. Every
+area has different color and output image have unnecessary details eliminated.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/dilationErosionResult.png}
+\caption{Fragment of a map of Sobótka with dilation(5 times) and then erosion(also 5 times) applied.
+Original image is on the left. On the right side there is a resulting image.}
+\label{dilationErosionResult}
+\end{center}
+\end{figure}
+
+\subsubsection{Areas detection and segmentation}
+
+Detection of all map areas is based on two properties. First one is color of every group represented
+by their pixels. Second one is a desired number of areas, which should be detected(this number is
+easy to determine in case of digital maps). The algorithm at the beggining analyses each pixel of an
+image and groups them. As a result there are groups of pixels with similar color. In the next step,
+all groups, which represent similar values are merged until the desired number of colors is reached.
+In the last part, each pixel of an image is assigned to best-fitting group. The whole process with
+its parameters is described in Algorithms~\ref{colorGroupingAlgorithm},~\ref{groupsMergingAlgorithm}
+~and~\ref{colorAssignmentAlgorithm}. \\
+
+Parameters of the algorithm:
+\begin{itemize}
+  \item \textit{Threshold} - The maximum distance between the currently checked color and a group,
+          determining if the color should be assigned into group
+  \item \textit{Maximum Number of Colors}, which determines, how much groups should exist in an
+          output map(the actual number of background colors in a map)
+\end{itemize}
+
+\begin{algorithm}[!ht]
+  \KwData{Threshold}
+  \KwIn{Image}
+  \KwOut{Colors grouped by color similarity}
+
+  GroupContainer gc\;
+  \ForEach{Pixel in Image}
+  {
+    pixelAddedToGroup := false\;
+    \ForEach{Group in gc}
+    {
+      \If{distance(Pixel.color, Group.averageColor) < Threshold}
+      {
+        Group.add(Pixel)\;
+        pixelAddedToGroup := true;
+      }
+    }
+
+    \If{pixelAddedToGroup = false}
+    {
+      gc.createNewGroup(Pixel)\;
+    }
+  }
+
+  \Return{gc}
+
+  \caption{Color grouping}
+  \label{colorGroupingAlgorithm}
+\end{algorithm}
+
+\begin{algorithm}[!ht]
+  \KwData{Threshold}
+  \KwData{MaximumNumberOfColors}
+  \KwIn{GroupContainer gc}
+  \KwOut{SegmentedImage}
+
+  \Repeat{gc.numberOfGroups > MaximumNumberOfColors}
+  {
+    \ForEach{Group in gc}
+    {
+      \ForEach{AnotherGroup in gc}
+      {
+        \If{distance(Group.averageColor, AnotherGroup.averageColor) < Threshold)}
+        {
+          mergeGroups\;
+        }
+      }
+    }
+    Threshold := Threshold + 1\;
+  }
+
+  \Return{gc}
+
+  \caption{Groups merging}
+  \label{groupsMergingAlgorithm}
+\end{algorithm}
+
+\begin{algorithm}[!ht]
+  \KwIn{GroupContainer gc}
+  \KwIn{Image}
+  \KwOut{SegmentedImage}
+
+  \ForEach{Pixel in Image}
+  {
+    group := gc.getBestFittingGroup{Pixel}\;
+    Pixel.color := group.averageColor\;
+  }
+
+  \Return{Image}
+
+  \caption{Color assignment}
+  \label{colorAssignmentAlgorithm}
+\end{algorithm}
+
+The distance between colors is Euclidean:~
+$$
+distance(c1, c2) = \sqrt{(c1.red - c2.red)^2 + (c1.green - c2.green)^2 + (c1.blue - c2.blue)^2}
+$$
+
+The color of entire group is counted as average value of red, green and blue of every pixel
+belonging to this group. The best fitting group for a pixel is that one, which distance to the pixel
+is the smallest.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=2.5]{images/segmentationResult.png}
+\caption{Fragment of a map of Ślęża with segmentation algorithm applied.
+Original image is on the left. On the right side there is a resulting image.}
+\label{segmentationResult}
+\end{center}
+\end{figure}
+
+In a Fig.~\ref{segmentationResult}, there is an example result of applying the segmentation
+algorithm. There was used preprocessed(with filtration, dilation and erosion) map of Ślęża. Initial
+threshold was set to 30, maximum number of colors was set to 20. Each area has its unified color.
+Shape of every area is fairly kept. There are some small areas, which have assigned wrong color.
+They exist mainly in places, where there was text in the input image.
+
+\subsubsection{Removal of small areas}
+
+After segmentation of areas in the map, there are often some pixels, which were interpreted as a
+wrong area. It is easy to detect this situation, because wrongly assigned pixels are in most of
+cases surrounded by properly evaluated elements. To remove such misinterpreted pixels, the Holes
+Removal algorithm has been designed. This method investigates surrounding of each pixel in an image.
+New color of the pixel is set to the value, which is the most frequent in the surrounding area.
+Algorithm has one parameter - it is a size of the matrix, which surrounds the pixel. This matrix is
+used for the analysis of color of area, which is around processed pixel. The bigger value is set,
+the bigger area is taken into consideration. For example, for parameter value = 7, the surrounding
+area is a matrix with a size 7x7. Pseudocode of the algorithm is presented in
+\ref{holesRemovalAlgorithm}.
+
+\begin{algorithm}[!ht]
+  \KwIn{WindowWidth}
+  \KwIn{Image}
+  \KwOut{SegmentedImage}
+
+  \ForEach{Pixel in Image}
+  {
+    window := getWindow(windowWidth)\;
+    newColor := window.getMostFrequentColor\;
+    pixel.color := newColor\;
+  }
+
+  \Return{Image}
+
+  \caption{Holes removal}
+  \label{holesRemovalAlgorithm}
+\end{algorithm}
+
+In a Fig.~\ref{holeRemovalResult}, there is presetend example usage of Holes Removal algorithm. It
+was applied to previously segmented map of Ślęża. Solution has been applied with a Window Width
+parameter set to a very big value - 50. The resulting image has all distortions eliminated.
+Unfortunately proper edges and sizes of areas have been lost. It follows, that used window width
+parameter value was too big. The bigger value of Window Width argument is used, the more details
+are eliminated and also there is bigger risk to loose backround borders.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{images/holeRemovalResult.png}
+\caption{Fragment of a map of Ślęża with Holes Removal algorithm applied.
+On the left, there is an image after segmentation. On the right side there is an image with removed
+holes.}
+\label{holeRemovalResult}
+\end{center}
+\end{figure}
+
+\subsection{Algorithm parameters}
+
+There are some arguments, which have to be set before application of the algorithm. Their values
+depend on the map, to which algorithm is applied. To achieve the best results, every map should have
+individually set of parameter values.
+
+\begin{description}
+  \item[enabled] \hfill \\
+    Determines, if Background Detection algorithm is enabled. \\
+    Possible~values:~\{\textit{true},~\textit{false}\};
+  \item[gaussian\_blur\_radius] \hfill \\
+    Radius of a Gaussian Blur. \\
+    Possible~values:~integer number. Proposed~values:~[5~-~15];
+  \item[gaussian\_blur\_standard\_deviation] \hfill \\
+    Standard deviation of a Gaussian Blur. \\
+    Possible~values:~integer number. Proposed~values:~[0~-~5];
+  \item[diameter] \hfill \\
+    Diameter used by Bilateral Filter. \\
+    Possible~values:~integer number. Proposed~values:~[10~-~30];
+  \item[sigma\_color] \hfill \\
+    Sigma Color used by Bilateral Filter. \\
+    Possible~values:~integer number. Proposed~values:~[50~-~150];
+  \item[sigma\_space] \hfill \\
+    Sigma Space used by Bilateral Filter. \\
+    Possible~values:~integer number. Proposed~values:~[50~-~150];
+  \item[dilation\_and\_erosion\_size] \hfill \\
+    Size of rectangular structuring element used in erosion in dilation algorithms. \\
+    Possible~values:~integer number. Proposed~values:~[1-10];
+  \item[dilation\_and\_erosion\_counter] \hfill \\
+    Number of erosion and dilation applications. \\
+    Possible~values:~integer number. Proposed~values:~[2~-~10];
+  \item[window\_width] \hfill \\
+    Width of a window used by Holes Removal algorithm. \\
+    Possible~values:~integer number. Proposed~values:~[5~-~15];
+  \item[max\_number\_of\_colors] \hfill \\
+    Maximal number of colors, which should be visible in resulting map. \\
+    Possible~values:~integer number. Proposed~values:~[10~-~50].
+\end{description}
+
+\section{Detection of details}
+
+The main aim of this part of the algorithm is to detect and unify smaller elements, which exist in
+the map. These are for example:
+\begin{itemize}
+  \item thin lines like for example streets, roads, rivers, topographic lines, etc.;
+  \item Strings: toponyms and other text, names of the streets;
+  \item Small elements from the legend, like for example churches, parking places.
+\end{itemize}
+
+The algorithm focuses mainly on filtering out the background, detecting all types of elements and
+finally, classification of every detected element or line to one of previously discovered groups.
+The result of this part should be an image with isolated and properly classified all map details.
+
+\subsection{Algorithm parts}
+
+In the first part, the algorithm tries to remove all background from the map and keep only wanted
+details. In this case there is thresholding algorithm used. Next, there is applied algorithm, which
+removes all distortions resulting from thresholding algorithm. This part there is called a 
+procedure, which finds and removes all single occuring(lonely) pixels. In the next part, there is
+applied an unsharp mask to improve image quality. Finally, all elements are recognized and 
+classified to appropriate group. Flow of the entire algorithm is presented in a 
+Fig.~\ref{detailDetectionFlow}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.4]{images/detailDetectionFlow.png}
+\caption{Flow of the Detail Detection algorithm}
+\label{detailDetectionFlow}
+\end{center}
+\end{figure}
+
+\subsubsection{Background removal}
+
+
+
+\subsubsection{Quality improval}
+
+\subsubsection{Elements classification}
+
+\subsection{Algorithm parameters}
+
+Similarly like in background detection algorithm, detection of details requires the specification of
+parameters. Their value depend on the type of the map.
+
+\begin{description}
+  \item[enabled] \hfill \\
+    Determines, if Background Detection algorithm is enabled. \\
+    Possible~values:~\{\textit{true},~\textit{false}\};
+  \item[threshold\_value] \hfill \\
+    Value of the threshold used by Thresholding algorithm. \\
+    Possible~values:~integer~number. Proposed~values:~[80~-~150];
+  \item[unsharp\_mask\_standard\_deviation] \hfill \\
+    Standard deviation used by the Unsharp Mask algorithm. \\
+    Possible~values:~integer~number. Proposed~values:~[0~-~5];
+  \item[denoising\_factor] \hfill \\
+    Denoising Factor parameter used in white noise elimination. \\
+    Possible~values:~integer~number. Proposed~values:~[30~-~50];
+  \item[bilateral\_filter\_counter] \hfill \\
+    Number of bilateral filter applications. \\
+    Possible~values:~integer~number. Proposed~values:~[0~-~3];
+  \item[gaussian\_blur\_radius] \hfill \\
+    Radius of a Gaussian Blur. \\
+    Possible~values:~integer~number. Proposed~values:~[5~-~15];
+  \item[gaussian\_blur\_standard\_deviation] \hfill \\
+    Standard deviation of a Gaussian Blur. \\
+    Possible~values:~integer~number. Proposed~values:~[0~-~5];
+  \item[gaussian\_blur\_counter] \hfill \\
+    Number of applications of Gaussian Blur algorithm. \\
+    Possible~values:~integer~number. Proposed~values:~[0~-~3];
+  \item[initial\_threshold] \hfill \\
+    Initial threshold used by elements detection algorithm \\
+    Possible~values:~integer~number. Proposed~values:~[5~-~15];
+  \item[mimimal\_color\_area] \hfill \\
+    Minimal number of elements classified as one group. \\
+    Possible~values:~integer~number. Proposed~values:~[500~-~1000];
+  \item[max\_number\_of\_colors] \hfill \\
+    Maximum number of detected unique elements. \\
+    Possible~values:~integer~number. Proposed~values:~[5~-~15];
+  \item[diameter] \hfill \\
+    Diameter used by Bilateral Filter. \\
+    Possible~values:~integer~number. Proposed~values:~[20~-~40];
+  \item[sigma\_color] \hfill \\
+    Sigma Color used by Bilateral Filter. \\
+    Possible~values:~integer~number. Proposed~values:~[100~-~150];
+  \item[sigma\_space] \hfill \\
+    Sigma Space used by Bilateral Filter. \\
+    Possible~values:~integer~number. Proposed~values:~[30~-~70];
+\end{description}
 
 \section{Merge of layers}
 

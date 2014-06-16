@@ -114,8 +114,8 @@ void ConfigurationFileReader::read()
 
     // Get Line detection attributes
     rapidxml::xml_node<> *lineDetectionNode = root->first_node( LINE_DETECTION_NODE.c_str() );
-    rapidxml::xml_node<> *ldEnabled
-        = backgroundDetectionNode->first_node( LD_ENABLED.c_str() );
+    rapidxml::xml_node<> *ldEnabled =
+        lineDetectionNode->first_node( LD_ENABLED.c_str() );
     rapidxml::xml_node<> *ldthresholdValue =
         lineDetectionNode->first_node( LD_THRESHOLD_VALUE.c_str() );
     rapidxml::xml_node<> *ldInsharpMaskStandardDev =
