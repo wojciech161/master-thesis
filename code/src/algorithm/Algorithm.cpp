@@ -2,6 +2,8 @@
 
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 #include "segmentation/ColorSegmentation.hpp"
 #include "segmentation/LineDetection.hpp"
@@ -25,6 +27,10 @@ Algorithm::~Algorithm()
 boost::shared_ptr<cv::Mat> Algorithm::run()
 {
     boost::shared_ptr<cv::Mat> result;
+
+    boost::posix_time::ptime startTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: Start time: " 
+                  << startTime.time_of_day() << std::endl;
 
     // Get params determining if algorithm is enabled
     bool lineDetectionEnabled = parameters_.getLineDetectionParams().enabled;
@@ -65,6 +71,12 @@ boost::shared_ptr<cv::Mat> Algorithm::run()
         result = image_;
     }
 
+    boost::posix_time::ptime stopTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: Stop time: "
+                  << stopTime.time_of_day() << std::endl;
+        std::cout << "ALGORITHM: Duration: "
+                  << ( stopTime - startTime ) << std::endl;
+
     return result;
 }
 
@@ -72,13 +84,23 @@ void Algorithm::backgroundDetection( bool isEnabled )
 {
     if( isEnabled )
     {
+        boost::posix_time::ptime startTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: ColorSegmentation: Start time: " 
+                  << startTime.time_of_day() << std::endl;
+
         backgroundImage_ =
             segmentation::ColorSegmentation( parameters_.getColorSegmentationParams() )
                 .apply( image_ );
+
+        boost::posix_time::ptime stopTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: ColorSegmentation: Stop time: "
+                  << stopTime.time_of_day() << std::endl;
+        std::cout << "ALGORITHM: ColorSegmentation: Duration: "
+                  << ( stopTime - startTime ) << std::endl;
     }
     else
     {
-        std::cout << "ColorSegmentation DISABLED\n";
+        std::cout << "ALGORITHM: ColorSegmentation DISABLED\n";
     }
 }
 
@@ -86,12 +108,22 @@ void Algorithm::lineDetection( bool isEnabled )
 {
     if( isEnabled )
     {
+        boost::posix_time::ptime startTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: LineDetection: Start time: " 
+                  << startTime.time_of_day() << std::endl;
+
         contourImage_ =
             segmentation::LineDetection( parameters_.getLineDetectionParams() ).apply( image_ );
+
+        boost::posix_time::ptime stopTime = boost::posix_time::microsec_clock::local_time();
+        std::cout << "ALGORITHM: LineDetection: Stop time: "
+                  << stopTime.time_of_day() << std::endl;
+        std::cout << "ALGORITHM: LineDetection: Duration: "
+                  << ( stopTime - startTime ) << std::endl;
     }
     else
     {
-        std::cout << "LineDetection DISABLED\n";
+        std::cout << "ALGORITHM: LineDetection DISABLED\n";
     }
 }
 

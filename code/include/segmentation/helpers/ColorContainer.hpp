@@ -21,7 +21,7 @@ public:
     bool isInRange( const Color&, int ) const;
     void add( const Color& );
     Color getAverage() const;
-    int getNumberOfColors() const;
+    long getNumberOfColors() const;
     double getCurrentRed() const;
     double getCurrentGreen() const;
     double getCurrentBlue() const;
@@ -33,7 +33,7 @@ private:
     bool checkColor( int, int, int ) const;
 
 private:
-    int numberOfColors_;
+    long numberOfColors_;
     double currentRedAverage_;
     double currentGreenAverage_;
     double currentBlueAverage_;

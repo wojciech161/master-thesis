@@ -134,8 +134,8 @@ SPECJALNOŚĆ: & \@specjalnosc\\
 }
 %
 \begin{tabularx}{\linewidth}{p{6cm}>{\centering\arraybackslash}X}
-		&{\fontsize{16pt}{18pt}\selectfont \@title}\\[5mm] 	%UWAGA: tutaj jest miejsce na tytył w języku polskim
-		&{\fontsize{16pt}{18pt}\selectfont \@titleEN}\\[10mm] %UWAGA: tutaj jest miejsce na tytył w języku angielskim
+		&{\fontsize{16pt}{18pt}\selectfont \@titleEN}\\[5mm] 	%UWAGA: tutaj jest miejsce na tytył w języku polskim
+		&{\fontsize{16pt}{18pt}\selectfont \@title}\\[10mm] %UWAGA: tutaj jest miejsce na tytył w języku angielskim
 \end{tabularx}
 \vfill
 \begin{tabularx}{\linewidth}{p{6cm}l}
@@ -287,31 +287,38 @@ SPECJALNOŚĆ: & \@specjalnosc\\
 
 \chapter{Introduction}
 
-Beginning of this chapter is focused on a problem background. Next part is a 
+Beginning of this chapter is focused on the problem background. Next part is focused on a 
 full description of the topic and definition of main objectives of this thesis.
-Finally there is presented a full structure of this document.
+In the last part of this chapter there is a full structure of this document given.
 
 \section{Background}
 
 Nowadays image digitization is a very important topic. It has a lot of practical applications.
 For example, it is a very good way to prevent destruction of old photos,
 to archive them(to keep them in one place in a digital version) and make it easier to 
-send it from one place to another. Unfortunately, basic method of digitization of
-images - scanning - has some disadvantages. Due to errors made during a scanning procedure,
+send a picture from one place to another. Unfortunately, basic method of image digitization - 
+scanning - has some disadvantages. Due to errors made during a scanning procedure,
 input image distortions or quality of a scanning device, resulting digitized images 
-have a poor quality. To improve digitization process there are many filtration algorithms,
-which task is to solve this problem and to produce an image with better quality.Image digitization 
-has another big advantage - there is a possibility to retrieve information from the picture(for 
-example: pattern recognition, feature extraction). This feature is handled by segmentation 
-algorithms. Although this group is one of the most difficult in image processing, there is a big 
-emphasis on a research, due to many advantages of this type of algorithms in practical use.
+have a poor quality. This issue is a great motivation to research in a field of digital image
+processing. To improve digitization process there are many filtration algorithms,
+which task is to solve this problem and to produce an image with better quality.
+
+Image digitization has another big advantage - there is a possibility to retrieve information from
+the picture(for example: pattern recognition, feature extraction). This feature is handled by
+segmentation algorithms. Although this group is one of the most difficult in image processing, there
+is a big emphasis on a research, due to many advantages of this type of algorithms in practical
+use. \\
+
+Digital image processing can be optimized to work with special types of the images. This work 
+focuses on improval of color-scanned maps quality. It is a very interesting topic, because maps
+processed with this kind of the algorithm can be used as an input for further map analysis by other 
+applications, to improve their readability or to allow them to edit.
 
 \section{Problem statement and main objectives}
 
-The main aim of this thesis is to create a filtration and segmentation algorithm, which should
-apply to scanned color-printed images. This work is focused on scanned maps. 
-Resulting algorithm should be optimized to used it with this type of scanned images. 
-Output image should have following properties:
+The main aim of this thesis is to create a filtration and segmentation algorithm, which should apply
+to scanned color-printed images. This work is focused on scanned maps. Resulting algorithm should be
+optimized to use it with this type of scanned images. Output image should have following properties:
 
 \begin{itemize}
   \item most of distortions should be eliminated;
@@ -326,29 +333,30 @@ for example rasters, moro effect). Next, proper segmentation algorithm should be
 areas in an input map and to divide the map into different, homogenous regions. \\
 
 The final solution - set of algorithms - should be impemented in a chosen programming language.
-Created application should be tested on many different scanned maps. Test results should be then
+Created application should be tested on many different scanned maps. Finally, test results should be
 analysed.
 
 \section{Document structure}
 
-This document has been divided into seven chapters and the bibliography at the end.
-Below there is a short description of a content for each chapter:
+This document has been divided into six chapters and the bibliography at the end.
+Below there is a short description of a content of each chapter:
 
 \begin{itemize}
-  \item In the first chapter there is a description and the background of the topic, 
-        next there are listed main objectives of the work and a problem statement;
+  \item In the first chapter there is a description and the background of the topic.
+        Next there are listed main objectives of the work and a problem statement;
   \item In the second chapter there is a theoretical introduction of the problem. There are
         explained all already known filtration and segmentation algorithms used in this work.
         The description consists of the definition, properties and parameters of each method. In the
         second part, there is an analysis of existing research work and solutions of the color
         scanned maps preprocessing problem;
-  \item Third chapter focuses on research part of this thesis. There are listed all found problems,
-        which should be taken into considerationin the analysis of color scanned maps. In the second
+  \item Third chapter focuses on the research part of this thesis. There are listed all found problems,
+        which should be taken into consideration in the analysis of color scanned maps. In the second
         part of the chapter, there is a full description of filtration and segmentation algorithms
         designed in this work;
-  \item Fourth chapter focuses on engineering part of the thesis. There is a description of all
+  \item Fourth chapter focuses on the engineering part of the thesis. There is a description of all
         implementation details of the algorithm;
-  \item In the fifth chapter there are presented description of all made tests and their results;
+  \item In the fifth chapter there are described all tests of developed algorithm. In the second part
+        there are test results with proper analysis given;
   \item In the last chapter there are conclusions of the thesis.
 \end{itemize}
 
@@ -672,14 +680,9 @@ there is a description of an input data and found problems related to it.
 
 \section{Input data description}
 
-Algorithm has two inputs. One is a file containing an image with a map. Second input is a
-configuration file, which contains parameters of an algorithm.
-
-\subsection{Map image file}
-
-Input of the algorithm is an digital image, stored in a disk in one of many available formats, like
-png, tif, jpg or bmp. Image should be a color-scanned map at any resolution. Example image is 
-presented in a Fig.~\ref{inputExample}. It is a scanned color map of a Polish city - Brzeg.
+Algorithm input is a color-scanned map saved on the disk as a digital image. Its resolution is
+arbitrary. Example image is presented in a Fig.~\ref{inputExample}. It is a scanned color map of a
+Polish city - Brzeg.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -688,92 +691,6 @@ presented in a Fig.~\ref{inputExample}. It is a scanned color map of a Polish ci
 \label{inputExample}
 \end{center}
 \end{figure}
-
-To confirm proper working of the algorithm, there were nine maps prepared. All input map files
-with its description are listed in a table~\ref{tableInputFiles}. 
-
-\begin{table}[!ht]
-\begin{center}
-\caption{Input files.}
-\label{tableInputFiles}
-\begin{tabular}{|c|c|c|c|}
-  \hline
-  Filename & Format & Resolution & Description \\
-  \hline
-  brzeg & tif & 3391x4671 & Map of Brzeg. It has text and multiple areas like \\
-        &     &           & forests, lakes, roads and cities \\
-  \hline
-  bydgoszcz & bmp & 1747x1272 & Map of Bydgoszcz. Small number of areas, \\
-            &     &           & high density of roads and small details \\
-  \hline
-  dolny\_slask & png & 5936x8669 & Old map of a Lower Silesia. No backround. \\
-              &     &           & Many thin lines and rivers. \\
-  \hline
-  lubsza & tif & 3391x4671 & Map of surroundings of Lubsza. It has many areas \\
-         &     &           & like forests and lakes. Image has a big damage. \\
-         &     &           & Map was bent during scanning process. \\
-  \hline
-  masyw\_slezy & tif & 3883x4606 & Topographic map of Ślęża Mountain. It contains \\
-              &     &           & many areas in different colors, roads, text and \\
-              &     &           & topographic lines. \\
-  \hline
-  namyslow & jpg & 4814x5628 & Topographic map of Namysłów. It contains many \\
-           &     &           & small details, topographic lines, small text  \\
-           &     &           & and bright background of areas\\
-  \hline
-  pokoj & tif & 2921x2989 & Map of Pokój. It has text, multiple areas \\
-        &     &           & (forests, lakes) and roads. \\
-  \hline
-  sleza & jpg & 1812x2756 & Map of Ślęża. It contains areas like forests, \\
-        &     &           & lakes and roads. \\
-  \hline
-  sobotka & png & 2798x1824 & Map of Sobótka. It has many different areas, like \\
-          &     &           & small details, text and roads. \\
-  \hline
-\end{tabular}
-\end{center}
-\end{table}
-
-\subsection{Configuration file}
-
-Created algorithm has number of parameters, which have to be determined. Application loads them
-using special XML file. Parameters in a configuration file are divided to two layers. Meaning
-and usage of each parameter is explained in next sections. Example XML configuration file is
-listed in~\ref{listingConfig}
-
-\begin{lstlisting}[caption=Example configuration XML file,label=listingConfig,language=xml]
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <background_detection>
-        <enabled>true</enabled>
-        <gaussian_blur_radius>9</gaussian_blur_radius>
-        <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
-        <diameter>20</diameter>
-        <sigma_color>150</sigma_color>
-        <sigma_space>150</sigma_space>
-        <dilation_and_erosion_size>2</dilation_and_erosion_size>
-        <dilation_and_erosion_counter>4</dilation_and_erosion_counter>
-        <window_width>15</window_width>
-        <max_number_of_colors>30</max_number_of_colors>
-    </background_detection>
-    <line_detection>
-        <enabled>true</enabled>
-        <threshold_value>100</threshold_value>
-        <unsharp_mask_standard_deviation>5</unsharp_mask_standard_deviation>
-        <denoising_factor>35</denoising_factor>
-        <bilateral_filter_counter>5</bilateral_filter_counter>
-        <gaussian_blur_radius>5</gaussian_blur_radius>
-        <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
-        <gaussian_blur_counter>2</gaussian_blur_counter>
-        <initial_threshold>10</initial_threshold>
-        <mimimal_color_area>500</mimimal_color_area>
-        <max_number_of_colors>15</max_number_of_colors>
-        <diameter>20</diameter>
-        <sigma_color>75</sigma_color>
-        <sigma_space>50</sigma_space>
-    </line_detection>
-</configuration>
-\end{lstlisting}
 
 \section{Problems and restrictions}
 
@@ -1142,7 +1059,7 @@ New color of the pixel is set to the value, which is the most frequent in the su
 Algorithm has one parameter - it is a size of the matrix, which surrounds the pixel. This matrix is
 used for the analysis of color of area, which is around processed pixel. The bigger value is set,
 the bigger area is taken into consideration. For example, for parameter value = 7, the surrounding
-area is a matrix with a size 7x7. Pseudocode of the algorithm is presented in
+area is a matrix with a size 7x7. Pseudocode of the algorithm is presented in Algorithm~
 \ref{holesRemovalAlgorithm}.
 
 \begin{algorithm}[!ht]
@@ -1181,6 +1098,7 @@ holes.}
 \end{figure}
 
 \subsection{Algorithm parameters}
+\label{backgroundDetectionParamsSection}
 
 There are some arguments, which have to be set before application of the algorithm. Their values
 depend on the map, to which algorithm is applied. To achieve the best results, every map should have
@@ -1253,13 +1171,179 @@ Fig.~\ref{detailDetectionFlow}.
 
 \subsubsection{Background removal}
 
+To remove background from the image, modified thresholding method is used. At the beginning, there
+are created three Black and White images. Their pixel values are represented by intensities of red,
+green and blue colors. Prepared in this way maps are then thresholded. Values greater than specified
+threshold value are marked as a black(Intensity Value = 0), the rest is marked as a white(Intensity
+Value = 255). In the next part, three resulting images are merged into one. If any of pixels from
+thresholded pixels is black, it is marked in a resulting image. Finally, image colors are restored.
+Pixel colors from the original images are assigned for each black pixels from thresholded image.
+Pseudocode of the algorithm is presented in Algorithm~\ref{thresholdingAlgorithm}.
 
+\begin{algorithm}[!ht]
+  \KwIn{ThresholdValue}
+  \KwIn{InputImage}
+  \KwOut{ThresholdedImage}
+
+  redIntensity := InputImage.getRedIntensity\;
+  greenIntensity := InputImage.getGreenIntensity\;
+  blueIntensity := InputImage.getBlueIntensity\;
+
+  threshold(redIntensity)\;
+  threshold(greenIntensity)\;
+  threshold(blueIntensity)\;
+
+  ThresholdedImage := InputImage\;
+
+  \ForEach{PixelPosition in ThresholdedImage}
+  {
+    \If{ redIntensity.at(PixelPosition).isWhite() AND greenIntensity.at(PixelPosition).isWhite() AND
+         blueIntensity.at(PixelPosition).isWhite() }
+    {
+      ThresholdedImage.at(PixelPosition).color := WhiteColor\;
+    }
+  }
+
+  \Return{ThresholdedImage}
+
+  \caption{Background removal}
+  \label{thresholdingAlgorithm}
+\end{algorithm}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=2.0]{images/thresholdingResult.png}
+\caption{Fragment of a map of Brzeg with background detection algorithm applied.
+On the left, there is an original image. On the right side there is an image with removed
+background.}
+\label{thresholdingResult}
+\end{center}
+\end{figure}
+
+In a Fig.~\ref{thresholdingResult} there is a fragment of a map of Brzeg with removed background.
+Main background area was removed, but in the output image there are some residues - single dots
+visible, especially inside Lubsza town. These errors are very similar to white noise and should be
+eliminated in next part of the algorithm.
 
 \subsubsection{Quality improval}
 
+Thresholded image has some background residues. In a resulting image it looks very similar to white
+noise. There are many single pixels, which were not eliminated during thresholding process. To
+remove these unwanted features, the algorithm of removing lonely pixels is applied. This method
+analyses every pixel of an image and removes all colored dots, which surrounding is white.
+Additionaly, value of all white pixels, which are surrounded by colored ones is changed to average
+of its surrounding pixels values. Pseudocode of the algorithm is presented in
+Algorithm~\ref{singleDotsRemovalAlgorithm}.
+
+\begin{algorithm}[!ht]
+  \KwIn{ThresholdedImage}
+  \KwOut{ProcessedImage}
+
+  ProcessedImage := ThresholdedImage\;
+
+  \ForEach{Pixel in ProcessedImage}
+  {
+    \eIf{ Pixel.isWhite() }
+    {
+      \If{ allSurroundingIsColored( Pixel ) }
+      {
+        Pixel.color := AverageColorOfSurrounding\;
+      }
+    }
+    {
+      \If{ allSurroundingIsWhite( Pixel ) }
+      {
+        Pixel.color := WhiteColor\;
+      }
+    }
+  }
+
+  \Return{ProcessedImage}
+
+  \caption{Single dots removal}
+  \label{singleDotsRemovalAlgorithm}
+\end{algorithm}
+
+Example of application of removing lonely pixels is presented in a Fig.~\ref{removeLonePixelsResult}.
+All single occuring pixels were removed from the thresholded image. Also white holes caused by image
+distortions were substituted with color of their surroundings.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.4]{images/removeLonePixelsResult.png}
+\caption{Fragment of a map of Brzeg with lonely pixels removal algorithm applied.
+On the left, there is a thresholded image. On the right side there is an image with removed
+lonely pixels.}
+\label{removeLonePixelsResult}
+\end{center}
+\end{figure}
+
+In the second part of quality improval method, the unsharp mask is applied. This algorithm is
+applied to remove input distortions, mainly to merge broken lines and improve text readability.
+Unsharp mask is applied with very small value of its parameters. Example output of this algorithm is
+presented in a Fig.~\ref{unsharpMaskResult}. All details, especially thin lines are clearer.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.4]{images/unsharpMaskResult.png}
+\caption{Fragment of a map of Brzeg with unsharp mask algorithm applied.
+On the left, there is an image with previous algorithms applied. On the right side there is an image
+with Unsharp Mask applied.}
+\label{unsharpMaskResult}
+\end{center}
+\end{figure}
+
 \subsubsection{Elements classification}
 
+Elements classification algorithm is divided to four parts. First, image is initialy filtered. Then
+all image elements are detected and assigned in a resulting image. Finally, to improve an output
+quality, White Noise elimination algorithm is applied.
+
+The filtration of an input map consists of two parts. There are applied two filters - Gaussian and
+Bilateral. The first one is called with a very small value of radius and standard deviation. The
+second one is applied with small values of diameter and sigma space. Sigma color value is bigger,
+its value depends on type of the map. Initial filtration of the map is done to unify colors of each
+element type. Thanks to this method segmentation process is easier. Example of previously
+thresholded map filtration is shown in a Fig.~\ref{contoursFiltrationResult}. As it can be seen,
+color of every element is unfied. Thanks to usage of small parameter values, text is still readable.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.6]{images/filtrationResult.png}
+\caption{Fragment of a map of Brzeg with filtration algorithms applied.
+On the left, there is an image with previous algorithms applied. On the right side there is a
+filtered image.}
+\label{contoursFiltrationResult}
+\end{center}
+\end{figure}
+
+In the second part of the algorithm all elements are detected. It is done in similar way as in
+background detection(presented in Algorithms~\ref{colorGroupingAlgorithm},~\ref{groupsMergingAlgorithm}
+~and~\ref{colorAssignmentAlgorithm}). It is assumed, that the same elements are equally colored in
+the input. There are created groups of colors on the basis of previously processed image. White
+elements (removed background in thresholded image is marked in this color) are omitted. After this
+process, every non-white element of thresholded image is assigned to one of created groups.
+
+In the last part of the procedure, there is applied Fast Nl Means Denoising algorithm to remove
+white noise from the result. It improves quality of the method output. Denoising factor parameter
+used in this part is small.
+
+Example of elements detection algorithm is presented in a Fig.~\ref{lineDetectionResult}. As it can
+be seen, all background has been removed. Detected elements are consistent, all details are clear
+and undamaged. Colors of every element is unified. Text is clear and readable. Roads and rivers
+(thin lines) are visible and not broken.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.2]{images/lineDetectionResult.png}
+\caption{Fragment of a map of Brzeg with Elements Detection(all parts) applied.
+On the left, there is an image input map. On the right side there is a resulting image.}
+\label{lineDetectionResult}
+\end{center}
+\end{figure}
+
 \subsection{Algorithm parameters}
+\label{lineDetectionParamsSection}
 
 Similarly like in background detection algorithm, detection of details requires the specification of
 parameters. Their value depend on the type of the map.
@@ -1311,19 +1395,607 @@ parameters. Their value depend on the type of the map.
 
 \section{Merge of layers}
 
+Outputs of the area detection and the details detection algorithms are separate images. After
+finishing of these two parts, results should be merged into one image. This procedure is very simple
+and it is based on assumption, that elements, which are background in the result image of details
+detection algorithm are white. If color of pixel from the detail detection result image is white,
+pixel background detection algorithm is taken. Pseudocode of Merge Layer procedure is presented in
+Algorithm~\ref{mergeLayersAlgorithm}.
+
+\begin{algorithm}[!ht]
+  \KwIn{AreaDetectionOutput}
+  \KwIn{DetailsDetectionOutput}
+  \KwOut{MergedImage}
+
+  MergedImage := DetailsDetectionOutput\;
+
+  \ForEach{PixelPosition in MergedImage}
+  {
+    \If{ DetailsDetectionOutput.at(PixelPosition).isWhite() }
+    {
+      MergedImage.at(PixelPosition).color := AreaDetectionOutput.at(PixelPosition).color\;
+    }
+  }
+
+  \Return{MergedImage}
+
+  \caption{Layers merge}
+  \label{mergeLayersAlgorithm}
+\end{algorithm}
+
+In a Fig.~\ref{layerMergeResult}, there is an example result of a Layer Merge. As it can be seen,
+all white areas from Details Detection result image(left) were substituted with colors from
+corresponding areas from Background Detection result image(central). The result of merging can be
+seen on the right image.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.3]{images/layersAndMergedImage.png}
+\caption{Fragment of a map of Brzeg with Layer Merge algorithm applied.
+DetailsDetection result is represented on Left Image. Central image is
+BackgroundDetection result. On the right, there is Layer Merge result.}
+\label{layerMergeResult}
+\end{center}
+\end{figure}
+
 \chapter{Implementation of the algorithm}
+
+This chapter focuses on the engineering part of the work. First, there is a description of all used
+tools in an implementation process. In the second part, the description of all classes and
+their implementation is given.
 
 \section{Used tools}
 
+This section provides description and version of programming language, tools and libraries, which
+were used during development process.
+
+\subsection{Programming Language and Building Process Management}
+
+All implementation of the master thesis application is developed in \textit{C++} programming 
+language. It was choosen because of its high performance and availability of many useful libraries.
+
+Used compiler is GCC in version 4.6.3.
+
+For the managing the building process, \textit{CMake} was used. It fits very well to the
+characteristics of the project - it supports directory hierarchies and library dependencies.
+Moreover, this software is compiler-independent, so project can be compiled on multiple platforms,
+like Linux, Microsoft Windows or Apple iOS. CMake documentation and download page is available on
+\cite{cmakeMainPage}.
+
+\subsection{External libraries}
+\label{externalLibrariesSection}
+To facilitate the development process there are used four external libraries in the project:
+\textit{OpenCV} for digital image processing, \textit{RapidXML} for managing XML files,
+\textit{Boost} and \textit{STL} for general purpose tools.
+
+\subsubsection{OpenCV}
+
+According to \cite{learningOpenCv}, OpenCV is an open-source computer vision library. It is written
+in C and C++ and runs on multiple platforms. It was designed for computational efficiency with a
+strong focus on real-time applications. It provides a simple to use computer vision architecture
+and Machine Learning Library. It contains over 500 functions, that span many areas in vision. It is
+used in many commercial and open-source projects. OpenCV documentation and download page can be
+found on \cite{opencvMainPage}. This project uses OpenCV in version 2.4.9.
+
+\subsubsection{Boost}
+
+According to \cite{boostWiki}, Boost is a set of libraries for the C++ programming language. It 
+contains over eighty individual libraries, which provide support for many tasks and structures.
+In this work, there were used five libraries from Boost:
+\begin{itemize}
+  \item Boost Smart Pointers - objects, which store pointers to dynamically allocated(heap) objects;
+  \item Boost Filesystem - library provides facilities to manipulate files and directories, and the
+        paths that identify them;
+  \item Boost Thread - library enables the use of multiple threads of execution with shared data in
+        portable C++ code;
+  \item Boost Foreach - Foreach loop designed for C++;
+  \item Boost Posix Time - Library defines a non-adjusted time system with nano-second/micro-second
+        resolution and stable calculation properties.
+\end{itemize}
+
+Boost documentation and download page can be found on \cite{boostMainPage}. This project uses Boost
+in version 1.46.
+
+\subsubsection{STL}
+
+According to \cite{stlWiki}, Standard Template Library(STL) is a software library for the C++
+programming language. It provides four components called algorithms, containers, functional and
+iterators. It is a part of a C++ standard.
+
+\subsubsection{RapidXML}
+
+RapidXML is a fast XML DOM parser for C++ Programming Language. Its documentation and download page
+can be found on \cite{rapidXmlMainPage}. This project uses RapidXML in version 1.13.
+
 \section{Application outline}
+
+This section provides descriptions of application design and main classes and interfaces implemented
+in the application.
+
+\subsection{Application design}
+
+The application code is divided into 6 packages:
+
+\begin{enumerate}
+  \item Algorithm - This package contains class, which controls main flow of a filtration and
+        segmentation algorithm;
+  \item Core - This package contains the \textit{main.cpp} file. Application work starts here;
+  \item Debug - Package contains a class, which views input and output images on a screen of the
+        computer. To enable this package, \textit{-DDEBUG\_IMAGES} definition should be added to
+        compilation process of the application.
+  \item Filehandler - Classes included in this package are responsible for an Input/Output
+        operations: finding path to the input images, loading an input image, finding path to the
+        output images, loading an output image and loading an XML configuration file;
+  \item Filtration - This package contains classes responsible for an image filtration. Every
+        filtration algorithm is represented by a separate class;
+  \item Segmentation - This package contains classes responsible for an image segmentation. Every
+        segmentation algorithm is represented by a separate class. It contains also one subpackage,
+        called \textit{helpers}, which includes classes helping in a segmentation process.
+\end{enumerate}
+
+All application architecture is visualized in a Fig.\ref{classDiagramImage}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.4]{images/classDiagram.png}
+\caption{Application architecture.}
+\label{classDiagramImage}
+\end{center}
+\end{figure}
+
+\subsection{Description of main classes and interfaces}
+
+This section focuses on description of most important classes included in core, algorithm,
+filtration and segmentation packages.
+
+\subsubsection{core::Application}
+
+This class starts at the beggining and is running for all the time. It controls main flow of the
+application. First, it reads all parameters from the configuration XML file(using 
+\textit{filehandler::ConfigurationFileReader} class). Next, it loads every input image. Finally, for
+each loaded map it runs an algorithm and saves its result to an output file. Reading input and
+saving output of the algorithm is done using \textit{filehandler::FileHandler} class. The map
+segmentation and filtration algorithm process is controlled by \textit{algorithm::Algorithm} class.
+
+\subsubsection{algorithm::Algorithm}
+
+This class controls the flow of the Detail Detection, Background Detection and Layer Merge
+algorithms. First, algorithm checks, which algorithms are enabled. Next, proper algorithms are run.
+Finally, class prepares an output image(it decides, if layer merging is needed).
+
+\subsubsection{segmentation::ISegmentationAlgorithm}
+
+It is an interface for all classes controling a segmentation process. It has two implementations:
+\begin{itemize}
+  \item \textit{segmentation::LineDetection} - This class is responsible for the Detail Detection
+        process;
+  \item \textit{segmentation::ColorSegmentation} - This class is responsible for the Background
+        Detection process.
+\end{itemize}
+
+Classes, which implement this interface. should have overrided one method:
+
+\begin{lstlisting}[language=C++, caption=ISegmentationAlgorithm methods]
+virtual boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const = 0;
+\end{lstlisting}
+
+It takes a \textit{shared\_ptr} to an input image and returns
+\textit{shared\_ptr} to an output, segmented image.
+
+\subsubsection{filtration::IFiltrationAlgorithm}
+
+This interface unifies usage of every filtration algorithm. It is implemented by nine classes:
+\begin{itemize}
+  \item \textit{ApplyBilateralFilter} - This class applies Bilateral Filter to an image;
+  \item \textit{ApplyGaussianFilter} - This class applies Gaussian Filter to an image;
+  \item \textit{ConvertToBlackAndWhite} - This class converts an image to black and white mode;
+  \item \textit{Dilation} - This class applies Dlation to an image;
+  \item \textit{ElliminateWhiteNoise} - This class eliminates white noise from an image;
+  \item \textit{Erosion} - This class applies Erosion to an image;
+  \item \textit{RemoveLonePixels} - This class applies filter, which removes lonely pixels from
+        image;
+  \item \textit{Threshold} - This class applies Thresholding to an image;
+  \item \textit{UnsharpMask} - This class applies an Unsharp Mask filter to an image.
+\end{itemize}
+
+Classes, which implement this interface, should have overriden one method:
+
+\begin{lstlisting}[language=C++, caption=IFiltrationAlgorithm methods]
+virtual boost::shared_ptr<cv::Mat> apply( boost::shared_ptr<cv::Mat> ) const = 0;
+\end{lstlisting}
+
+It takes a \textit{shared\_ptr} to an input image and returns
+\textit{shared\_ptr} to an output, segmented image.
+
+\section{Running the application}
+
+This section focuses on compilation and application running processes for a Linux OS.
+
+\subsection{Compilation and running}
+
+To compile the application properly, there are needed CMake, Boost and OpenCV in proper versions(
+listed in section~\ref{externalLibrariesSection}). CMake checks the dependencies in the system and
+generates a Makefile. If this process is successful, it is possible to start the compilation.
+
+\begin{lstlisting}[language=sh, caption=Commands needed for building the application]
+# Application root Directory
+$ cmake . # It runs the CMake, checks dependencies and generates the Makefile
+$ make # This command compiles application.
+\end{lstlisting}
+
+After successful compilation, the binary file should appear in a \textit{(project\_root)/bin/}
+directory. To run it, the binary file should be executed:
+
+\begin{lstlisting}[language=sh, caption=Commands needed for running the application]
+# Application root Directory
+$ ./bin/MasterThesisWojciechowski
+\end{lstlisting}
+
+\subsubsection{Scripts}
+
+To ease process of compilation and running, three scripts are prepared:
+
+\begin{itemize}
+  \item \textit{clean.sh} - script removes all application output files, application binaries and
+        CMake files;
+  \item \textit{fast\_compile\_and\_run.sh} - Script compiles the project and starts the application;
+  \item \textit{compile\_and\_run.sh} - Scripts does everything from \textit{clean.sh} and
+        \textit{fast\_compile\_and\_run.sh};
+\end{itemize}
+
+\subsection{Input and output files}
+
+All input and output files are placed in a \textit{(project\_root/resources/)} directory.
+
+\subsubsection{Configuration file}
+
+All parameters of the algorithm should be given in a configuration file, which full path must be:~
+\textit{(project\_root)/resources/conf/config.xml}. This file is divided into two parts(xml nodes)
+to improve its readability. First node:~\textit{background\_detection} contains all arguments for
+Background Detection algorithm. Second node:~\textit{line\_detection} contains all arguments for
+Details detection algorithm. Description of all parameters can be found in
+sections:~\ref{backgroundDetectionParamsSection}~and~\ref{lineDetectionParamsSection}.
+
+On al listing below there is an example of a \textit{config.xml} file:
+
+\begin{lstlisting}[language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <background_detection>
+        <enabled>true</enabled>
+        <gaussian_blur_radius>13</gaussian_blur_radius>
+        <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
+        <diameter>10</diameter>
+        <sigma_color>150</sigma_color>
+        <sigma_space>150</sigma_space>
+        <dilation_and_erosion_size>1</dilation_and_erosion_size>
+        <dilation_and_erosion_counter>5</dilation_and_erosion_counter>
+        <window_width>20</window_width>
+        <max_number_of_colors>30</max_number_of_colors>
+    </background_detection>
+
+    <line_detection>
+        <enabled>true</enabled>
+        <threshold_value>110</threshold_value>
+        <unsharp_mask_standard_deviation>5</unsharp_mask_standard_deviation>
+        <denoising_factor>35</denoising_factor>
+        <bilateral_filter_counter>5</bilateral_filter_counter>
+        <gaussian_blur_radius>9</gaussian_blur_radius>
+        <gaussian_blur_standard_deviation>3</gaussian_blur_standard_deviation>
+        <gaussian_blur_counter>5</gaussian_blur_counter>
+        <initial_threshold>10</initial_threshold>
+        <mimimal_color_area>500</mimimal_color_area>
+        <max_number_of_colors>15</max_number_of_colors>
+        <diameter>25</diameter>
+        <sigma_color>130</sigma_color>
+        <sigma_space>50</sigma_space>
+    </line_detection>
+</configuration>
+\end{lstlisting}
+
+\subsubsection{Input and output images}
+
+Every input map(it can be more than one) should be placed in a \textit{resources/input\_images}
+directory. Images must be placed there before starting the application. There are acceptable all
+file formats, which are supported by OpenCV library(for example \textit{jpg}, \textit{tif},
+\textit{bmp}).
+When application finishes its work, the result is saved in a \textit{resources/output\_images}
+directory. Saved images have the same name and format as their input equivalents.
 
 \chapter{Tests and Results}
 
+This chapter contains description of all tests of created algorithm. In the second part there are
+presented results of made tests and their analysis.
+
 \section{Test description}
+
+\subsection{Scope of tests}
+
+Tests were made for each picture with different values of parameters. There are two properties
+tested. First is a quality of an output image. During this phase there are checked such properties
+like: proper borders of each area, proper color of the area, presence of all small details,
+continuities of lines(in roads, rivers, etc.) and readability of text. Second checked property is
+the algorithm performance. There was checked time of execution of the algorithm. Measurement is
+divided into three categories:
+\begin{enumerate}
+  \item Time of Details Detection algorithm;
+  \item Time of Background Detection algorithm;
+  \item Time of execution of both algorithms.
+\end{enumerate}
+
+Images were divided into groups according to the best achieved image quality. All pictures from one
+group were tested with the same set of algorithm parameters.
+
+\subsection{Test environment}
+
+Description of the computer on which all tests were done is presented in a
+Table~\ref{computerDescription}.
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Test environment.}
+\label{computerDescription}
+\begin{tabular}{|c|c|}
+  \hline
+  CPU & Intel Core 2 Duo T6600 @ 2.20GHz x 2 \\
+  \hline
+  Memory & 4GB RAM \\
+  \hline
+  Operating System & Ubuntu Linux 12.04(precise) 64-bit \\
+  Kernel & 3.8.0-42-generic \\
+  Desktop Environment & Gnome 3.4.2 \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Input data}
+
+To confirm proper working of the algorithm, there were nine maps prepared. All input map files
+with its description are listed in a table~\ref{tableInputFiles}. 
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Input files.}
+\label{tableInputFiles}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  Filename & Format & Resolution & Description \\
+  \hline
+  brzeg & tif & 3391x4671 & Geographical map of Brzeg. It has text and multiple \\
+        &     &           & areas like forests, lakes, roads and cities \\
+  \hline
+  bydgoszcz & bmp & 1747x1272 & City map of Bydgoszcz. Small number of areas, \\
+            &     &           & high density of roads and small details \\
+  \hline
+  dolny\_slask & png & 5936x8669 & Old map of a Lower Silesia. No backround. \\
+              &     &           & Many thin lines and rivers. \\
+  \hline
+  lubsza & tif & 3391x4671 & Geographical map of surroundings of Lubsza. \\
+         &     &           & It has many areas like forests and lakes. Image has \\
+         &     &           & a big damage. Map was bent during scanning process. \\
+  \hline
+  masyw\_slezy & tif & 3883x4606 & Topographic map of Ślęża Mountain. It contains \\
+              &     &           & many areas in different colors, roads, text and \\
+              &     &           & topographic lines. \\
+  \hline
+  namyslow & jpg & 4814x5628 & Topographic map of Namysłów. It contains many \\
+           &     &           & small details, topographic lines, small text  \\
+           &     &           & and bright background of areas\\
+  \hline
+  pokoj & tif & 2921x2989 & Geographical map of Pokój. It has text, \\
+        &     &           & multiple areas(forests, lakes) and roads. \\
+  \hline
+  sleza & jpg & 1812x2756 & Geographical map of Ślęża. It contains \\
+        &     &           & areas like forests, lakes and roads. \\
+  \hline
+  sobotka & png & 2798x1824 & Geographical map of Sobótka. It has many \\
+          &     &           & different areas, like small details, text and roads. \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \section{Result analysis}
 
+Testing process was divided into six groups. Every group had different parameters set during testing
+process. The results, which are presented in this section are the best achieved for each map(among
+all tests with different values of parameters). There are also some examples given, which show, how
+the image reacts to the bad choice of parameters.
+
+\subsection{Ślęża and Sobótka}
+
+Ślęża and Sobótka are geographic maps designed for tourists. It is taken from atlas. Map of Sobótka
+has streets with their names, travel routes and some small details. It contains areas of a park,
+small lakes and smaller areas in the city. On Ślęża map there are marked mainly travel routes,
+names of places, which are worth seeing and area of the park and a city.
+
+\subsubsection{Used parameters}
+
+Background of these maps have visible moro effect and some distortions(dust). Te eliminate this,
+there was used a Gaussian Blur with a big radius - 13. Diameter of a bilateral filter was set to
+10, its sigma space and sigma color to 150. To keep the shape of areas and remove all details and
+not needed lines, dilation and erosion was applied five times, but with small size - 1. Holes
+removal algorithm was used with a big parameter - 30 - there were many residues in an image after
+erosion and dilation application. Maximum numbers of colors was set to 15. It is enough for the
+background. \\
+
+Details detection was set to medium-sensitive. Threshold was set to 110. It was enough to keep all
+details and lines with this value, background and distortions have been successfully eliminated.
+To improve image quality, standard deviation of unsharp mask was set to 5 and denoising factor to
+35. Image filtering was quite big as for details detection. It was caused by the moro effect inside
+the green area, which was hard to eliminate. Bilateral filter was applied five times with diameter =
+20, sigma color = 130 and sigma space = 50. Gaussian filter was applied two times with a radius = 5.
+Image contains small number of colors. Maximal number of colors was set to 15 and initial threshold
+to 10. Minimal color area was set to 500, because images have big resolution.
+
+\subsubsection{Achieved results}
+
+The result of application of the algorithm on Ślęża map is presented in a Fig.~\ref{resultSlezaIO}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.5]{images/resultSlezaIO.jpeg}
+\caption{Result of application of the algorithm to Ślęża map. Original map is on the left, algorithm
+result is presented on the right.}
+\label{resultSlezaIO}
+\end{center}
+\end{figure}
+
+Borders of the areas remained unchanged. Color is unified, distortions have been eliminated from
+resulting image. All small details are kept and marked in a result image. There are also some 
+errors. On the right center border of the map, fragment of the area was assigned to other group
+(it is marked in darker color). The same situation is visible near text "Ślężański Park 
+Krajobrazowy". It is caused by dilation and erosion algorithms(surroundings of these areas are 
+darker in the original - black text and roads). Additionaly, on the green area it was impossible to
+remove all moro effect. It is visible in a Fig.~\ref{moroSlezaIO}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=3.0]{images/moroSlezaResult.png}
+\caption{Moro effect visible in enlarged Ślęża result.}
+\label{moroSlezaIO}
+\end{center}
+\end{figure}
+
+Due to big values of filters, text is not as sharp, as it was in the original. However it is still
+readable. Example is shown in a Fig.~\ref{slezaRozlanyTekst}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1.0]{images/slezaRozlanyTekst.png}
+\caption{Unsharp text visible in enlarged Ślęża result.}
+\label{slezaRozlanyTekst}
+\end{center}
+\end{figure}
+
+Performance of the algorithm is presented in a table \ref{slezaPerformance}.
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Time of algorithm execution - Ślęża.}
+\label{slezaPerformance}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Detail Detection & Background Detection & Algorithm \\
+  \hline
+  2 min 16s & 8 min 21s & 8min 21s \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+% The result of application of the algorithm on Sobótka map is presented in a Fig.~\ref{resultSlezaIO}.
+% TODO SOBÓTKA
+
+\subsection{Pokój}
+
+Pokój is a map of a small town. There are marked streets with their names, bigger road and town
+surroundings(multiple ponds and green areas). The map background is not consistent - there are 
+visible big dots. It is an additional difficulty for an algorithm.
+
+\subsubsection{Used parameters}
+
+\subsubsection{Achieved results}
+
+
+\subsection{Lubsza and Brzeg}
+
+Lubsza and Brzeg are geographical maps. There are visible green areas, towns with named streets,
+rivers, roads, lakes and some thin lines. On some of the areas moro effect is visible(especially
+after enlargement of images). There are many distortions visible on both maps. There are some
+creases(one of them is major - in Lubsza map) and darker elements(result of improper scanning).
+
+\subsubsection{Used parameters}
+
+\subsubsection{Achieved results}
+
+
+\subsection{Bydgoszcz}
+
+Bydgoszcz is a city map. It has a lot of details(streets with names, small elements from a legend,
+names of companies, ...). Additionaly it has many areas marked with different colors and a river
+marked as a thick blue line. Maps has some distortions. It has visible creases and it is dirty.
+
+\subsubsection{Used parameters}
+
+\subsubsection{Achieved results}
+
+
+\subsection{Namysłów and Masyw Ślęży}
+
+Namysłów and Masyw Ślęży are examples of topographic maps. They have a lot of very thin topographic
+lines, small details and text. There are also marked cities and towns. Background of these images is
+white. Only green areas, cities and lakes are marked in a different, bright colors.
+
+\subsubsection{Used parameters}
+
+\subsubsection{Achieved results}
+
+
+\subsection{Dolny Śląsk}
+
+Dolny Śląsk is old(from 1909) German map of Lower Silesia. There are marked main cities and towns
+(their names and borders) and rivers. This map has a lot of small elements(especially text) and
+very thin lines. Moreover, map is damaged - it has some creases visible. Map has no background - 
+there are only contours on a white background visible.
+
+\subsubsection{Used parameters}
+
+\subsubsection{Achieved results}
+
+
 \chapter{Conclusion}
+
+In this Master Thesis, the filtration and segmentation algorithm for digital color scanned maps was
+created. There was checked impact of many known filters and segmentation algorithms to this type of
+images. In the basis of gained knowledge there were chosen the best methods for digital maps
+processing. To some of them there were applied needed modifications. Additionaly there was designed
+a color-based segmentation algorithm for grouping map background and details by their type. As a
+part of the work there was also an application developed, which was used in the method evaluation
+process. Created algorithm was fully tested. In this process there were used nine different
+(topographic, geographical, city, old) maps. \\
+
+Tests showed, that the algorithm gives good results, but not for every image. In case of 
+geographical maps, like Ślęża, Sobótka or Pokój, background color was unified. Borders of all areas
+remained unchanged and main details were kept. Additionaly many distortions were eliminated. Slighty
+worse results were achieved with Lubsza and Brzeg. This was a consequence of some major distortions
+existing these maps(like creases or darker elements) - the algorithm was not able to deal with these
+types of difficulties. 
+
+The algorithm gives quite good results also for topographic maps. Both
+Namysłów and Masyw\_Ślęży output image quality was good. Small distortions were eliminated,
+background color was unified and borders of areas were at the same place as in the input. The most
+important in this type of maps - thin topographic lines and small elements and text were not damaged
+after segmentation process.
+
+In case of very big old maps with a big number of elements and lines with a small size algorithm it
+is very difficult to set proper algorithm parameters. With that kind of map it is difficult to
+combine the image quality(no distortions) and keeping all map details(especially a very thin lines).
+
+The worst results were achieved with a map of Bydgoszcz. Many areas are damaged - they have wrong
+shape and color and text is less readable than in the original. It can be caused by a very small
+image resolution.
+
+The main weakness of the algorithm is its performance. Time of preprocessing of bigger maps is very
+long - it takes more than one hour. It is caused by the number of operations which should be
+executed for each pixel. The slowest parts of the whole procedure are Bilateral Filter and
+segmentation algorithm. Another disadvantage is a number of parameters, which have to be adjusted
+for every map.\\
+
+The algorithm in this form gives good results for many types of maps. However it is suitable for
+further development. The improvements can be done in a field of background detection(especially with
+a city maps, like Bydgoszcz) and better removal of distortions. Additionaly, pre-analysis of the
+input map can be added to eliminate or, at least, reduce the number of parameters. The work should
+be also focused on execution time of the algorithm. The short execution time was not main aim of 
+this work(the algorithm will not work as the real-time apllication), however improvement on this
+field would ease testing process. Another improvement, which would improve the convenience of the
+application usage would be a GUI development.
+In the field of testing, it is a very good idea to test results of this algorithm by specialised
+software. Unfortunately it was not possible to carry out this type of tests in this work. \\
+
+The presented algorithm is a variant of color scanned maps segmentation. With properly set
+parameters it is a good way to process this type of digital images.
 
 \newpage
 
@@ -1368,6 +2040,18 @@ parameters. Their value depend on the type of the map.
           {Alireza Khotanzad, Edd Zink, Color paper map segmentation using eigenvector line-fitting,
           Image Analysis and Interpretation, 1996., Proceedings of the IEEE Southwest Symposium on
           8-9 April 1996}
+  \bibitem{cmakeMainPage}
+          {http://www.cmake.org/, Version from 17.06.2014}
+  \bibitem{opencvMainPage}
+          {http://opencv.org/, Version from 17.06.2014}
+  \bibitem{boostWiki}
+          {http://en.wikipedia.org/wiki/Boost\_\%28C\%2B\%2B\_libraries\%29, Version from 17.06.2014}
+  \bibitem{boostMainPage}
+          {http://www.boost.org/, Version from 17.06.2014}
+  \bibitem{stlWiki}
+          {http://en.wikipedia.org/wiki/Standard\_Template\_Library, Version from 18.06.2014}
+  \bibitem{rapidXmlMainPage}
+          {http://rapidxml.sourceforge.net/, Version from 18.06.2014}
 
 \end{thebibliography}
 

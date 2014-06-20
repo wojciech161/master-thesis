@@ -21,7 +21,7 @@ ElliminateWhiteNoise::~ElliminateWhiteNoise()
 boost::shared_ptr<cv::Mat> ElliminateWhiteNoise::apply( boost::shared_ptr<cv::Mat> input ) const
 {
     boost::shared_ptr<cv::Mat> result( new cv::Mat() );
-    cv::fastNlMeansDenoisingColored( *input, *result, denoisingFactor_ );
+    cv::fastNlMeansDenoising( *input, *result, denoisingFactor_ );
     return result;
 }
 

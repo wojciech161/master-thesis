@@ -85,7 +85,7 @@ Color ColorContainer::getAverage() const
     return Color( redTrimmed, greenTrimmed, blueTrimmed );
 }
  
-int ColorContainer::getNumberOfColors() const
+long ColorContainer::getNumberOfColors() const
 {
     return numberOfColors_;
 }
@@ -107,7 +107,7 @@ double ColorContainer::getCurrentBlue() const
 
 void ColorContainer::merge( const ColorContainer& anotherContainer )
 {
-    int newNumberOfColors_ = anotherContainer.getNumberOfColors() + numberOfColors_;
+    long newNumberOfColors_ = anotherContainer.getNumberOfColors() + numberOfColors_;
 
     // Get sum of colors of this object
     double myRedSum = currentRedAverage_ * numberOfColors_;
