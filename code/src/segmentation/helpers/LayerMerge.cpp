@@ -61,7 +61,7 @@ boost::shared_ptr<cv::Mat> LayerMerge::merge() const
 
 bool LayerMerge::isWhite( const Color& c ) const
 {
-    const int WHITE_VALUE = 240;
+    const int WHITE_VALUE = 220;
     if( c.getRed() >= WHITE_VALUE && c.getGreen() >= WHITE_VALUE && c.getBlue() >= WHITE_VALUE )
     {
         return true;

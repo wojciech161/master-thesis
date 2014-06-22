@@ -4,29 +4,29 @@
 
     <background_detection>
         <enabled>true</enabled>
-        <gaussian_blur_radius>13</gaussian_blur_radius>
+        <gaussian_blur_radius>9</gaussian_blur_radius>
         <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
         <diameter>10</diameter>
-        <sigma_color>150</sigma_color>
-        <sigma_space>150</sigma_space>
+        <sigma_color>50</sigma_color>
+        <sigma_space>50</sigma_space>
         <dilation_and_erosion_size>1</dilation_and_erosion_size>
-        <dilation_and_erosion_counter>5</dilation_and_erosion_counter>
-        <window_width>30</window_width>
+        <dilation_and_erosion_counter>1</dilation_and_erosion_counter>
+        <window_width>3</window_width>
         <max_number_of_colors>15</max_number_of_colors>
     </background_detection>
 
     <line_detection>
         <enabled>true</enabled>
-        <threshold_value>75</threshold_value>
+        <threshold_value>100</threshold_value>
         <unsharp_mask_standard_deviation>5</unsharp_mask_standard_deviation>
-        <denoising_factor>45</denoising_factor>
+        <denoising_factor>35</denoising_factor>
         <bilateral_filter_counter>5</bilateral_filter_counter>
         <gaussian_blur_radius>5</gaussian_blur_radius>
         <gaussian_blur_standard_deviation>0</gaussian_blur_standard_deviation>
         <gaussian_blur_counter>2</gaussian_blur_counter>
         <initial_threshold>10</initial_threshold>
         <mimimal_color_area>500</mimimal_color_area>
-        <max_number_of_colors>25</max_number_of_colors>
+        <max_number_of_colors>8</max_number_of_colors>
         <diameter>30</diameter>
         <sigma_color>130</sigma_color>
         <sigma_space>50</sigma_space>

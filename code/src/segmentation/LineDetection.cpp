@@ -23,7 +23,7 @@ LineDetection::~LineDetection()
 boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> input ) const
 {
     const int THRESHOLD_VALUE = parameters_.thresholdValue;
-    const int UNSHARP_MASK_STANDARD_DEVIATION = parameters_.unsharpMaskStandardDeviation;
+    // const int UNSHARP_MASK_STANDARD_DEVIATION = parameters_.unsharpMaskStandardDeviation;
 
     boost::shared_ptr<cv::Mat> result = input;
 
@@ -36,8 +36,8 @@ boost::shared_ptr<cv::Mat> LineDetection::apply( boost::shared_ptr<cv::Mat> inpu
     // Elliminate single dots
     result = filtration::RemoveLonePixels().apply( result );
 
-    // Apply unsharp mask to image
-    result = filtration::UnsharpMask( UNSHARP_MASK_STANDARD_DEVIATION ).apply( result );
+    // // Apply unsharp mask to image
+    // result = filtration::UnsharpMask( UNSHARP_MASK_STANDARD_DEVIATION ).apply( result );
 
     // Find common colors of lines
     result = helpers::ColorAlignment( parameters_ ).apply( result );
