@@ -2307,7 +2307,21 @@ places color of the background was assigned wrongly. It can be seen in a Fig.~\r
 \end{center}
 \end{figure}
 
-\newpage
+Performance of the algorithm is presented in a table \ref{masywSlezyPerformance}.
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Time of algorithm execution - Masyw Ślęży.}
+\label{masywSlezyPerformance}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Detail Detection & Background Detection & Algorithm \\
+  \hline
+  16 min 11s & 53min 22s & 53min 23s \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \subsection{Dolny Śląsk}
 
@@ -2318,8 +2332,58 @@ there are only contours on a white background visible.
 
 \subsubsection{Used parameters}
 
+The map of Dolny Śląsk does not have any background. The background detection part is disabled in
+this case. Line detection must be very sensitive, because map contains a lot of very small details.
+Thresholding for this map was set to 245. To improve image quality, there was used an unsharp mask
+with standard deviation set to 1 and denosing algorithm with a factor value set to 20. Gaussian blur
+was applied once with radius set to 1. Bilateral filter was applied twice with diameter set to 10,
+sigma color to 70 and sigma space to 10. Maximum number of colors was set to 7, initial threshold
+to 10 and minimum color area to 500.
+
 \subsubsection{Achieved results}
 
+Result of the algorithm application in a map of Dolny Śląsk is presented in a 
+Fig.~\ref{dolnySlaskResult}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.2]{images/dolnySlaskResult.png}
+\caption{Final result of the algorithm applied to Dolny Śląsk map. Input image is on the left, the
+result is on the right side of an image.}
+\label{dolnySlaskResult}
+\end{center}
+\end{figure}
+
+This map was segmented very well. The text and small elements are visible and readable. Almost all,
+even very thin lines are visible and have proper color set. Only one visible error is in places,
+where map was creased. The algorithm was not able to eliminate these distorions and recognized it
+as a river. This situation is presented in a Fig.~\ref{dolnySlaskZagiecie}.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.2]{images/dolnySlaskZagiecie.png}
+\caption{Crease visible in a result map of Dolny Śląsk.}
+\label{dolnySlaskZagiecie}
+\end{center}
+\end{figure}
+
+\newpage
+
+Performance of the algorithm is presented in a table \ref{dolnySlaskPerformance}.
+
+\begin{table}[!ht]
+\begin{center}
+\caption{Time of algorithm execution - Dolny Śląsk.}
+\label{dolnySlaskPerformance}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Detail Detection & Background Detection & Algorithm \\
+  \hline
+  1h 29 min 10s & 1h 36min 51s & 1h 36min 52s \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \chapter{Conclusions}
 
