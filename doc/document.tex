@@ -1739,7 +1739,7 @@ group were tested with the same set of algorithm parameters.
 
 \subsection{Test environment}
 
-Description of the computer on which all tests were done is presented in a
+Description of the computer on which all tests were done is presented in the
 Table~\ref{computerDescription}.
 
 \begin{table}[!ht]
@@ -1763,7 +1763,7 @@ Table~\ref{computerDescription}.
 \subsection{Input data}
 
 To confirm proper working of the algorithm, there were nine maps prepared. All input map files
-with its description are listed in a table~\ref{tableInputFiles}. 
+with their description are listed in a table~\ref{tableInputFiles}. 
 
 \begin{table}[!ht]
 \begin{center}
@@ -1810,9 +1810,8 @@ with its description are listed in a table~\ref{tableInputFiles}.
 \section{Result analysis}
 
 Testing process was divided into six groups. Every group had different parameters set during testing
-process. The results, which are presented in this section are the best achieved for each map(among
-all tests with different values of parameters). There are also some examples given, which show, how
-the image reacts to the bad choice of parameters.
+process. Results, which are presented in this section are the best achieved for each map(among
+all tests with different values of parameters).
 
 \subsection{Ślęża and Sobótka}
 
@@ -1823,13 +1822,13 @@ names of places, which are worth seeing and area of the park and a city.
 
 \subsubsection{Used parameters}
 
-Background of these maps have visible moro effect and some distortions(dust). To eliminate this,
+Background of these maps have visible moro effect and some distortions(dust). To eliminate them,
 there was used a Gaussian Blur with a big radius - 15. Diameter of a bilateral filter was set to
-20, its sigma space to 75 and sigma color to 150. To keep the shape of areas and remove all details
+20, its sigma space to 75 and sigma color to 150. To keep the shape of areas, remove all details
 and not needed lines, dilation and erosion was applied once, with small size - 1. Holes removal
 algorithm was used with a window width set to 10 - there were many residues in an image after
-erosion and dilation application. Maximum numbers of colors was set to 30. It is enough for the
-background. \\
+application of erosion and dilation. Maximum numbers of colors parameter was set to 30. It is enough
+value for the background. \\
 
 Details detection was set to medium-sensitive. Threshold was set to 110. It was enough to keep all
 details and lines with this value, background and distortions have been successfully eliminated.
@@ -1837,8 +1836,8 @@ To improve image quality, standard deviation of unsharp mask was set to 5 and de
 35. Image filtering was quite big as for details detection. It was caused by the moro effect inside
 the green area, which was hard to eliminate. Bilateral filter was applied five times with diameter =
 20, sigma color = 150 and sigma space = 50. Gaussian filter was applied two times with a radius = 7.
-Image contains small number of colors. Maximal number of colors was set to 12 and initial threshold
-to 10. Minimal color area was set to 500, because images have big resolution.
+Image contains small number of colors. Maximal number of colors parameter was set to 12 and initial
+threshold to 10. Minimal color area was set to 500, because images has big resolution.
 
 \subsubsection{Achieved results}
 
@@ -1855,9 +1854,9 @@ result is presented on the right.}
 
 Borders of the areas remained unchanged. Color is unified, distortions have been eliminated from
 resulting image. All small details are kept and marked in a result image. There are also some 
-errors. Near roads and bigger text, areas were assigned to wrong groups. It is epecially visible on
+errors. Near roads and bigger text, areas were assigned to wrong groups. It is especially visible on
 the right center border of the map(it is marked in darker color). The same situation is visible
-near text "Ślężański Park Krajobrazowy". It is caused by dilation and erosion algorithms
+near text "Ślężański Park Krajobrazowy". It is caused by dilation and erosion algorithms application
 (surroundings of these areas are darker in the original - black text and roads). This situation is
 presented in a Fig.~\ref{badBackgroundSleza}. 
 
@@ -1975,8 +1974,8 @@ Window width is also small and set only to 3. The map does not have many backgro
 value is set to 15. \\
 
 In the detail detection algorithm unusual moro effect is also a problem. With bigger threshold
-values some dots are still visible. To ensure quality and sharpness of details and text and also to
-remove dots from moro effect, the threshold value was set to 100. Unsharp mask standard deviation is
+values some dots are still visible. To ensure quality and sharpness of details or text and also to
+remove dots from moro effect, the threshold value is set to 100. Unsharp mask standard deviation is
 set to 5. Denoising factor is quite big - it is set to 35. Bilateral filter is called five times
 with diameter set to 30, sigma color to 130 and sigma space to 50. Gaussian blur is called two times
 with radius set to 5. Maximal number of colors is small - 8. Initial threshold is 10 and minimal
@@ -1995,10 +1994,10 @@ is on the right side of an image.}
 \end{center}
 \end{figure}
 
-Size of the areas was segmented properly. Almost all elements were segmented to proper groups. Text
-and small details are visible, sharp and readable. Unfortunately moro effect in some places was too
-difficult to segment out. It is especially visible near the lakes(shown in a Fig.\ref{pokojBadLake})
-and in the town(visualized in a Fig.~\ref{pokojBadCity}).
+Size of the areas is correct. Almost all elements are segmented to proper groups. Text and small
+details are visible, sharp and readable. Unfortunately moro effect in some places is too difficult
+to segment out. It is especially visible near the lakes(shown in a Fig.\ref{pokojBadLake}) and in
+the town(visualized in a Fig.~\ref{pokojBadCity}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2041,15 +2040,15 @@ creases(one of them is major - in Lubsza map) and darker elements(result of impr
 
 \subsubsection{Used parameters}
 
-Maps of Lubsza and Brzeg have some distortions. To eliminate them there were used filters with a
-bigger parameter values. Gaussian blur was applied with radius set to 13. Bilateral filter was
-called with diameter set to 10, sigma color and sigma space set to 150. Dilation and erosion was
-applied five times with a size set to 1. Holes were removed using a window width set to 30. Maps
+Maps of Lubsza and Brzeg have some distortions. To eliminate them there are used filters with a
+bigger parameter values. Gaussian blur is applied with radius set to 13. Bilateral filter is
+called with diameter set to 10, sigma color and sigma space set to 150. Dilation and erosion is
+applied five times with a size set to 1. Holes are removed using a window width set to 30. Maps
 have maximum 12 colors. \\
 
-Line swere deted with a threshold set to 100. To improve quality of details, there was applied an
-unsharp mask with standard deviation set to 5 and denoising factor set to 35. Gaussian blur was
-applied twice with radius set to 5. Bilateral filter was applied five times with diameter set to 30,
+Lines are detected with a threshold set to 100. To improve quality of details, there is applied an
+unsharp mask with standard deviation set to 5 and denoising factor set to 35. Gaussian blur is
+applied twice with radius set to 5. Bilateral filter is applied five times with diameter set to 30,
 sigma color to 130 and sigma space to 50. Map details are marked in maximum 10 colors. Initial
 threshold is set to 10 and minimal color area is 500(images have big resolution).
 
@@ -2066,8 +2065,8 @@ is on the right side of an image.}
 \end{center}
 \end{figure}
 
-Major part of areas and details was segmented properly. Text and details are sharp and readable.
-Many distortions were eliminated. Unfortunately area inside the city of Brzeg is segmented wrongly.
+Major part of areas and details is segmented properly. Text and details are sharp and readable.
+Many distortions are eliminated. Unfortunately area inside the city of Brzeg is segmented wrongly.
 It is shown in a Fig.\ref{badBrzeg}.
 
 \begin{figure}[!ht]
@@ -2089,7 +2088,7 @@ Fig.~\ref{badBrzegRiver}).
 \end{center}
 \end{figure}
 
-Last, the moro effect inside main road was not eliminated(shown in a Fig.~\ref{badBrzegRoad}).
+Last, the moro effect inside main road is not eliminated(shown in a Fig.~\ref{badBrzegRoad}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2126,8 +2125,8 @@ is on the right side of an image.}
 \end{center}
 \end{figure}
 
-Areas of this map were segmented very well. Also text and small details remained sharp and readable.
-Unfortunately, the algorithm was not able to eliminate the distortion caused by the creased input.
+Areas of this map are segmented very well. Also text and small details remain sharp and readable.
+Unfortunately, the algorithm is not able to eliminate the distortion caused by the creased input.
 This situation is presented in a Fig.~\ref{lubszaCreased}.
 
 \begin{figure}[!ht]
@@ -2187,9 +2186,9 @@ result is on the right side of an image.}
 \end{center}
 \end{figure}
 
-In case of the map of Bydgoszcz, the result of the algorithm was worse than achieved in other
+In case of the map of Bydgoszcz, the result of the algorithm is worse than achieved in other
 images. Shape of the background areas is correct in most of cases, but due to small resolution of
-the map and a lot of distortions, many areas were assigned to wrong groups. It is shown in a
+the map and a lot of distortions, many areas are assigned to wrong groups. It is shown in a
 Fig.~\ref{bydgoszczBadAreas}.
 
 \begin{figure}[!ht]
@@ -2211,8 +2210,8 @@ input image. This situation is presented in a Fig.~\ref{bydgoszczBadSharpness}.
 \end{center}
 \end{figure}
 
-Quality of the output image was the worst in case of a map of Bydgoszcz, but it can be caused by the
-quality of an input image.
+Quality of the output image is the worst in case of a map of Bydgoszcz, but this situation is
+probably caused by the quality of an input image.
 
 Performance of the algorithm is presented in a table \ref{bydgoszczPerformance}.
 
@@ -2239,21 +2238,21 @@ white. Only green areas, cities and lakes are marked in a different, bright colo
 \subsubsection{Used parameters}
 
 Removal of details in a background detection algorithm is not a hard task in case of topographic
-lines - details are very small. In this algorithm there was used strong filtration. Radius of a
-Gaussian filter was set to 13. In Bilateral filter diameter was set to 10, sigma color and sigma
-space to 150. Dilation and erosion was applied 5 times with size set to 1. Window width for holes
-removal was set to 20. Maximum number of background colors for these maps was set to 10. \\
+lines - details are very small. In this algorithm there is used strong filtration. Radius of a
+Gaussian filter is set to 13. In Bilateral filter diameter is set to 10, sigma color and sigma
+space to 150. Dilation and erosion is applied 5 times with size set to 1. Window width for holes
+removal is set to 20. Maximum number of background colors for these maps is set to 10. \\
 
 Line detection algorithm is very sensitive. It has to find all thin lines and small details or
-letters. Threshold was big - it was set to 150. To improve the image quality, standard deviation for
-unsharp mask was set to 3 and denoising factor to 35. Gaussian blur was applied once with a radius
-set to 3. Bilateral filter was applied twice with a diameter set to 10, sigma color to 70 and sigma
-space to 10. Maximum number of colors was set to 11m initial threshold was 10 and minimal color area
-was 500.
+letters. Threshold is big - it is set to 150. To improve the image quality, standard deviation for
+unsharp mask is set to 3 and denoising factor to 35. Gaussian blur is applied once with a radius
+set to 3. Bilateral filter is applied twice with a diameter set to 10, sigma color to 70 and sigma
+space to 10. Maximum number of colors is set to 11, initial threshold is 10 and minimal color area
+is 500.
 
 \subsubsection{Achieved results}
 
-The map of Namysłów with an algorithm applied is shown in a Fig.~\ref{namyslowResult}.
+The map of Namysłów with the algorithm applied is shown in a Fig.~\ref{namyslowResult}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2264,7 +2263,7 @@ result is on the right side of an image.}
 \end{center}
 \end{figure}
 
-Namysłów map was segmented very good. Areas have the same borders, almost all pixels were assigned
+Namysłów map is segmented very well. Areas have the same borders, almost all pixels are assigned
 to proper group. All small details and thin topographic lines are visible and sharp. Text is
 readable. Resulting map has only small, hardly visible errors.
 
@@ -2297,7 +2296,7 @@ result is on the right side of an image.}
 
 Results of the test with the map of Masyw Ślęży is also very good. Borders of areas are properly
 placed, text, details and thin topographic lines are visible and readable. Unfortunately in some
-places color of the background was assigned wrongly. It can be seen in a Fig.~\ref{masywSlezyBadAreas}.
+places color of the background is assigned wrongly. It can be seen in a Fig.~\ref{masywSlezyBadAreas}.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2326,7 +2325,7 @@ Performance of the algorithm is presented in a table \ref{masywSlezyPerformance}
 \subsection{Dolny Śląsk}
 
 Dolny Śląsk is old(from 1909) German map of Lower Silesia. There are marked main cities and towns
-(their names and borders) and rivers. This map has a lot of small elements(especially text) and
+(their names, borders) and rivers. This map has a lot of small elements(especially text) and
 very thin lines. Moreover, map is damaged - it has some creases visible. Map has no background - 
 there are only contours on a white background visible. 
 
@@ -2334,10 +2333,10 @@ there are only contours on a white background visible.
 
 The map of Dolny Śląsk does not have any background. The background detection part is disabled in
 this case. Line detection must be very sensitive, because map contains a lot of very small details.
-Thresholding for this map was set to 245. To improve image quality, there was used an unsharp mask
+Thresholding for this map is set to 245. To improve image quality, there is used an unsharp mask
 with standard deviation set to 1 and denosing algorithm with a factor value set to 20. Gaussian blur
-was applied once with radius set to 1. Bilateral filter was applied twice with diameter set to 10,
-sigma color to 70 and sigma space to 10. Maximum number of colors was set to 7, initial threshold
+is applied once with radius set to 1. Bilateral filter is applied twice with diameter set to 10,
+sigma color to 70 and sigma space to 10. Maximum number of colors is set to 7, initial threshold
 to 10 and minimum color area to 500.
 
 \subsubsection{Achieved results}
@@ -2354,9 +2353,9 @@ result is on the right side of an image.}
 \end{center}
 \end{figure}
 
-This map was segmented very well. The text and small elements are visible and readable. Almost all,
+This map is segmented very well. The text and small elements are visible and readable. Almost all,
 even very thin lines are visible and have proper color set. Only one visible error is in places,
-where map was creased. The algorithm was not able to eliminate these distorions and recognized it
+where map is creased. The algorithm is not able to eliminate these distorions and recognizes it
 as a river. This situation is presented in a Fig.~\ref{dolnySlaskZagiecie}.
 
 \begin{figure}[!ht]
@@ -2412,7 +2411,7 @@ after segmentation process.
 In case of large old maps with a big number of small-sized elements and thin lines, like Dolny 
 Śląsk, it is very difficult to set proper algorithm parameters. With that kind of map it is
 difficult to combine the image quality(no distortions) and keeping all map details(especially a very
-thin lines).
+thin lines). In case of map of Dolny Śląsk, the algorithm recognized almost all elements properly.
 
 The worst results were achieved with a map of Bydgoszcz. Many areas are damaged - they have wrong
 shape and color and text is less readable than in the original. It can be caused by a very small
