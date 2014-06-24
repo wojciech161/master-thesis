@@ -295,7 +295,7 @@ In the last part of this chapter there is a full structure of this document give
 
 Nowadays image digitization is a very important topic. It has a lot of practical applications.
 For example, it is a very good way to prevent destruction of old photos,
-to archive them(to keep them in one place in a digital version) and make it easier to 
+to archive them (to keep them in one place in a digital version) and make it easier to 
 send a picture from one place to another. Unfortunately, basic method of image digitization - 
 scanning - has some disadvantages. Due to errors made during a scanning procedure,
 input image distortions or quality of a scanning device, resulting digitized images 
@@ -304,7 +304,7 @@ processing. To improve digitization process there are many filtration algorithms
 which task is to solve this problem and to produce an image with better quality.
 
 Image digitization has another big advantage - there is a possibility to retrieve information from
-the picture(for example: pattern recognition, feature extraction). This feature is handled by
+the picture (for example: pattern recognition, feature extraction). This feature is handled by
 segmentation algorithms. Although this group is one of the most difficult in image processing, there
 is a big emphasis on a research, due to many advantages of this type of algorithms in practical
 use. \\
@@ -323,12 +323,12 @@ optimized to use it with this type of scanned images. Output image should have f
 \begin{itemize}
   \item most of distortions should be eliminated;
   \item image should be divided into consistent areas, like forests, lakes, rivers, etc. These areas
-        should be marked on the map in a consistent way(it should have the same color);
+        should be marked on the map in a consistent way (it should have the same color);
   \item detected areas should have the same size like in an input image;
   \item small details, like text should be kept and marked in a resulting image.
 \end{itemize}
 
-Used fltering algorithms should remove main distortions and all disadvantages of image scanning(like
+Used fltering algorithms should remove main distortions and all disadvantages of image scanning (like
 for example rasters, moro effect). Next, proper segmentation algorithm should be used to detect all
 areas in an input map and to divide the map into different, homogenous regions. \\
 
@@ -376,12 +376,12 @@ the XX century to send pictures over long distances. Research and development of
 processing algorithms  was strongly associated with growth of the computer industry. It was caused
 by high computational complexity of this type of algorithms. Further growth began in 1960s. Many 
 techniques were developed in organisations like Jet Propulsion Laboratory, Massachusetts Institute
-of Technology or Bell Laboratories. It was used in satellite imagery, medical imaging(in 1970s 
-computerized tomography was developed), image enhancement, science(for example in geography - 
+of Technology or Bell Laboratories. It was used in satellite imagery, medical imaging (in 1970s 
+computerized tomography was developed), image enhancement, science (for example in geography - 
 in research about pollution, archeology - in restoring blured pictures), defence or industry.
 Another area of digital image processing focuses on extracting of an information from the picture in
-a form suitable for the computer processing. It is used in a character recognition(OCR), industry(
-automatic inspection of production process), military, forensics(recognition of fingerprints) and
+a form suitable for the computer processing. It is used in a character recognition (OCR), industry (
+automatic inspection of production process), military, forensics (recognition of fingerprints) and
 weather prediction. \\
 
 Nowadays, with fast computers and signal processors, digital image processing is used widely.
@@ -394,8 +394,8 @@ coordinates and f(x, y) is the intensity or gray level of the image at this poin
 and f(x, y) should be finite and descrete quantities. Digital image processing refers to processing 
 digital images by means of a digital computer. It includes many primitive operations like noise
 reduction, contrast enhancement or image sharpening. It also involves more advanced algorithms like
-image segmentation(partitioning an image into regions or objects), description of objects,
-classification(recognition) of objects and even advanced analysis of an image. Digital image 
+image segmentation (partitioning an image into regions or objects), description of objects,
+classification (recognition) of objects and even advanced analysis of an image. Digital image 
 processing algorithms take an image as an input. Output depends on a type of the algorithm.
 It can be new, processed image or a group of attributes taken from an image. Main tasks of digital
 image processing are:
@@ -420,7 +420,7 @@ Image enhancement algorithms are one of the simplest and most commonly used grou
 processing. Main idea of those algorithms is to improve image quality, bring out obscured details 
 or highlight certain features of an image. The main aim of image enhancement is to process image 
 and return it in a more suitable form, than input for a specific application. Proper image enhancement
-algorithms should be chosen for different cases(algorithm solving one problem may be inadequate for
+algorithms should be chosen for different cases (algorithm solving one problem may be inadequate for
 other problems). Image enhancement algorithms can be divided into two groups:
 
 \begin{itemize}
@@ -574,8 +574,8 @@ Source: http://upload.wikimedia.org/wikipedia/commons/4/43/Unsharped\_eye.jpg}
 According to \cite{digitalImageProcessing}, segmentation algorithms partition images into
 constituent parts or objects. They are generally based on two basic properties of intensity values:
 discontinuity and similarity. In the first case, the approach is to partition an image based on
-abrupt changes in intensity(like for example edges in an image). In the second case, the approach is
-based on partitioning an image into regions, that are similar(for example they have similar color).
+abrupt changes in intensity (like for example edges in an image). In the second case, the approach is
+based on partitioning an image into regions, that are similar (for example they have similar color).
 There are many segmentation algorithms available. Solution presented in this work is based on
 thresholding approach.
 
@@ -603,7 +603,7 @@ $$
 
 Algorithm takes one parameter - T, which is a thresholding value.
 
-Example image with applied thresholding( with T = 130 ) is presented in a 
+Example image with applied thresholding ( with T = 130 ) is presented in a 
 Fig.~\ref{thresholdingExample}.
 
 \begin{figure}[ht]
@@ -630,7 +630,7 @@ linear characters in the map. In this algorithm there are used such techniques l
 color segmentation and neural networks. \\
 
 Another approach is presented in \cite{comparativeAnalysisOfScannedMaps}. This work focused on 
-decomposition of scanned topographic maps. Algorithm finds different areas(like lakes, rivers,
+decomposition of scanned topographic maps. Algorithm finds different areas (like lakes, rivers,
 contours, text, grid and other) using map analysis and thresholding in a black and white mode.
 Next, there are used filtering algorithms to remove elements smaller than expected and noise.
 Then map texture is analysed. This step is helpful in detection of areas like for example lakes.
@@ -667,10 +667,10 @@ In these processes there are used: pattern matching, contour following, polygona
 skeletonization algorithms.
 
 Last presented approach is shown in \cite{colorMapSegmentation}. There is presented a segmentation
-method dedicated for United States Geological Survey(U.S.G.S.) topographic maps. Algorithm first 
+method dedicated for United States Geological Survey (U.S.G.S.) topographic maps. Algorithm first 
 segments out white background. Next, image is segmented using Eigenvector line fitting technique.
 Algorithm knows typical values of colors used in U.S.G.S. In the final part of the algorithm, proper
-color value is set for every pixel(it is based on distance of pixel Eigenvector and Eigenvalue and
+color value is set for every pixel (it is based on distance of pixel Eigenvector and Eigenvalue and
 a known value from U.S.G.S. colors standard). Summarizing, the segmentation algorithm uses knowledge
 about colors used in maps from U.S.G.S.
 
@@ -697,7 +697,7 @@ Polish city - Brzeg.
 
 There are a lot of problems associated with segmentation of scanned maps. Due to imperfection of
 a scanning process, resulting color scanned digital images have many distortions. There are also
-problems connected with input images(they can be damaged before scanning). Moreover, raster derived
+problems connected with input images (they can be damaged before scanning). Moreover, raster derived
 from printed document should be removed. Additionaly maps have many small elements and text. These
 details, as well as shape of background areas (like for example lakes and forests) should be kept in
 resulting image. All found problems are described more precisely in next sections.
@@ -705,7 +705,7 @@ resulting image. All found problems are described more precisely in next section
 \subsection{Input image and scanning process quality}
 
 Scanned digital images have many distortions. They are related to the damage of an input image, like
-places, where maps are creased(example in Fig.~\ref{creaseExample}) or dirty(shown in a 
+places, where maps are creased (example in Fig.~\ref{creaseExample}) or dirty (shown in a 
 Fig.~\ref{dirtyExample}). It results in the existence of darker elements in the output image.
 
 \begin{figure}[!ht]
@@ -749,7 +749,7 @@ Fig.~\ref{doubleSidedMap}.
 \end{center}
 \end{figure}
 
-Finally, resulting image can have undesirable areas with wrong(usually darker) color. Their
+Finally, resulting image can have undesirable areas with wrong (usually darker) color. Their
 existence is caused by mistakes made during scanning process, for example when image is not properly
 put in a scanner surface. This situation is visualized in a Fig.~\ref{badScanExample}.
 
@@ -780,7 +780,7 @@ each other. Example fragment of a city map is shown in a Fig.~\ref{cityExample}.
 
 Another problems are related to topographic maps. They have small letters and elements in different
 colors. Additionaly they contain very thin topographic lines. Many of them are not continuous
-(some lines are even marked as dots in the same color). These problems are shown in a fragment of a
+ (some lines are even marked as dots in the same color). These problems are shown in a fragment of a
 topographic map in a Fig.~\ref{topographicMapExample}.
 
 \begin{figure}[!ht]
@@ -818,7 +818,7 @@ lot of details, lines and text like for example streets, toponyms, symbols and t
 In this case using smoothing algorithms with bigger parameter values is not a good idea - these
 algorithms cause, that for example text is deformed and is not as sharp as in the input image. To
 solve these problems, algorithm has been divided into two parts. First one is responsible for
-detection of all details(roads, text, lines, rivers). Second one detects background of the map. Both
+detection of all details (roads, text, lines, rivers). Second one detects background of the map. Both
 algorithms work independently and take as an input the same, image. They can work simultaneously.
 Results of segmentation of both layers are merged to one output image. Flow of the algorithm is
 presented on a statechart in a Fig.~\ref{algorithmParts}.
@@ -834,7 +834,7 @@ presented on a statechart in a Fig.~\ref{algorithmParts}.
 \section{Detection of areas}
 
 The main aim of this part is to detect all background elements, like for example lakes, forests and
-thicker lines(rivers, main roads). The algorithm focuses on elimination of all distortions and on
+thicker lines (rivers, main roads). The algorithm focuses on elimination of all distortions and on
 detection and unification of areas. This method should remove all thiner lines and small details
 from an image. In an output image there should appear all background elements. Every separate
 area should have a different color. Main distortions should be eliminated.
@@ -861,11 +861,11 @@ in a Fig.~\ref{backgroundDetectionImage}
 
 In an input preprocessing part there were used two algorithms: \textit{Gaussian Filter} and \textit{
 Bilateral Filter}. Usage of first one is a very good method in elimination of raster and small
-distortions(like for example dust). The procedure is applied with a big value of \textit{Radius}
+distortions (like for example dust). The procedure is applied with a big value of \textit{Radius}
 parameter - it helps to remove more distortions. It causes loss of image sharpness, but it is
 irrelevant in this case. In a Fig.~\ref{gaussianBlurResult} there is an example usage of a Gaussian
 Filter with \textit{Radius} = 5. All major distortions and moro effect do not exist in a resulting
-image. Sharpness of the text(in this case name of the river) is lost.
+image. Sharpness of the text (in this case name of the river) is lost.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -896,7 +896,7 @@ applied. Original image is on the left. On the right side there is a resulting i
 
 Erosion and Dilation algorithms are useful in removing noise, joining or isolation of individual
 elements and finding intensity holes or bumps in an image. Thanks to these properties, it is easy
-to eliminate unwanted, small elements from an image like roads, rivers, small details(in cities) or
+to eliminate unwanted, small elements from an image like roads, rivers, small details (in cities) or
 topographic lines. These algorithms are helpful in removal of some distortions of a map, like for
 example darker areas caused by unproper scanning process or map creases - image after application of
 these algorithms have these unwanted areas eliminated. Usage of dilation cause, that all thin areas
@@ -905,14 +905,14 @@ dissapear. Furthermore, distance between every separate element grows.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=1.0]{images/dilationResult.png}
-\caption{Fragment of a map of Sobótka with dilation applied(5 times). \\
+\caption{Fragment of a map of Sobótka with dilation applied (5 times). \\
 Original image is on the left. On the right side there is a resulting image.}
 \label{dilationResult}
 \end{center}
 \end{figure}
 
 Example of dilation usage is in a Fig.~\ref{dilationResult}. All thin lines are eliminated from the
-resulting image. In the output there are visible only yellow and green background elements(with some
+resulting image. In the output there are visible only yellow and green background elements (with some
 distortions eliminated). Moreover there is a background of roads and areas of three smaller elements.
 
 Erosion does the opposite - it causes, that all lines become thicker. It also merges broken
@@ -922,14 +922,14 @@ original. Borders of every area are easy to determine. Colors of areas are darke
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=1.0]{images/erosionResult.png}
-\caption{Fragment of a map of Sobótka with erosion applied(5 times). Original image is on the left.
+\caption{Fragment of a map of Sobótka with erosion applied (5 times). Original image is on the left.
 On the right side there is a resulting image.}
 \label{erosionResult}
 \end{center}
 \end{figure}
 
 In case of background detection in scanned color maps, these algorithms give the best results when
-they are combined together. After applying these operations, noise and all smaller elements(listed
+they are combined together. After applying these operations, noise and all smaller elements (listed
 above) are removed. Major distortions are also eliminated. Moreover colors of every area is almost
 the same. As a result, these algorithms are an excellent base for segmentation methods. Example
 usage of combined dilation and erosion is presented in a Fig.~\ref{dilationErosionResult}. Every
@@ -938,7 +938,7 @@ area has different color and output image have unnecessary details eliminated.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=1.0]{images/dilationErosionResult.png}
-\caption{Fragment of a map of Sobótka with dilation(5 times) and then erosion(also 5 times) applied.
+\caption{Fragment of a map of Sobótka with dilation (5 times) and then erosion (also 5 times) applied.
 Original image is on the left. On the right side there is a resulting image.}
 \label{dilationErosionResult}
 \end{center}
@@ -947,7 +947,7 @@ Original image is on the left. On the right side there is a resulting image.}
 \subsubsection{Areas detection and segmentation}
 
 Detection of all map areas is based on two properties. First one is color of every group represented
-by their pixels. Second one is a desired number of areas, which should be detected(this number is
+by their pixels. Second one is a desired number of areas, which should be detected (this number is
 easy to determine in case of digital maps). The algorithm at the beggining analyses image pixels and
 groups them. As a result there are groups of pixels with a similar color. In the next step,
 all groups, which represent similar values are merged until the desired number of colors is reached.
@@ -960,7 +960,7 @@ Parameters of the algorithm:
   \item \textit{Threshold} - The maximum distance between the currently checked color and a group,
           determining if the color should be assigned into the group
   \item \textit{Maximum Number of Colors}, which determines, how much groups should exist in an
-          output map(the actual number of background colors in a map)
+          output map (the actual number of background colors in a map)
 \end{itemize}
 
 \begin{algorithm}[!ht]
@@ -1056,7 +1056,7 @@ Original image is on the left. On the right side there is a resulting image.}
 \end{figure}
 
 In a Fig.~\ref{segmentationResult}, there is an example result of applying the segmentation
-algorithm. There was used preprocessed(with filtration, dilation and erosion) map of Ślęża. Initial
+algorithm. There was used preprocessed (with filtration, dilation and erosion) map of Ślęża. Initial
 threshold was set to 30, maximum number of colors was set to 20. Each area has its unified color.
 Shape of every area is fairly kept. There are some small areas, which have assigned wrong color.
 They exist mainly in places, where there was text in the input image.
@@ -1168,7 +1168,7 @@ The result of this part should be an image with isolated and properly classified
 In the first step, the algorithm tries to remove all background from the map and keep only small
 details. In this case there is a thresholding algorithm used. Next, there is applied a procedure,
 which removes all distortions remained in the thresholded image. In this part there is called a 
-procedure, which finds and removes all single occuring(lonely) pixels. In the next step, there is
+procedure, which finds and removes all single occuring (lonely) pixels. In the next step, there is
 applied an unsharp mask which improves image quality. Finally, all elements are recognized and 
 classified to appropriate group. Flow of the entire algorithm is presented in a 
 Fig.~\ref{detailDetectionFlow}.
@@ -1186,7 +1186,7 @@ Fig.~\ref{detailDetectionFlow}.
 To remove background from the image, modified thresholding method is used. At the beginning, there
 are created three Black and White images. Their pixel values are represented by intensities of red,
 green and blue colors. Prepared in this way maps are then thresholded. Values greater than specified
-threshold value are marked as a black(Intensity Value = 0), the rest is marked as a white(Intensity
+threshold value are marked as a black (Intensity Value = 0), the rest is marked as a white (Intensity
 Value = 255). In the next part, three resulting images are merged into one. If any of pixels from
 thresholded pixels is black, it is marked in a resulting image. Finally, image colors are restored.
 Pixel colors from the original image are assigned for each black pixel from thresholded image.
@@ -1330,10 +1330,10 @@ filtered image.}
 \end{figure}
 
 In the second part of the algorithm all elements are detected. It is done in similar way as in
-background detection(presented in Algorithms~\ref{colorGroupingAlgorithm},~\ref{groupsMergingAlgorithm}
+background detection (presented in Algorithms~\ref{colorGroupingAlgorithm},~\ref{groupsMergingAlgorithm}
 ~and~\ref{colorAssignmentAlgorithm}). It is assumed, that the same elements are equally colored in
 the input. There are created groups of colors on the basis of previously processed image. White
-elements (removed background in thresholded image is marked in this color) are omitted. After this
+elements  (removed background in thresholded image is marked in this color) are omitted. After this
 process, every non-white element of thresholded image is assigned to one of created groups.
 
 In the last part of the procedure, there is applied Fast Nl Means Denoising algorithm to remove
@@ -1343,12 +1343,12 @@ used in this part is small.
 Example of elements detection algorithm is presented in a Fig.~\ref{lineDetectionResult}. As it can
 be seen, all background has been removed. Detected elements are consistent, all details are clear
 and undamaged. Color of every element is unified. Text is clear and readable. Roads and rivers
-(thin lines) are visible and not broken.
+ (thin lines) are visible and not broken.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=1.2]{images/lineDetectionResult.png}
-\caption{Fragment of a map of Brzeg with Elements Detection(all parts) applied.
+\caption{Fragment of a map of Brzeg with Elements Detection (all parts) applied.
 On the left, there is an image input map. On the right side there is a resulting image.}
 \label{lineDetectionResult}
 \end{center}
@@ -1436,8 +1436,8 @@ Algorithm~\ref{mergeLayersAlgorithm}.
 \end{algorithm}
 
 In a Fig.~\ref{layerMergeResult}, there is an example result of a Layer Merge. As it can be seen,
-all white areas from Details Detection result image(left) were substituted with colors from
-corresponding areas from Background Detection result image(central). The result of merging can be
+all white areas from Details Detection result image (left) were substituted with colors from
+corresponding areas from Background Detection result image (central). The result of merging can be
 seen on the right image.
 
 \begin{figure}[!ht]
@@ -1494,7 +1494,7 @@ According to \cite{boostWiki}, Boost is a set of libraries for the C++ programmi
 contains over eighty individual libraries, which provide support for many tasks and structures.
 In this work, there were used five libraries from Boost:
 \begin{itemize}
-  \item Boost Smart Pointers - objects, which store pointers to dynamically allocated(heap) objects;
+  \item Boost Smart Pointers - objects, which store pointers to dynamically allocated (heap) objects;
   \item Boost Filesystem - library provides facilities to manipulate files and directories, and the
         paths that identify them;
   \item Boost Thread - library enables the use of multiple threads of execution with shared data in
@@ -1509,7 +1509,7 @@ in version 1.46.
 
 \subsubsection{STL}
 
-According to \cite{stlWiki}, Standard Template Library(STL) is a software library for the C++
+According to \cite{stlWiki}, Standard Template Library (STL) is a software library for the C++
 programming language. It provides four components called algorithms, containers, functional and
 iterators. It is a part of a C++ standard.
 
@@ -1562,7 +1562,7 @@ filtration and segmentation packages.
 \subsubsection{core::Application}
 
 This class starts at the beggining and is running for all the time. It controls main flow of the
-application. First, it reads all parameters from the configuration XML file(using 
+application. First, it reads all parameters from the configuration XML file (using 
 \textit{filehandler::ConfigurationFileReader} class). Next, it loads every input image. Finally, for
 each loaded map it starts an algorithm and saves its result to an output file. Reading input and
 saving output of the algorithm is done using \textit{filehandler::FileHandler} class. The map
@@ -1572,7 +1572,7 @@ segmentation and filtration algorithm process is controlled by \textit{algorithm
 
 This class controls the flow of the Detail Detection, Background Detection and Layer Merge
 algorithms. First, algorithm checks, which algorithms are enabled. Next, proper algorithms are run.
-Finally, class prepares an output image(it decides, if layer merging is needed).
+Finally, class prepares an output image (it decides, if layer merging is needed).
 
 \subsubsection{segmentation::ISegmentationAlgorithm}
 
@@ -1624,7 +1624,7 @@ This section focuses on compilation and application running processes for a Linu
 
 \subsection{Compilation and running}
 
-To compile the application properly, there are needed CMake, Boost and OpenCV in proper versions(
+To compile the application properly, there are needed CMake, Boost and OpenCV in proper versions (
 listed in section~\ref{externalLibrariesSection}). CMake checks the dependencies in the system and
 generates a Makefile. If this process is successful, it is possible to start the compilation.
 
@@ -1661,7 +1661,7 @@ All input and output files are placed in a \textit{(project\_root/resources/)} d
 \subsubsection{Configuration file}
 
 All parameters of the algorithm should be given in a configuration file, which full path must be:~
-\textit{(project\_root)/resources/conf/config.xml}. This file is divided into two parts(xml nodes)
+\textit{(project\_root)/resources/conf/config.xml}. This file is divided into two parts (xml nodes)
 to improve its readability. First node:~\textit{background\_detection} contains all arguments for
 Background Detection algorithm. Second node:~\textit{line\_detection} contains all arguments for
 Details detection algorithm. Description of all parameters can be found in
@@ -1706,9 +1706,9 @@ On al listing below there is an example of a \textit{config.xml} file:
 
 \subsubsection{Input and output images}
 
-Every input map(it can be more than one) should be placed in a \textit{resources/input\_images}
+Every input map (it can be more than one) should be placed in a \textit{resources/input\_images}
 directory. Images must be placed there before starting the application. There are acceptable all
-file formats, which are supported by OpenCV library(for example \textit{jpg}, \textit{tif},
+file formats, which are supported by OpenCV library (for example \textit{jpg}, \textit{tif},
 \textit{bmp}).
 When application finishes its work, the result is saved in a \textit{resources/output\_images}
 directory. Saved images have the same name and format as their input equivalents.
@@ -1725,7 +1725,7 @@ presented results of made tests and their analysis.
 Tests were made for each picture with different values of parameters. There are two properties
 tested. First is a quality of an output image. During this phase there are checked such properties
 like: proper borders of each area, proper color of the area, presence of all small details,
-continuities of lines(in roads, rivers, etc.) and readability of text. Second checked property is
+continuities of lines (in roads, rivers, etc.) and readability of text. Second checked property is
 the algorithm performance. There was checked time of execution of the algorithm. Measurement is
 divided into three categories:
 \begin{enumerate}
@@ -1752,7 +1752,7 @@ Table~\ref{computerDescription}.
   \hline
   Memory & 4GB RAM \\
   \hline
-  Operating System & Ubuntu Linux 12.04(precise) 64-bit \\
+  Operating System & Ubuntu Linux 12.04 (precise) 64-bit \\
   Kernel & 3.8.0-42-generic \\
   Desktop Environment & Gnome 3.4.2 \\
   \hline
@@ -1795,7 +1795,7 @@ with their description are listed in a table~\ref{tableInputFiles}.
            &     &           & and bright background of areas\\
   \hline
   pokoj & tif & 2921x2989 & Geographical map of Pokój. It has text, \\
-        &     &           & multiple areas(forests, lakes) and roads. \\
+        &     &           & multiple areas (forests, lakes) and roads. \\
   \hline
   sleza & jpg & 1812x2756 & Geographical map of Ślęża. It contains \\
         &     &           & areas like forests, lakes and roads. \\
@@ -1810,7 +1810,7 @@ with their description are listed in a table~\ref{tableInputFiles}.
 \section{Result analysis}
 
 Testing process was divided into six groups. Every group had different parameters set during testing
-process. Results, which are presented in this section are the best achieved for each map(among
+process. Results, which are presented in this section are the best achieved for each map (among
 all tests with different values of parameters).
 
 \subsection{Ślęża and Sobótka}
@@ -1822,7 +1822,7 @@ names of places, which are worth seeing and area of the park and a city.
 
 \subsubsection{Used parameters}
 
-Background of these maps have visible moro effect and some distortions(dust). To eliminate them,
+Background of these maps have visible moro effect and some distortions (dust). To eliminate them,
 there was used a Gaussian Blur with a big radius - 15. Diameter of a bilateral filter was set to
 20, its sigma space to 75 and sigma color to 150. To keep the shape of areas, remove all details
 and not needed lines, dilation and erosion was applied once, with small size - 1. Holes removal
@@ -1855,9 +1855,9 @@ result is presented on the right.}
 Borders of the areas remained unchanged. Color is unified, distortions have been eliminated from
 resulting image. All small details are kept and marked in a result image. There are also some 
 errors. Near roads and bigger text, areas were assigned to wrong groups. It is especially visible on
-the right center border of the map(it is marked in darker color). The same situation is visible
+the right center border of the map (it is marked in darker color). The same situation is visible
 near text "Ślężański Park Krajobrazowy". It is caused by dilation and erosion algorithms application
-(surroundings of these areas are darker in the original - black text and roads). This situation is
+ (surroundings of these areas are darker in the original - black text and roads). This situation is
 presented in a Fig.~\ref{badBackgroundSleza}. 
 
 \begin{figure}[!ht]
@@ -1868,7 +1868,7 @@ presented in a Fig.~\ref{badBackgroundSleza}.
 \end{center}
 \end{figure}
 
-Additionaly, on some areas(central green and grey near Górka town) it was
+Additionaly, on some areas (central green and grey near Górka town) it was
 impossible to remove all moro effect. It is visible in a Fig.~\ref{moroSlezaIO}.
 
 \begin{figure}[!ht]
@@ -1917,10 +1917,10 @@ algorithm result is presented on the lower part.}
 \end{center}
 \end{figure}
 
-Borders of areas remained the same. All distortions have been eliminated(dust, second side of the
+Borders of areas remained the same. All distortions have been eliminated (dust, second side of the
 map). Text and small details are sharp and readable. Major part of the same areas have unified
-color. Similarly to the Ślęża result, there are some areas with wrongly assigned color(presented in
-a Fig.~\ref{sobotkaBadColorAssignment}) and there are some small remainings of a moro effect(
+color. Similarly to the Ślęża result, there are some areas with wrongly assigned color (presented in
+a Fig.~\ref{sobotkaBadColorAssignment}) and there are some small remainings of a moro effect (
 presented in a Fig.~\ref{sobotkaMoroEffect}). \\
 
 \begin{figure}[!ht]
@@ -1961,7 +1961,7 @@ assigning a pixel to the color group, most of elements and areas are processed p
 \subsection{Pokój}
 
 Pokój is a map of a small town. There are marked streets with their names, bigger road and town
-surroundings(multiple ponds and green areas). The map background is not consistent - there are 
+surroundings (multiple ponds and green areas). The map background is not consistent - there are 
 visible big dots. It is an additional difficulty for an algorithm.
 
 \subsubsection{Used parameters}
@@ -1996,8 +1996,8 @@ is on the right side of an image.}
 
 Size of the areas is correct. Almost all elements are segmented to proper groups. Text and small
 details are visible, sharp and readable. Unfortunately moro effect in some places is too difficult
-to segment out. It is especially visible near the lakes(shown in a Fig.\ref{pokojBadLake}) and in
-the town(visualized in a Fig.~\ref{pokojBadCity}).
+to segment out. It is especially visible near the lakes (shown in a Fig.\ref{pokojBadLake}) and in
+the town (visualized in a Fig.~\ref{pokojBadCity}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2034,9 +2034,9 @@ Performance of the algorithm is presented in a table \ref{pokojPerformance}.
 \subsection{Lubsza and Brzeg}
 
 Lubsza and Brzeg are geographical maps. There are visible green areas, towns with named streets,
-rivers, roads, lakes and some thin lines. On some of the areas moro effect is visible(especially
+rivers, roads, lakes and some thin lines. On some of the areas moro effect is visible (especially
 after enlargement of images). There are many distortions visible on both maps. There are some
-creases(one of them is major - in Lubsza map) and darker elements(result of improper scanning).
+creases (one of them is major - in Lubsza map) and darker elements (result of improper scanning).
 
 \subsubsection{Used parameters}
 
@@ -2050,7 +2050,7 @@ Lines are detected with a threshold set to 100. To improve quality of details, t
 unsharp mask with standard deviation set to 5 and denoising factor set to 35. Gaussian blur is
 applied twice with radius set to 5. Bilateral filter is applied five times with diameter set to 30,
 sigma color to 130 and sigma space to 50. Map details are marked in maximum 10 colors. Initial
-threshold is set to 10 and minimal color area is 500(images have big resolution).
+threshold is set to 10 and minimal color area is 500 (images have big resolution).
 
 \subsubsection{Achieved results}
 
@@ -2077,7 +2077,7 @@ It is shown in a Fig.\ref{badBrzeg}.
 \end{center}
 \end{figure}
 
-Additionaly, the river is not continuous in all places(situation visualized in a 
+Additionaly, the river is not continuous in all places (situation visualized in a 
 Fig.~\ref{badBrzegRiver}).
 
 \begin{figure}[!ht]
@@ -2088,7 +2088,7 @@ Fig.~\ref{badBrzegRiver}).
 \end{center}
 \end{figure}
 
-Last, the moro effect inside main road is not eliminated(shown in a Fig.~\ref{badBrzegRoad}).
+Last, the moro effect inside main road is not eliminated (shown in a Fig.~\ref{badBrzegRoad}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -2155,7 +2155,7 @@ Performance of the algorithm is presented in a table \ref{lubszaPerformance}.
 
 \subsection{Bydgoszcz}
 
-Bydgoszcz is a city map. It has a lot of details(streets with names, small elements from a legend,
+Bydgoszcz is a city map. It has a lot of details (streets with names, small elements from a legend,
 names of companies, ...). Additionaly it has many areas marked with different colors and a river
 marked as a thick blue line. Maps has some distortions. It has visible creases and it is dirty.
 
@@ -2324,8 +2324,8 @@ Performance of the algorithm is presented in a table \ref{masywSlezyPerformance}
 
 \subsection{Dolny Śląsk}
 
-Dolny Śląsk is old(from 1909) German map of Lower Silesia. There are marked main cities and towns
-(their names, borders) and rivers. This map has a lot of small elements(especially text) and
+Dolny Śląsk is old (from 1909) German map of Lower Silesia. There are marked main cities and towns
+ (their names, borders) and rivers. This map has a lot of small elements (especially text) and
 very thin lines. Moreover, map is damaged - it has some creases visible. Map has no background - 
 there are only contours on a white background visible. 
 
@@ -2393,13 +2393,13 @@ processing. To some of them there were applied needed modifications. Additionaly
 a color-based segmentation algorithm for grouping map background and details by their type. As a
 part of the work there was also an application developed, which was used in the method evaluation
 process. Created algorithm was fully tested. In this process there were used nine different
-(topographic, geographical, city, old) maps. \\
+ (topographic, geographical, city, old) maps. \\
 
 Tests showed, that the algorithm gives good results, but not for every image. In case of 
 geographical maps, like Ślęża, Sobótka or Pokój, background color was unified. Borders of all areas
 remained unchanged and main details were kept. Additionaly many distortions were eliminated. Slighty
 worse results were achieved with Lubsza and Brzeg. This was a consequence of some major distortions
-existing these maps(like creases or darker elements) - the algorithm was not able to deal with these
+existing these maps (like creases or darker elements) - the algorithm was not able to deal with these
 types of difficulties. 
 
 The algorithm gives quite good results also for topographic maps. Both
@@ -2410,7 +2410,7 @@ after segmentation process.
 
 In case of large old maps with a big number of small-sized elements and thin lines, like Dolny 
 Śląsk, it is very difficult to set proper algorithm parameters. With that kind of map it is
-difficult to combine the image quality(no distortions) and keeping all map details(especially a very
+difficult to combine the image quality (no distortions) and keeping all map details (especially a very
 thin lines). In case of map of Dolny Śląsk, the algorithm recognized almost all elements properly.
 
 The worst results were achieved with a map of Bydgoszcz. Many areas are damaged - they have wrong
@@ -2424,11 +2424,11 @@ segmentation algorithm. Another disadvantage is a number of parameters, which ha
 for every map.\\
 
 The algorithm in this form gives good results for many types of maps. However it is suitable for
-further development. The improvements can be done in a field of background detection(especially with
+further development. The improvements can be done in a field of background detection (especially with
 a city maps, like Bydgoszcz) and better removal of distortions. Additionaly, pre-analysis of the
 input map can be added to eliminate, or at least reduce the number of parameters. The work should
 be also focused on execution time of the algorithm. The short execution time was not main aim of 
-this work(the algorithm will not work as the real-time apllication), however improvement on this
+this work (the algorithm will not work as the real-time apllication), however improvement on this
 field would ease testing process. Another improvement, which would improve the convenience of the
 application usage would be a GUI development.
 In the field of testing, it is a very good idea to test results of this algorithm by specialised
