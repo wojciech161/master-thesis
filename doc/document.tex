@@ -615,6 +615,42 @@ Source: own}
 \end{center}
 \end{figure}
 
+\subsection{Principles of grouping}
+
+According to \cite{gestaltTheory}, the Principles of Grouping (known also as Gestalt laws or
+grouping) starts with the assumption of active grouping laws in visual perception. These groups are
+identifiable with subsets of the retina. Whenever points (or previously formed groups) have one or
+several characteristics in common, they get grouped and form a new larger visual object. Gestalt
+basic grouping principles are:
+
+\begin{description}
+  \item[Vicinity] for example pixels glued together or objects which are close enough to each other
+        and apart enough from the rest to build a group;
+  \item[Similarity] for example similarity of color, shape, texture, orientation;
+  \item[Continuity of direction] which for example can be applied to an array of objects;
+  \item[Constant width] which is very relevant for drawings and all kinds of natural and artificial
+        forms;
+  \item[Convexity] which applies to closure and continuation of objects;
+  \item[Past Experience] which applies, when some generic shapes can be interpreted as familiar
+        objects(for example an oval interpreted as a face).
+\end{description}
+
+\section{Color image scanning}
+
+According to \cite{imageScanner}, image scanner is a device, that optically scans images and
+converts them to digital ones. The most commonly used type is called flatbed scanner. It is composed
+of a glass pane on which document is placed to be scanned. Typical modern scanners use a 
+charge-coupled device (CCD) or Contact Image Sensor (CIS) as the image sensor. In case of CCD, under
+the glass pane there is a bright light, which illuminates it and a moving three optical arrays of
+sensors with red, green and blue filters. CIS scanners consist of moving set of LEDs strobed for
+illumination and a connected monochromatic photodiode array under a rod lens array for light
+collection.
+
+The scanned result is a raster image - a dot matrix data structure representing a generally
+rectangular grid of pixels, or points of color, stored in a memory as an image file in a varying
+formats. Unfortunately resulting raster image has many false colors caused by for example an RGB
+misalignment (described widely in \cite{colorMapSegmentation}).
+
 \section{Color scanned maps processing}
 
 Processing of color scanned maps is a very interesting topic. There are some research works focusing
@@ -1897,7 +1933,7 @@ Performance of the algorithm is presented in a table \ref{slezaPerformance}.
 \label{slezaPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   2 min 16s & 8 min 21s & 8min 21s \\
   \hline
@@ -1947,7 +1983,7 @@ Performance of the algorithm is presented in a table \ref{sobotkaPerformance}.
 \label{sobotkaPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total time \\
   \hline
   3 min 00s & 9 min 15s & 9min 15s \\
   \hline
@@ -2023,7 +2059,7 @@ Performance of the algorithm is presented in a table \ref{pokojPerformance}.
 \label{pokojPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   4 min 19s & 16 min 19s & 16min 19s \\
   \hline
@@ -2106,7 +2142,7 @@ Performance of the algorithm is presented in a table \ref{brzegPerformance}.
 \label{brzegPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   13 min 19s & 1h 7min 42s & 1h 7min 43s \\
   \hline
@@ -2145,7 +2181,7 @@ Performance of the algorithm is presented in a table \ref{lubszaPerformance}.
 \label{lubszaPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   13 min 44s & 1h 12min 11s & 1h 12min 11s \\
   \hline
@@ -2221,7 +2257,7 @@ Performance of the algorithm is presented in a table \ref{bydgoszczPerformance}.
 \label{bydgoszczPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   2 min 31s & 2min 24s & 2min 31s \\
   \hline
@@ -2275,7 +2311,7 @@ Performance of the algorithm is presented in a table \ref{namyslowPerformance}.
 \label{namyslowPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   15 min 42s & 50min 17s & 50min 18s \\
   \hline
@@ -2314,7 +2350,7 @@ Performance of the algorithm is presented in a table \ref{masywSlezyPerformance}
 \label{masywSlezyPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   16 min 11s & 53min 22s & 53min 23s \\
   \hline
@@ -2376,7 +2412,7 @@ Performance of the algorithm is presented in a table \ref{dolnySlaskPerformance}
 \label{dolnySlaskPerformance}
 \begin{tabular}{|c|c|c|}
   \hline
-  Detail Detection & Background Detection & Algorithm \\
+  Detail Detection & Background Detection & Total Time \\
   \hline
   1h 29 min 10s & 1h 36min 51s & 1h 36min 52s \\
   \hline
@@ -2425,12 +2461,13 @@ for every map.\\
 
 The algorithm in this form gives good results for many types of maps. However it is suitable for
 further development. The improvements can be done in a field of background detection (especially with
-a city maps, like Bydgoszcz) and better removal of distortions. Additionaly, pre-analysis of the
-input map can be added to eliminate, or at least reduce the number of parameters. The work should
-be also focused on execution time of the algorithm. The short execution time was not main aim of 
-this work (the algorithm will not work as the real-time apllication), however improvement on this
-field would ease testing process. Another improvement, which would improve the convenience of the
-application usage would be a GUI development.
+a city maps, like Bydgoszcz) and better removal of distortions. Moreover, another class distance
+measurement algorithms can be tested (for example Mahalanobis distance instead of Euclidean
+distance) Additionaly, pre-analysis of the input map can be added to eliminate, or at least reduce
+the number of parameters. The work should be also focused on execution time of the algorithm. The
+short execution time was not main aim of this work (the algorithm will not work as the real-time
+apllication), however improvement on this field would ease testing process. Another improvement,
+which would improve the convenience of the application usage would be a GUI development.
 In the field of testing, it is a very good idea to test results of this algorithm by specialised
 software. Unfortunately it was not possible to carry out this type of tests in this work. \\
 
@@ -2492,6 +2529,12 @@ parameters it is a good way to process this type of digital images.
           {http://en.wikipedia.org/wiki/Standard\_Template\_Library, Version from 18.06.2014}
   \bibitem{rapidXmlMainPage}
           {http://rapidxml.sourceforge.net/, Version from 18.06.2014}
+  \bibitem{imageScanner}
+          {http://en.wikipedia.org/wiki/Image_scanner, Version from 25.06.2014}
+  \bibitem{gestaltTheory}
+          {From Gestalt Theory to Image Analysis, Agnes Desolneux, Lionel Moisan, Jean-Michel Morel,
+          10 July 2006}
+}
 
 \end{thebibliography}
 
