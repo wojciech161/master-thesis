@@ -322,9 +322,9 @@ optimized to use it with this type of scanned images. Output image should have f
 
 \begin{itemize}
   \item most of distortions should be eliminated;
-  \item image should be divided into consistent areas, like forests, lakes, rivers, etc. These areas
+  \item image should be divided into consistent areas, for instance forests, lakes, rivers, etc. These areas
         should be marked on the map in a consistent way (it should have the same color);
-  \item detected areas should have the same size like in an input image;
+  \item detected areas should have the same size for example in an input image;
   \item small details, like text should be kept and marked in a resulting image.
 \end{itemize}
 
@@ -338,25 +338,25 @@ analysed.
 
 \section{Document structure}
 
-This document has been divided into six chapters and the bibliography at the end.
+This document has been divided into six chapters and the references at the end.
 Below there is a short description of a content of each chapter:
 
 \begin{itemize}
-  \item In the first chapter there is a description and the background of the topic.
+  \item In the first chapter the background of the topic is a description.
         Next there are listed main objectives of the work and a problem statement;
-  \item In the second chapter there is a theoretical introduction of the problem. There are
-        explained all already known filtration and segmentation algorithms used in this work.
+  \item In the second chapter theoretical introduction of the problem is stated. All already known
+        filtration and segmentation algorithms used in this work are explained.
         The description consists of the definition, properties and parameters of each method. In the
         second part, there is an analysis of existing research work and solutions of the color
         scanned maps preprocessing problem;
-  \item Third chapter focuses on the research part of this thesis. There are listed all found problems,
-        which should be taken into consideration in the analysis of color scanned maps.
-  \item In the fourth chapter there is a full description of filtration and segmentation algorithms
-        designed in this work;
+  \item Third chapter focuses on the research part of this thesis. All found problems,
+        which should be taken into consideration in the analysis of color scanned maps are listed;
+  \item In the fourth chapter a full description of filtration and segmentation algorithms
+        designed in this work is given;
   \item Fifth chapter focuses on the engineering part of the thesis. There is a description of all
         implementation details of the algorithm;
-  \item In the sixth chapter there are described all tests of developed algorithm. In the second part
-        there are test results with proper analysis given;
+  \item In the sixth chapter all tests of developed algorithm are described. In the second part
+        ttest results with proper analysis are given;
   \item In the last chapter there are conclusions of the thesis.
 \end{itemize}
 
@@ -380,8 +380,8 @@ of Technology or Bell Laboratories. It was used in satellite imagery, medical im
 computerized tomography was developed), image enhancement, science (for example in geography - 
 in research about pollution, archeology - in restoring blured pictures), defence or industry.
 Another area of digital image processing focuses on extracting of an information from the picture in
-a form suitable for the computer processing. It is used in a character recognition (OCR), industry (
-automatic inspection of production process), military, forensics (recognition of fingerprints) and
+a form suitable for the computer processing. It is used in a character recognition (OCR), industry
+(automatic inspection of production process), military, forensics (recognition of fingerprints) and
 weather prediction. \\
 
 Nowadays, with fast computers and signal processors, digital image processing is used widely.
@@ -404,7 +404,6 @@ image processing are:
   \item Image aquisition;
   \item Image enhancement;
   \item Image restoration;
-  \item Wavelets;
   \item Compression;
   \item Feature extraction;
   \item Segmentation;
@@ -416,7 +415,7 @@ work are described in next sections.
 
 \section{Image enhancement}
 
-Image enhancement algorithms are one of the simplest and most commonly used group of digital image
+Image enhancement algorithms are ones of the simplest and most commonly used group of digital image
 processing. Main idea of those algorithms is to improve image quality, bring out obscured details 
 or highlight certain features of an image. The main aim of image enhancement is to process image 
 and return it in a more suitable form, than input for a specific application. Proper image enhancement
@@ -492,6 +491,15 @@ Morphological operations are used to remove noise, isolate or join disparate ele
 and to find intensity bumps or holes in an image to aquire image gradients. Basic  morphological
 operations are called Dilation and Erosion.
 
+Both take two parameters:
+
+\begin{itemize}
+  \item \textit{Size of rectangular structuring element used for erosion/dilation}. If it is set to
+        3, the structuring element is a matrix with size 3x3. The bigger value is set, the stronger
+        impact has the algorithm on the image;
+  \item \textit{Number of iterations} of the algorithm.
+\end{itemize}
+
 \subsubsection{Dilation}
 
 Dilation is a convolution of an image with a kernel. The kernel can have any shape or size and has
@@ -523,15 +531,6 @@ Source: http://www.mathworks.com/help/images/ref/referenceipart128.gif}
 \label{erosionExample}
 \end{center}
 \end{figure}
-
-Dilation and erosion take two parameters:
-
-\begin{itemize}
-  \item \textit{Size of rectangular structuring element used for erosion/dilation}. If it is set to
-        3, the structuring element is a matrix with size 3x3. The bigger value is set, the stronger
-        impact has the algorithm on the image;
-  \item \textit{Number of iterations} of the algorithm.
-\end{itemize}
 
 \subsection{Denoising}
 
@@ -571,8 +570,26 @@ Source: http://upload.wikimedia.org/wikipedia/commons/4/43/Unsharped\_eye.jpg}
 
 \section{Image segmentation}
 
-According to \cite{digitalImageProcessing}, segmentation algorithms partition images into
-constituent parts or objects. They are generally based on two basic properties of intensity values:
+Segmentation algorithms partition images into constituent parts or objects. There are widely
+accepted Principles of Grouping (known also as Gestalt laws of grouping \cite{gestaltTheory}).
+They start with the assumption of active grouping laws in visual perception. These groups are
+identifiable with subsets of the retina. Whenever points (or previously formed groups) have one or
+several characteristics in common, they get grouped and form a new larger visual object. Gestalt
+basic grouping principles are:
+
+\begin{description}
+  \item[Vicinity] for example pixels glued together or objects which are close enough to each other
+        and apart enough from the rest to build a group;
+  \item[Similarity] for example similarity of color, shape, texture, orientation;
+  \item[Continuity of direction] which for example can be applied to an array of objects;
+  \item[Constant width] which is very relevant for drawings and all kinds of natural and artificial
+        forms;
+  \item[Convexity] which applies to closure and continuation of objects;
+  \item[Past Experience] which applies, when some generic shapes can be interpreted as familiar
+        objects (for example an oval interpreted as a face).
+\end{description}
+
+Segmentation methods \cite{digitalImageProcessing} are generally based on two basic properties of intensity values:
 discontinuity and similarity. In the first case, the approach is to partition an image based on
 abrupt changes in intensity (like for example edges in an image). In the second case, the approach is
 based on partitioning an image into regions, that are similar (for example they have similar color).
@@ -614,26 +631,6 @@ Source: own}
 \label{thresholdingExample}
 \end{center}
 \end{figure}
-
-\subsection{Principles of grouping}
-
-According to \cite{gestaltTheory}, the Principles of Grouping (known also as Gestalt laws or
-grouping) starts with the assumption of active grouping laws in visual perception. These groups are
-identifiable with subsets of the retina. Whenever points (or previously formed groups) have one or
-several characteristics in common, they get grouped and form a new larger visual object. Gestalt
-basic grouping principles are:
-
-\begin{description}
-  \item[Vicinity] for example pixels glued together or objects which are close enough to each other
-        and apart enough from the rest to build a group;
-  \item[Similarity] for example similarity of color, shape, texture, orientation;
-  \item[Continuity of direction] which for example can be applied to an array of objects;
-  \item[Constant width] which is very relevant for drawings and all kinds of natural and artificial
-        forms;
-  \item[Convexity] which applies to closure and continuation of objects;
-  \item[Past Experience] which applies, when some generic shapes can be interpreted as familiar
-        objects(for example an oval interpreted as a face).
-\end{description}
 
 \section{Color image printing}
 
@@ -817,7 +814,7 @@ Input image contains many small details. They exist especially in city and topog
 City maps contain a lot of small elements, like churches, parking places or gas stations.
 Additionaly, in cities there are many roads and areas, which are marked in different colors. 
 Furthermore they contain many small letters, which, for example, indicate names of streets, parks
-or major buildings and places. Finally, in the city map, lines, roads and test are often crossing
+or major buildings and places. Finally, in the city map, lines, roads and text are often crossing
 each other. Example fragment of a city map is shown in a Fig.~\ref{cityExample}.
 
 \begin{figure}[!ht]
@@ -1374,7 +1371,7 @@ color of every element is unfied. Thanks to usage of small parameter values, tex
 \includegraphics[scale=0.6]{images/filtrationResult.png}
 \caption{Fragment of a map of Brzeg with filtration algorithms applied.
 On the left, there is an image with previous algorithms applied. On the right side there is a
-filtered image.}
+resulting image.}
 \label{contoursFiltrationResult}
 \end{center}
 \end{figure}
@@ -1924,7 +1921,7 @@ impossible to remove all moro effect. It is visible in a Fig.~\ref{moroSlezaIO}.
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[scale=0.5]{images/moroSlezaResult.png}
-\caption{Moro effect visible in enlarged Ślęża result.}
+\caption{Single dot noise visible in enlarged Ślęża result.}
 \label{moroSlezaIO}
 \end{center}
 \end{figure}
@@ -2475,9 +2472,11 @@ for every map.\\
 
 The algorithm in this form gives good results for many types of maps. However it is suitable for
 further development. The improvements can be done in a field of background detection (especially with
-a city maps, like Bydgoszcz) and better removal of distortions. Moreover, another class distance
-measurement algorithms can be tested (for example Mahalanobis distance instead of Euclidean
-distance) Additionaly, pre-analysis of the input map can be added to eliminate, or at least reduce
+a city maps, like Bydgoszcz) and better removal of distortions. Currently in a segmentation and
+classification method there is used an Euclidean distance. In the literature methods using 
+Mahalanobis distance are also proposed\cite{mahalanobisConclusionsCite}. It is a good direction for
+further research. Additionaly,
+pre-analysis of the input map can be added to eliminate, or at least reduce
 the number of parameters. The work should be also focused on execution time of the algorithm. The
 short execution time was not main aim of this work (the algorithm will not work as the real-time
 apllication), however improvement on this field would ease testing process. Another improvement,
@@ -2546,12 +2545,15 @@ parameters it is a good way to process this type of digital images.
   \bibitem{imageScanner}
           {http://en.wikipedia.org/wiki/Image\_scanner, Version from 25.06.2014}
   \bibitem{gestaltTheory}
-          {From Gestalt Theory to Image Analysis, Agnes Desolneux, Lionel Moisan, Jean-Michel Morel,
+          {Agnes Desolneux, Lionel Moisan, Jean-Michel Morel, From Gestalt Theory to Image Analysis, 
           10 July 2006}
   \bibitem{cmykWiki}
           {http://en.wikipedia.org/wiki/CMYK\_color\_model, Version from 28.06.2014}
   \bibitem{halftoneWiki}
           {http://en.wikipedia.org/wiki/Halftone, Version from 28.06.2014}
+  \bibitem{mahalanobisConclusionsCite}
+          {Zhang, Y., Huang, D., Ji, M., and Xie, F. Image segmentation using PSO and PCM with
+          Mahalanobis distance. Expert Systems with Applications, 38(7), 9036-9040, 2011}
 }
 
 \end{thebibliography}
