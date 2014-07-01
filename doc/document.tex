@@ -370,9 +370,8 @@ actual state of art in the topic of filtration and segmentation of color printed
 
 \subsection{History and usage}
 
-According to \cite{digitalImageProcessing},
-digital image processing has a lot of practical applications. It was used first at the beginning of
-the XX century to send pictures over long distances. Research and development of digital image
+Digital image processing \cite{digitalImageProcessing} has a lot of practical applications. It was
+used first at the beginning of the XX century to send pictures over long distances. Research and development of digital image
 processing algorithms  was strongly associated with growth of the computer industry. It was caused
 by high computational complexity of this type of algorithms. Further growth began in 1960s. Many 
 techniques were developed in organisations like Jet Propulsion Laboratory, Massachusetts Institute
@@ -429,14 +428,14 @@ other problems). Image enhancement algorithms can be divided into two groups:
 
 \subsection{Smoothing algorithms}
 
-According to \cite{learningOpenCv}, smoothing is a very simple and frequently applied operation. It
-is used to reduce noise or camera artifacts and also in the image resolution reduction. In this work
-there are two smoothing algorithms applied.
+Smoothing \cite{learningOpenCv} is a very simple and frequently applied operation. It is used to
+reduce noise or camera artifacts and also in the image resolution reduction. In this work there are
+two smoothing algorithms applied.
 
 \subsubsection{Gaussian blur}
 
-Gaussian filter is one of the most frequently used filters. According to \cite{learningOpenCv}, 
-gaussian blur is done by convolving each point in the input array with a Gaussian kernel and then
+Gaussian filter is one of the most frequently used filters. Gaussian blur \cite{learningOpenCv} is
+done by convolving each point in the input array with a Gaussian kernel and then
 summing to produce the output array. Resulting image is a smooth blur. It is used to reduce noise
 or image details and as a part of edge detection algorithms. Algorithm has two parameters:
 
@@ -458,7 +457,7 @@ Source: own}
 
 \subsubsection{Bilateral filter}
 
-According to \cite{bilateralFilterWiki}, bilateral filter is a non-linear, edge-preserving and
+Bilateral filter \cite{bilateralFilterWiki} is a non-linear, edge-preserving and
 noise reducing filter for images. The intensity value at each pixel in an image is replaced by a
 weighted average of an intensity values from nearby pixels. In contrast to the Gaussian Blur, 
 weights are based on the difference of intensity from the center pixel. This algorithm is commonly
@@ -551,8 +550,8 @@ Source: Image generator in \cite{nonLocalMeansDenoising}}
 
 \subsection{Unsharp mask}
 
-Unsharp mask is applied to highlight or enhance some details of the image. According to 
-\cite{unsharpMaskWiki}, this technique uses a blured or unsharped image to create mask of the
+Unsharp mask \cite{unsharpMaskWiki} is applied to highlight or enhance some details of the image.
+This technique uses a blured or unsharped image to create mask of the
 original image. The unsharped mask is then combined with the negative image. As a result there is an
 image less blurry than the original. In the algorithm used in this work, Gaussian blur is used and
 then its result is compared to the original image. If the difference is greater than specified
@@ -634,12 +633,12 @@ Source: own}
 
 \section{Color image printing}
 
-According to \cite{cmykWiki} and \cite{halftoneWiki}, color images are printed using a CMYK (Cyan,
-Magenta, Yellow and Key - Black) model. The final printing color using a CMYK model is achieved by
+Color images are printed using a CMYK (Cyan, Magenta, Yellow and Key - Black) model
+\cite{cmykWiki,halftoneWiki}. The final printing color using a CMYK model is achieved by
 linking of each basic color in a proportion from 0\% to 100\%. Individual color layers are linked by 
 overlapping (not mixing). In a CMYK printing halftone method is used. It is a reprographic technique
 that simulates continuous tone imagery through the use of dots, varying either in size, in shape or
-in spacing, thus generating a gradient like effect. Where continuous tone imagery contains an
+in spacing, thus generating various color values. Where continuous tone imagery contains an
 infinite range of colors or greys, the halftone process reduces visual reproductions to an image
 that is printed with only one color of ink, in dots of differing size. To improve image quality, the
 screen for each color is set at a different angle. Without halftoning, the three primary process
@@ -648,7 +647,7 @@ colors. With halftoning, a full continuous range of colors can be produced.
 
 \section{Color image scanning}
 
-According to \cite{imageScanner}, image scanner is a device, that optically scans images and
+Image scanner \cite{imageScanner} is a device, that optically scans images and
 converts them to digital ones. The most commonly used type is called flatbed scanner. It is composed
 of a glass pane on which document is placed to be scanned. Typical modern scanners use a 
 charge-coupled device (CCD) or Contact Image Sensor (CIS) as the image sensor. In case of CCD, under
@@ -711,15 +710,32 @@ of processes is as follows:
 \end{itemize}
 
 In these processes there are used: pattern matching, contour following, polygonal approximation and
-skeletonization algorithms.
+skeletonization algorithms. \\
+
+There are also some algorithms using a tensor voting technique, like for example
+\cite{tensorVoting}. The tensor voting framework is adapted to encode color information via tensors
+in order to propagate them into a neighborhood through a voting process specifically designed for
+color edge detection by taking into account perceptual color differences, region uniformity and
+edginess according to a set of intuitive perceptual criteria. \\
+
+In the literature methods using Mahalanobis distance are also proposed
+\cite{mahalanobisConclusionsCite}. According to \cite{mahalanobisWiki}, Mahalanobis distance is a
+measure of the distance between a point P and a distribution D. It is a multi-dimensional
+generalization of the idea of measuring how many standard deviations away P is from the mean of D.
+It uses mean and covariance matrixes. \\
 
 Last presented approach is shown in \cite{colorMapSegmentation}. There is presented a segmentation
 method dedicated for United States Geological Survey (U.S.G.S.) topographic maps. Algorithm first 
 segments out white background. Next, image is segmented using Eigenvector line fitting technique.
-Algorithm knows typical values of colors used in U.S.G.S. In the final part of the algorithm, proper
-color value is set for every pixel (it is based on distance of pixel Eigenvector and Eigenvalue and
-a known value from U.S.G.S. colors standard). Summarizing, the segmentation algorithm uses knowledge
-about colors used in maps from U.S.G.S.
+An Eigenvector of a square matrix \textit{A} \cite{eigenWiki} is a non-zero vector \textit{v} that,
+when the matrix multiplies \textit{v}, yields a constant multiple of \textit{v}, the latter
+multiplier being commonly denoted by \textit{L}. The number \textit{L} is called the Eigenvalue of
+\textit{A} corresponding to \textit{v}. Algorithm knows typical values of colors used in U.S.G.S. In
+the final part of the algorithm, proper color value is set for every pixel (it is based on distance
+of pixel Eigenvector and Eigenvalue and a known value from U.S.G.S. colors standard). Summarizing,
+the segmentation algorithm uses knowledge about colors used in maps from U.S.G.S. Although the
+method gives good results, it cannot be applied for maps processed in this work - colors of input
+maps are not known.
 
 \chapter{Research of the topic}
 
@@ -1528,7 +1544,7 @@ To facilitate the development process there are used four external libraries in 
 
 \subsubsection{OpenCV}
 
-According to \cite{learningOpenCv}, OpenCV is an open-source computer vision library. It is written
+OpenCV \cite{learningOpenCv} is an open-source computer vision library. It is written
 in C and C++ and runs on multiple platforms. It was designed for computational efficiency with a
 strong focus on real-time applications. It provides a simple to use computer vision architecture
 and Machine Learning Library. It contains over 500 functions, that span many areas in vision. It is
@@ -1537,7 +1553,7 @@ found on \cite{opencvMainPage}. This project uses OpenCV in version 2.4.9.
 
 \subsubsection{Boost}
 
-According to \cite{boostWiki}, Boost is a set of libraries for the C++ programming language. It 
+Boost \cite{boostWiki} is a set of libraries for the C++ programming language. It 
 contains over eighty individual libraries, which provide support for many tasks and structures.
 In this work, there were used five libraries from Boost:
 \begin{itemize}
@@ -1556,7 +1572,7 @@ in version 1.46.
 
 \subsubsection{STL}
 
-According to \cite{stlWiki}, Standard Template Library (STL) is a software library for the C++
+Standard Template Library (STL) \cite{stlWiki} is a software library for the C++
 programming language. It provides four components called algorithms, containers, functional and
 iterators. It is a part of a C++ standard.
 
@@ -2473,10 +2489,10 @@ for every map.\\
 The algorithm in this form gives good results for many types of maps. However it is suitable for
 further development. The improvements can be done in a field of background detection (especially with
 a city maps, like Bydgoszcz) and better removal of distortions. Currently in a segmentation and
-classification method there is used an Euclidean distance. In the literature methods using 
-Mahalanobis distance are also proposed\cite{mahalanobisConclusionsCite}. It is a good direction for
-further research. Additionaly,
-pre-analysis of the input map can be added to eliminate, or at least reduce
+classification method there is used an Euclidean distance.  It is a good direction for further
+research to use Mahalanobis distance. Moreover, tensor voting can be used in a line detection
+algorithm. Also Eigenvectors and Eigenvalues can be used during background detection procedure.
+Additionaly, pre-analysis of the input map can be added to eliminate, or at least reduce
 the number of parameters. The work should be also focused on execution time of the algorithm. The
 short execution time was not main aim of this work (the algorithm will not work as the real-time
 apllication), however improvement on this field would ease testing process. Another improvement,
@@ -2554,6 +2570,13 @@ parameters it is a good way to process this type of digital images.
   \bibitem{mahalanobisConclusionsCite}
           {Zhang, Y., Huang, D., Ji, M., and Xie, F. Image segmentation using PSO and PCM with
           Mahalanobis distance. Expert Systems with Applications, 38(7), 9036-9040, 2011}
+  \bibitem{eigenWiki}
+          {http://en.wikipedia.org/wiki/Eigenvalues\_and\_eigenvectors, Version from 1.07.2014}
+  \bibitem{tensorVoting}
+          {Moreno, R., Garcia, M.A., Puig, D., Julia, C., Robust color edge detection through tensor
+          voting, 2009 }
+  \bibitem{mahalanobisWiki}
+          {http://en.wikipedia.org/wiki/Mahalanobis\_distance, Version from 1.07.2014}
 }
 
 \end{thebibliography}
