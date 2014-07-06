@@ -720,9 +720,11 @@ edginess according to a set of intuitive perceptual criteria. \\
 
 In the literature methods using Mahalanobis distance are also proposed
 \cite{mahalanobisConclusionsCite}. According to \cite{mahalanobisWiki}, Mahalanobis distance is a
-measure of the distance between a point P and a distribution D. It is a multi-dimensional
-generalization of the idea of measuring how many standard deviations away P is from the mean of D.
-It uses mean and covariance matrixes. \\
+measure of the distance between a point P and a distribution D. It is used to count the distance
+between the point (described by some features like for example an RGB color) and the group
+(described by the average or center of mass of points and the covariance matrix). The closer is
+point to the group, the more probable is that the point belongs to it. Mahalanobis distance is
+proportional, for a normal distribution, to the square root of the negative log likelihood. \\
 
 Last presented approach is shown in \cite{colorMapSegmentation}. There is presented a segmentation
 method dedicated for United States Geological Survey (U.S.G.S.) topographic maps. Algorithm first 
